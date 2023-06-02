@@ -1,0 +1,12 @@
+###
+// there is an extension called 'REST client' which let you test your requests whithout using postman.
+// this file is created to try this extension.
+
+
+Post http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "test3@gmail.com",
+    "password" : "11111111"
+}
