@@ -222,9 +222,18 @@ export const updateProfile = async (req, res) => {
 
 
 export const Profile = async(req, res) => {    //this function is to send info of the profile back to the user.
-    try {                                      // instead of get data of the user from 'front'
-      const user = req.user;                   // we get data of the user from 'VerifyToken' (line 18)
-      res.json(user)
+    try { 
+      const id = req.userId;                                     // instead of get data of the user from 'front'
+      const user = await Users.findByPk(id);
+      if(user) {
+        res.json({
+          id: user.id,
+          name: user.name,
+          url: user.url
+        })
+      } else {
+        res.json({error: 'User is not found'})
+      }                  // we get data of the user from 'VerifyToken' (line 18)
     } catch (error) {
       console.log(error)
     }
