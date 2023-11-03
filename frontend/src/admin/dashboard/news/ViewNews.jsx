@@ -12,7 +12,7 @@ const ViewNews = () => {
 
   const handleId = (id) => {
     setId(id);
-  }
+  };
 
   useEffect(() => {
     handleNews();
@@ -51,7 +51,13 @@ const ViewNews = () => {
                 <td>{item?.user?.name}</td> //to prevent errors in nested
                 objects, added ?
                 <td>
-                  <button className="button is-success">Edit</button>
+                  <Link
+                    state={item}
+                    to={`/edit-news/${item.id}`}
+                    className="button is-info"
+                  >
+                    Edit
+                  </Link>
                 </td>
                 <td>
                   <button
@@ -94,8 +100,10 @@ const ViewNews = () => {
 
 export default ViewNews;
 
-//about callback function her:
-// <button onClick={() => setShowModal(true)} className="button is-danger">Delete</button>
-// if we don't use callback and write onClick={setShowModal(true)}
-// we get error as this button is inside a loop.
-// but callback, wait until user clicks on the button and the specific item will be deleted
+{
+  /* about callback function her:
+<button onClick={() => setShowModal(true)} className="button is-danger">Delete</button>
+if we don't use callback and write onClick={setShowModal(true)}
+we get error as this button is inside a loop.
+but callback, wait until user clicks on the button and the specific item will be deleted */
+}
