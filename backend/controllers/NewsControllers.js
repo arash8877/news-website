@@ -6,7 +6,9 @@ import Users from "../models/userModel.js";
 
 export const getNews = async (req, res) => {
   try {
-    const news = await News.findAll({});
+    const news = await News.findAll({
+      include: [Users]
+    });
     res.json(news);
   } catch (error) {
     console.log(error);
