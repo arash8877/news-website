@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+App.js
+
+import Login from "./admin/auth/Login";
+import {Routes, Route} from "react-router-dom";
+import Dashboard from "./admin/dashboard/Dashboard";
+import ViewNews from "./admin/dashboard/components/news/ViewNews"
+import AddNews from "./admin/dashboard/components/news/AddNews"
+import { ToastContainer } from 'react-toastify';
+import Main from "./admin/dashboard/components/main/Main";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/administrator" element={<Login />}  />
+        <Route path="/dashboard" element={<Main />} />
+        <Route path="/add-news" element={<AddNews />} />
+        <Route path="/view-news" element={<ViewNews />} />
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 
