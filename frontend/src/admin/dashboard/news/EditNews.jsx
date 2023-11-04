@@ -63,7 +63,26 @@ const EditNews = () => {
       });
 
   return (
-    <Dashboard></Dashboard>
+    <Dashboard>
+    <div className="field">
+          <label htmlFor="" className="label">
+            Title
+          </label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="title"
+              defaultValue={singleNews.title}
+              onChange={formik.handleChange("title")}
+              onBlur={formik.handleBlur("title")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.title && formik.errors.title}
+            </p>
+          </div>
+        </div>
+    </Dashboard>
   )
 }
 
