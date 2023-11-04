@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import Dashboard from '../Dashboard'
+import Dashboard from '../../Dashboard'
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../context/context";
@@ -145,7 +145,6 @@ const EditNews = () => {
             </div>
           </div>
         </div>
-      </form>
     </Dashboard>
   )
 }
