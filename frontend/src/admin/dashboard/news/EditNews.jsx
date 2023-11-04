@@ -13,6 +13,19 @@ const formSchema = Yup.object({
 
 const EditNews = () => {
 
+    const loadImage = (e) => {
+        const image = e.target.files[0];
+        setFile(image);
+        setPreview(URL.createObjectURL(image));
+      };
+  
+      const {id} = useParams();
+  
+      useEffect(() => {
+        getCategory();
+        getSingleNews(id);
+      }, [])
+
 
     const getCategory = async () => {
         try {
@@ -48,7 +61,7 @@ const EditNews = () => {
         },
         validationSchema: formSchema,
       });
-      
+
   return (
     <Dashboard></Dashboard>
   )
