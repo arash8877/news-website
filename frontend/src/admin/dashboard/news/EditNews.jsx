@@ -12,6 +12,43 @@ const formSchema = Yup.object({
   });
 
 const EditNews = () => {
+
+
+    const getCategory = async () => {
+        try {
+          const res = await axiosInterceptor.get(
+            "http://localhost:300/api/get-category",
+            {
+              Headers: {
+                authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setCategoryList(res.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+    const formik = useFormik({
+        initialValues: {
+          title: singleNews.title,
+          desc: singleNews.desc,
+          catId: singleNews.catId,
+          file: "",
+        },
+        onSubmit: (values) => {
+          const data = {
+            title: values.title,
+            desc: values.desc,
+            catId: values.catId,
+            file: file,
+          }
+          createNews(data);
+        },
+        validationSchema: formSchema,
+      });
+      
   return (
     <Dashboard></Dashboard>
   )
