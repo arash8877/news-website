@@ -48,8 +48,7 @@ const ViewNews = () => {
                 <td>
                   <img src={item.url} width="100" />
                 </td>
-                <td>{item?.user?.name}</td> //to prevent errors in nested
-                objects, added ?
+                <td>{item?.user?.name}</td> //to prevent errors in nested objects, added ?
                 <td>
                   <Link
                     state={item}
@@ -100,10 +99,12 @@ const ViewNews = () => {
 
 export default ViewNews;
 
-{
-  /* about callback function her:
-<button onClick={() => setShowModal(true)} className="button is-danger">Delete</button>
-if we don't use callback and write onClick={setShowModal(true)}
-we get error as this button is inside a loop.
-but callback, wait until user clicks on the button and the specific item will be deleted */
-}
+{/* about callback function here:
+ <button onClick={() => setShowModal(true)} className="button is-danger">Delete</button>
+ if we don't use callback and write onClick={setShowModal(true)}
+ we get error as this button is inside a loop.
+ but callback, wait until user clicks on the button and the specific item will be deleted */}
+
+{/* in react-router-dom 'state' is a prop that enable
+you to send something. and you don't need to
+send request to database to get that ting */}
