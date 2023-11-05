@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
   const [expire, setExpire] = useState("");
   const [news, setNews] = useState([]);
+  const [singleNews, setSingleNews] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +38,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const axiosInterceptor = axios.create();
 
-  axiosInterceptor.interceptors.request.use( //interceptor (in axios) helps to update the token automatically when the token is expired
+  axiosInterceptor.interceptors.request.use(
+    //interceptor (in axios) helps to update the token automatically when the token is expired
     async (config) => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
@@ -130,7 +132,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const handleNews = async () => {
     try {
-      const res = await axiosInspector.get(`http://localhost:3000/api/news`, {
+      const res = await axiosInterceptor.get(`http://localhost:3000/api/news`, {
         Headers: {
           authorization: `Bearer ${token}`,
         },
@@ -143,9 +145,12 @@ export const AuthContextProvider = ({ children }) => {
 
   const deleteNews = async (id) => {
     try {
-      const res = await axiosInterceptor.delete(`http://localhost:3000/api/news/${id}`, {
-        headers: {authorization: `Bearer ${token}`}
-      });
+      const res = await axiosInterceptor.delete(
+        `http://localhost:3000/api/news/${id}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
       toast.success(res.data.msg, {
         position: "bottom-center",
         autoClose: 3000,
@@ -156,11 +161,36 @@ export const AuthContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const getSingleNews = async (id) => {
+    try {
+      const res = axiosInterceptor.get(`http://localhost:3000/api/news/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setSingleNews(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <AuthContext.Provider
-      value={{ login, error, getAllUsers, axiosInterceptor, token, createNews, news, handleNews, deleteNews }}
+      value={{
+        login,
+        error,
+        getAllUsers,
+        axiosInterceptor,
+        token,
+        createNews,
+        news,
+        handleNews,
+        deleteNews,
+        getSingleNews,
+        singleNews,
+      }}
     >
       {children}
     </AuthContext.Provider>
