@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
-import Dashboard from '../../Dashboard'
+import Dashboard from "../../Dashboard";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../context/context";
@@ -11,21 +11,27 @@ const formSchema = Yup.object({
     catId: Yup.string().required("Choose a category"),
   });
 
+
+
 const EditNews = () => {
-
+    const [categoryList, setCategoryList] = useState([]);
+    const [file, setFile] = useState("");
+    const [preview, setPreview] = useState("");
+    const { axiosInterceptor, token, createNews, getSingleNews, singleNews } = useContext(AuthContext);
+  
     const loadImage = (e) => {
-        const image = e.target.files[0];
-        setFile(image);
-        setPreview(URL.createObjectURL(image));
-      };
-  
-      const {id} = useParams();
-  
-      useEffect(() => {
-        getCategory();
-        getSingleNews(id);
-      }, [])
+      const image = e.target.files[0];
+      setFile(image);
+      setPreview(URL.createObjectURL(image));
+    };
 
+    const {id} = useParams();
+
+    useEffect(() => {
+      getCategory();
+      getSingleNews(id);
+    }, [])
+    
 
     const getCategory = async () => {
         try {
@@ -62,9 +68,11 @@ const EditNews = () => {
         validationSchema: formSchema,
       });
 
+
   return (
     <Dashboard>
-    <div className="field">
+      <form onSubmit={formik.handleSubmit}>
+        <div className="field">
           <label htmlFor="" className="label">
             Title
           </label>
@@ -145,8 +153,9 @@ const EditNews = () => {
             </div>
           </div>
         </div>
+      </form>
     </Dashboard>
-  )
-}
+  );
+};
 
 export default EditNews;
