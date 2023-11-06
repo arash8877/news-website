@@ -1,8 +1,9 @@
 .dashboard-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 300px 1fr;
 }
+/* 
+.main-info {
+    width: 70%;
+} */
 
-/* .dashboard-wrapper > * {
-    flex: 1 1 3%;
-  } */
