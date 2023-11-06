@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
   const refreshToken = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/token");
+      const response = await axios.get("http://localhost:3000/token");
       setToken(response.data.accessToken);
       const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
@@ -43,7 +43,7 @@ export const AuthContextProvider = ({ children }) => {
     async (config) => {
       const currentDate = new Date();
       if (expire * 1000 < currentDate.getTime()) {
-        const response = await axios.get("http://localhost:5000/token");
+        const response = await axios.get("http://localhost:3000/token");
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
@@ -62,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
   const login = async (inputs) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "http://localhost:3000/api/users/login",
         inputs
       );
       if (res.data.error) {
@@ -88,7 +88,7 @@ export const AuthContextProvider = ({ children }) => {
   const getAllUsers = async () => {
     try {
       const res = await axiosInterceptor.get(
-        "http://localhost:5000/api/users",
+        "http://localhost:3000/api/users",
         {
           headers: {
             authorization: `Bearer ${token}`,

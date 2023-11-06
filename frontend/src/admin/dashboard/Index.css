@@ -1,0 +1,8 @@
+.dashboard-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* .dashboard-wrapper > * {
+    flex: 1 1 3%;
+  } */
