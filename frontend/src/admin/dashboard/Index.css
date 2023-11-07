@@ -2,8 +2,7 @@
     display: grid;
     grid-template-columns: 300px 1fr;
 }
-/* 
-.main-info {
-    width: 70%;
-} */
 
+.main-info {
+    padding: 0px 50px;
+}
