@@ -32,7 +32,24 @@ const ViewUsers = () => {
         </thead>
 
         <tbody>
-
+          {users?.map((user, index) => {
+            return (
+              <tr key={user.id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.isAdmin ? "Admin" : "Author"}</td>
+                <td>
+                  <Link to="/" className="button is-info">
+                    Edit
+                  </Link>
+                </td>
+                <td>
+                  <button className="button is-danger">Delete</button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </Dashboard>
