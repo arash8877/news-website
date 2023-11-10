@@ -7,6 +7,7 @@ const Sidebar = () => {
   const [showNews, setShowNews] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [showUsers, setShowUsers] = useState(false);
 
   return (
     <div className="sidebar">
@@ -63,7 +64,18 @@ const Sidebar = () => {
           )}
         </li>
         <li>
-          <Link to="">Users</Link>
+          <span onClick={() => setShowUsers(!showUsers)}>Users</span>
+
+          {showUsers && (
+            <ul>
+              <li>
+                <Link to="/add-user">Add user</Link>
+              </li>
+              <li>
+                <Link to="/view-users">View users</Link>
+              </li>
+            </ul>
+          )}
         </li>
         <li>
           <Link to="">Comments</Link>
