@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import Dashboard from "../../Dashboard";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/context";
 
 const ViewVideos = () => {
+  const {getAllVideos, allVideos, deleteVideo} = useContext(AuthContext);
+
+  useEffect(() => {
+   getAllVideos();
+  }, []);
+  
+
   return (
     <Dashboard>
       <div className="is-flex is-justify-content-end">
@@ -19,13 +27,19 @@ const ViewVideos = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>test</td>
-            <td>
-              <button className="button is-danger">Delete</button>
-            </td>
-          </tr>
+          {
+            allVideos && allVideos.map((item, index) => (
+              <tr key={item.id}>
+              <td>{index+1}</td>
+              <td>
+                <video src={item.url} width="200" controls></video>
+              </td>
+              <td>
+                <button className="button is-danger" onClick={() => deleteVideo(item.id)}>Delete</button>
+              </td>
+            </tr>
+            ))
+          }
         </tbody>
       </table>
     </Dashboard>
