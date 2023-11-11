@@ -19,6 +19,10 @@ export const AuthContextProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [singleNews, setSingleNews] = useState([]);
   const [category, setCategory] = useState([]);
+  const [errorVideo, setErrorVideo] = useState("");
+  const [allVideos, setAllVideos] = useState([]);
+  const [registerError, setRegisterError] = useState("");
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,10 +69,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     try {
-      const res = await axios.post(
-        `${baseUrl}/api/users/login`,
-        inputs
-      );
+      const res = await axios.post(`${baseUrl}/api/users/login`, inputs);
       if (res.data.error) {
         setError(res.data.error);
       } else {
@@ -93,15 +94,40 @@ export const AuthContextProvider = ({ children }) => {
 
   const getAllUsers = async () => {
     try {
-      const res = await axiosInterceptor.get(
-        `${baseUrl}/api/users`,
+      const res = await axiosInterceptor.get(`${baseUrl}/api/users`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUsers(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const register = async (user) => {
+    try {
+      const res = await axiosInterceptor.post(
+        `${baseUrl}/api/users/register`,
+        user,
         {
           headers: {
-            authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(res);
+      if (res.data.error) {
+        setRegisterError(res.data.error);
+        console.log(registerError);
+      } else {
+        toast.success(res.data.message, {
+          position: "bottom-center",
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+        navigate("/view-users")
+      }
     } catch (error) {
       console.log(error);
     }
@@ -117,15 +143,11 @@ export const AuthContextProvider = ({ children }) => {
     formData.append("userId", userId);
     formData.append("file", data.file);
     try {
-      const res = await axiosInterceptor.post(
-        `${baseUrl}/api/news`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axiosInterceptor.post(`${baseUrl}/api/news`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success(res.data.msg, {
         position: "bottom-center",
         autoClose: 3000,
@@ -153,12 +175,9 @@ export const AuthContextProvider = ({ children }) => {
 
   const deleteNews = async (id) => {
     try {
-      const res = await axiosInterceptor.delete(
-        `${baseUrl}/api/news/${id}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await axiosInterceptor.delete(`${baseUrl}/api/news/${id}`, {
+        headers: { authorization: `Bearer ${token}` },
+      });
       toast.success(res.data.msg, {
         position: "bottom-center",
         autoClose: 3000,
@@ -217,11 +236,15 @@ export const AuthContextProvider = ({ children }) => {
 
   const createCategory = async (value) => {
     try {
-      const res = await axiosInterceptor.post( `${baseUrl}/api/create-category`, value, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await axiosInterceptor.post(
+        `${baseUrl}/api/create-category`,
+        value,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      })
+      );
       toast.success(res.data.msg, {
         position: "bottom-center",
         autoClose: 3000,
@@ -236,11 +259,15 @@ export const AuthContextProvider = ({ children }) => {
 
   const getCategories = async (values) => {
     try {
-      const res = await axiosInterceptor.get(`${baseUrl}/api/get-category`, values, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await axiosInterceptor.get(
+        `${baseUrl}/api/get-category`,
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       setCategory(res.data);
     } catch (error) {
       console.log(error);
@@ -249,12 +276,15 @@ export const AuthContextProvider = ({ children }) => {
 
   const editCategory = async (values) => {
     try {
-      const res = await axiosInterceptor.put(`${baseUrl}/api/update-category/${values.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await axiosInterceptor.put(
+        `${baseUrl}/api/update-category/${values.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
-      
+      );
+
       toast.success(res.data, {
         position: "bottom-center",
         autoClose: 3000,
@@ -269,12 +299,15 @@ export const AuthContextProvider = ({ children }) => {
 
   const deleteCategory = async (id) => {
     try {
-      const res = await axiosInterceptor.delete(`${baseUrl}/api/delete-category/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/delete-category/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
-            
+      );
+
       toast.success(res.data, {
         position: "bottom-center",
         autoClose: 3000,
@@ -287,7 +320,74 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  // ---------------------------------------------  -----------------------------------------------------
+  // ---------------------------------------------Video  -----------------------------------------------------
+
+  const createVideo = async (data) => {
+    const formData = new FormData();
+    formData.append("file", data.file);
+    try {
+      const res = await axiosInterceptor.post(
+        `${baseUrl}/api/create-video`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.data.msg) {
+        setErrorVideo(res.data.msg);
+      }
+      if (res.data.msg) {
+        toast.success(res.data.msg, {
+          position: "bottom-center",
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+      }
+      navigate("/view-videos");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllVideos = async () => {
+    try {
+      const res = await axiosInterceptor.get(`${baseUrl}/api/get-videos`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAllVideos(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteVideo = async (id) => {
+    try {
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/delete-video/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success(res.data.msg, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      getAllVideos();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // --------------------------------------------- -----------------------------------------------------
 
 
 
@@ -310,6 +410,14 @@ export const AuthContextProvider = ({ children }) => {
         getCategories,
         category,
         editCategory,
+        createVideo,
+        errorVideo,
+        getAllVideos,
+        allVideos,
+        deleteVideo,
+        register,
+        registerError,
+        users,
       }}
     >
       {children}
