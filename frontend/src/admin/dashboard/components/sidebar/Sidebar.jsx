@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { AuthContext } from "../../../context/context";
 
 const Sidebar = () => {
   const [showNews, setShowNews] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
+  const {logout} = useContext(AuthContext);
 
   return (
     <div className="sidebar">
@@ -81,7 +83,7 @@ const Sidebar = () => {
           <Link to="">Comments</Link>
         </li>
         <li>
-          <Link to="">Logout</Link>
+          <span onClick={logout}>Logout</span>
         </li>
       </ul>
     </div>
