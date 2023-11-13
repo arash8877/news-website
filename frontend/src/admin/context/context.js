@@ -433,6 +433,30 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    try {
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/users/logout`,
+        {
+          header: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success(res.data, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
 
 
 
