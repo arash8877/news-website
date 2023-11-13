@@ -411,6 +411,30 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/delete-user/${id}`,
+        {
+          header: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success(res.data.message, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      getAllUsers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
 
 
   return (
