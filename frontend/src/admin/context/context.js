@@ -455,6 +455,21 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const updateProfile = async (data) => {
+    try {
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/users/logout`,
+        {
+          header: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
 
 
 
