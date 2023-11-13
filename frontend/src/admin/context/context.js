@@ -126,7 +126,7 @@ export const AuthContextProvider = ({ children }) => {
           closeOnClick: true,
           pauseOnHover: true,
         });
-        navigate("/view-users")
+        navigate("/view-users");
       }
     } catch (error) {
       console.log(error);
@@ -381,13 +381,35 @@ export const AuthContextProvider = ({ children }) => {
         closeOnClick: true,
         pauseOnHover: true,
       });
-      getAllVideos();
     } catch (error) {
       console.log(error);
     }
   };
 
-  // --------------------------------------------- -----------------------------------------------------
+  // ---------------------------------------------User -----------------------------------------------------
+
+  const editUser = async (value) => {
+    try {
+      const res = await axiosInterceptor.put(
+        `${baseUrl}/api/edit-user/${value.id}`,
+        value,
+        {
+          header: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success(res.data.message, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/view-users");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -418,9 +440,15 @@ export const AuthContextProvider = ({ children }) => {
         register,
         registerError,
         users,
+        editUser,
+        deleteUser,
+        logout,
+        userId,
+        updateProfile,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
