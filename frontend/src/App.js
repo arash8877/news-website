@@ -15,11 +15,18 @@ import ViewUsers from "./admin/dashboard/components/users/ViewUsers";
 import AddUser from "./admin/dashboard/components/users/AddUser";
 import EditUser from "./admin/dashboard/components/users/EditUser";
 import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
     <>
       <Routes>
+
+        <Route path="/" element={<HomePage/>} />
+
+
+
+
         <Route path="/administrator" element={<Login />} />
         <Route path="/dashboard" element={<Main />} />
 
