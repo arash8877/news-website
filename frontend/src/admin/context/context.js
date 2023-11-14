@@ -23,11 +23,15 @@ export const AuthContextProvider = ({ children }) => {
   const [allVideos, setAllVideos] = useState([]);
   const [registerError, setRegisterError] = useState("");
   const [users, setUsers] = useState([]);
+  const [profilePhoto, setProfilePhoto] = useState("");
+  const [nameOfUser, setNameOfUser] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     refreshToken();
+    getProfileInfo();
   }, []);
+
   const refreshToken = async () => {
     try {
       const response = await axios.get(`${baseUrl}/token`);
@@ -85,6 +89,7 @@ export const AuthContextProvider = ({ children }) => {
         setToken(res.data.accessToken);
         setAdmin(res.data.isAdmin);
       }
+      getProfileInfo();
     } catch (error) {
       console.log(error);
     }
@@ -215,7 +220,7 @@ export const AuthContextProvider = ({ children }) => {
         `${baseUrl}/api/news/${data.id}`,
         formData,
         {
-          header: {
+          headers: {
             authorization: `Bearer ${token}`,
           },
         }
@@ -394,7 +399,7 @@ export const AuthContextProvider = ({ children }) => {
         `${baseUrl}/api/edit-user/${value.id}`,
         value,
         {
-          header: {
+          headers: {
             authorization: `Bearer ${token}`,
           },
         }
@@ -416,7 +421,7 @@ export const AuthContextProvider = ({ children }) => {
       const res = await axiosInterceptor.delete(
         `${baseUrl}/api/delete-user/${id}`,
         {
-          header: {
+          headers: {
             authorization: `Bearer ${token}`,
           },
         }
@@ -438,7 +443,7 @@ export const AuthContextProvider = ({ children }) => {
       const res = await axiosInterceptor.delete(
         `${baseUrl}/api/users/logout`,
         {
-          header: {
+          headers: {
             authorization: `Bearer ${token}`,
           },
         }
@@ -457,10 +462,17 @@ export const AuthContextProvider = ({ children }) => {
 
   const updateProfile = async (data) => {
     try {
-      const res = await axiosInterceptor.delete(
-        `${baseUrl}/api/users/logout`,
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("password", data.password);
+      formData.append("confPassword", data.confPassword);
+      formData.append("id", data.id);
+      formData.append("file", data.file);
+
+      const res = await axiosInterceptor.put(
+        `${baseUrl}/api/users/profile/${data.id}`, formData,
         {
-          header: {
+          headers: {
             authorization: `Bearer ${token}`,
           },
         }
@@ -470,11 +482,22 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-
-
-
-
-
+  const getProfileInfo = async () => {
+    try {
+      const res = await axiosInterceptor.get(
+        `${baseUrl}/api/users/profile`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setProfilePhoto(res.data.url);
+      setNameOfUser(res.data.name);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <AuthContext.Provider
@@ -508,6 +531,9 @@ export const AuthContextProvider = ({ children }) => {
         logout,
         userId,
         updateProfile,
+        getProfileInfo,
+        profilePhoto,
+        nameOfUser,
       }}
     >
       {children}
