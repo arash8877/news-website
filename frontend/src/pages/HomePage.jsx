@@ -1,7 +1,7 @@
 import React from "react";
 import TopMenu from "../components/home/topMenu/TopMenu";
 import NavBar from "../components/home/topMenu/navBar/NavBar";
-import HomeWrapper from "../components/home/home-wrapper/HomeWrapper";
+import HomeWrapper from "../components/home/homeWrapper/HomeWrapper";
 import WhatNews from "../components/home/whatNews/WhatNews";
 
 const HomePage = () => {
