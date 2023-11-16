@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const WhatNews = () => {
   return (
@@ -31,6 +31,13 @@ const WhatNews = () => {
 
                 <div className="what-news-name">
                     <h1 className="is-size-2 title">Whats up</h1>
+                </div>
+              </div>
+              <div className="what-news-post mt-y">
+                <div className="what-news-post-item">
+                  <div className="what-news-post-item-img">
+                    <Link></Link>
+                  </div>
                 </div>
               </div>
             </div>
