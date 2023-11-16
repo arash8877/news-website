@@ -45,6 +45,9 @@ const WhatNews = () => {
                     <p>post description test</p>
                     </Link>
                   </div>
+                  <div className="what-news-item-date">
+                    <p>16-11-2023</p>
+                  </div>
                 </div>
               </div>
             </div>
