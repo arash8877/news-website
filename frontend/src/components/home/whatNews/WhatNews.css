@@ -1,0 +1,20 @@
+#what-news {
+    height: 630px;
+}
+
+.what-news {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.what-news-post .what-news-post-item {
+    float: left;
+    width: calc(50% - 10px);
+}
+
+.what-news-post-item .what-news-post-item-img img{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+}
