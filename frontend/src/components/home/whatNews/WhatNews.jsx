@@ -43,7 +43,12 @@ const WhatNews = () => {
                   </div>
                   <div className="what-news-post-description">
                     <Link>
-                      <p>post description test</p>
+                      <p>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley
+                      </p>
                     </Link>
                   </div>
                   <div className="what-news-item-date">
@@ -58,7 +63,12 @@ const WhatNews = () => {
                   </div>
                   <div className="what-news-post-description">
                     <Link>
-                      <p>post description test</p>
+                      <p>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley
+                      </p>
                     </Link>
                   </div>
                   <div className="what-news-item-date">
@@ -73,7 +83,32 @@ const WhatNews = () => {
                   </div>
                   <div className="what-news-post-description">
                     <Link>
-                      <p>post description test</p>
+                      <p>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley
+                      </p>
+                    </Link>
+                  </div>
+                  <div className="what-news-item-date">
+                    <p>16-11-2023</p>
+                  </div>
+                </div>
+                <div className="what-news-post-item">
+                  <div className="what-news-post-item-img">
+                    <Link to="/">
+                      <img src="https://images.unsplash.com/photo-1682687981907-170c006e3744?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" />
+                    </Link>
+                  </div>
+                  <div className="what-news-post-description">
+                    <Link>
+                      <p>
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley
+                      </p>
                     </Link>
                   </div>
                   <div className="what-news-item-date">
