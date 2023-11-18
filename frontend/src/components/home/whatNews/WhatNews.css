@@ -12,6 +12,8 @@
     width: calc(50% - 10px);
     padding-left: 30px;
     margin-top: 10px;
+    display: flex;
+    gap: 20px;
 }
 
 .what-news-post-item .what-news-post-item-img img{
