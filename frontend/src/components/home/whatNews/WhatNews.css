@@ -60,3 +60,18 @@
     -webkit-box-orient: vertical;
     max-width: 100%;
 }
+
+.send-news {
+    height: 350px;
+}
+
+@media screen and (max-width: 760px) {
+    .what-news-post .what-news-post-item {
+        width: 100%;
+    }
+
+    .what-news-post .what-news-post-item:first-child {
+        width: 100%;
+    }
+    
+}
