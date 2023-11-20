@@ -14,7 +14,7 @@ const WhatNews = () => {
             />
           </div>
           <div className="column is-three-quarters is-justify-content-center">
-            <div className="what-news has-text-white p-5">
+            <div className="what-news has-background-white p-5">
               <div className="what-news-title is-flex is-justify-content-space-between is-align-items-center">
                 <div className="what-news-nav">
                   <ul className="is-flex">
