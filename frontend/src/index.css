@@ -8,3 +8,18 @@
 a {
      color: rgb(36, 36, 36);
 }
+
+body {
+     background: whitesmoke !important;  
+  }
+  
+  .container {
+       padding: 0 50px;
+  }
+
+@media screen and (max-width: 600px) {
+     .container {
+          padding: 0 8px;
+     }
+     
+}
