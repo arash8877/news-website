@@ -8,9 +8,9 @@ const NavBar = () => {
         <div className="container">
             <div className="nav">
                 <ul className="is-flex nav-ul">
-                    <li><Link>Home</Link></li>
-                    <li><Link>About Us</Link></li>
-                    <li><Link>Contact</Link></li>
+                <li><Link to='/'>Home</Link></li>
+                    <li><Link to='/about'>About Us</Link></li>
+                    <li><Link to='/contact'>Contact</Link></li>
                 </ul>
             </div>
         </div>
