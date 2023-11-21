@@ -17,6 +17,11 @@ body {
        padding: 0 50px;
   }
 
+  .has-background-danger {
+     background: #6F0000 !important;
+}
+
+
 @media screen and (max-width: 600px) {
      .container {
           padding: 0 8px;

@@ -1,6 +1,5 @@
 import Login from "./admin/auth/Login";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./admin/dashboard/Dashboard";
 import ViewNews from "./admin/dashboard/components/news/ViewNews";
 import AddNews from "./admin/dashboard/components/news/AddNews";
 import { ToastContainer } from "react-toastify";
@@ -16,18 +15,21 @@ import AddUser from "./admin/dashboard/components/users/AddUser";
 import EditUser from "./admin/dashboard/components/users/EditUser";
 import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
 import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Details from "./pages/Details";
+
 
 function App() {
   return (
     <>
       <Routes>
-
-        <Route path="/" element={<HomePage/>} />
-
-
-
-
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/details/:id" element={<Details />} />
         <Route path="/administrator" element={<Login />} />
+
         <Route path="/dashboard" element={<Main />} />
 
         <Route path="/add-news" element={<AddNews />} />
