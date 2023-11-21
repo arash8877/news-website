@@ -1,6 +1,6 @@
 import React from "react";
 import TopMenu from "../components/home/topMenu/TopMenu";
-import NavBar from "../components/home/topMenu/navBar/NavBar";
+import NavBar from "../components/home/navBar/NavBar";
 import HomeWrapper from "../components/home/homeWrapper/HomeWrapper";
 import WhatNews from "../components/home/whatNews/WhatNews";
 import PopularNews from "../components/home/popular/PopularNews";

@@ -2,7 +2,10 @@ import React from "react";
 import TopMenu from "../components/home/topMenu/TopMenu";
 import NavBar from "../components/home/navBar/NavBar";
 import Content from "../components/details/content/Content";
-import Sidebar from "../components/details/sideBar/Sidebar";
+import Sidebar from "../components/details/sidebar/Sidebar";
+
+
+
 
 const Details = () => {
   return (
