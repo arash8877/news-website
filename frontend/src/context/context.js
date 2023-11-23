@@ -4,6 +4,8 @@ import { reducerVideo } from "./reducer/reducerVideo";
 
 export const HomeContext = createContext();
 
+// reducer or useReducer help managing/interact with an api.
+
 
 export const HomeContextProvider = ({Children}) => {
 
