@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { reducerVideo } from "./reducer/reducerVideo";
+import { reducerVideo } from "./reducer/videoReducer";
 
 
 export const HomeContext = createContext();
