@@ -1,6 +1,10 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import { reducerVideo } from "./reducer/videoReducer";
-import { VIDEO_FAIL, VIDEO_REQUEST, VIDEO_SUCCESS } from "./constants/videoConstants";
+import {
+  VIDEO_FAIL,
+  VIDEO_REQUEST,
+  VIDEO_SUCCESS,
+} from "./constants/videoConstants";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 
@@ -17,15 +21,30 @@ export const HomeContextProvider = ({ Children }) => {
 
   const [state, dispatch] = useReducer(reducerVideo, INITIAL_STATE);
 
+  useEffect(() => {
+    loadVideo();
+  }, []);
+
   const loadVideo = async () => {
     try {
       dispatch({ type: VIDEO_REQUEST });
-      const {data} = await axios.get(`${baseUrl}/api/single-video`);
+      const { data } = await axios.get(`${baseUrl}/api/single-video`);
       dispatch({ type: VIDEO_SUCCESS, payload: data });
     } catch (error) {
-      dispatch({type: VIDEO_FAIL, payload: error.response.data.message});
+      dispatch({ type: VIDEO_FAIL, payload: error.response.data.message });
+      console.log(error);
     }
   };
 
-  return <HomeContext.Provider value="">{Children}</HomeContext.Provider>;
+  return (
+    <HomeContext.Provider
+      value={{
+        loading: state.loading,
+        error: state.error,
+        videos: state.videos,
+      }}
+    >
+      {Children}
+    </HomeContext.Provider>
+  );
 };
