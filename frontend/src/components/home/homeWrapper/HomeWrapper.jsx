@@ -8,12 +8,12 @@ const HomeWrapper = () => {
   useContext(HomeContext);
 
   return (
-    <div className="home-wrapper">
+<div className="home-wrapper">
       <div className="container">
         <div className="columns is-flex-widescreen is-block-tablet is-align-items-start">
           <div className="column is-one-quarter-widescreen is-full-desktop">
             <div className="left-side-post">
-            {loadingLastNews ? (
+              {loadingLastNews ? (
                 <div className="left-side-top has-text-centered mt-6">
                   <Loader />
                 </div>
@@ -45,17 +45,24 @@ const HomeWrapper = () => {
           </div>
           <div className="column is-three-quarters is-full-tablet">
             <div className="post-right-side">
-              <video
-                src="https://youtu.be/SMxx9XEF6m0"
-                controls
-                width="100%"
-                height="100%"
-              ></video>
+              {loading ? (
+                <div className="has-text-centered">
+                  <Loader />
+                </div>
+              ) : (
+                <video
+                  src={videos.url}
+                  controls
+                  width="100%"
+                  height="100%"
+                ></video>
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
+  );
   );
 };
 
