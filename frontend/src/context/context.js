@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import { reducerVideo } from "./reducer/videoReducer";
+import { videoReducer } from "./reducer/videoReducer";
 import {
   VIDEO_FAIL,
   VIDEO_REQUEST,
@@ -19,7 +19,7 @@ export const HomeContextProvider = ({ Children }) => {
     videos: [],
   };
 
-  const [state, dispatch] = useReducer(reducerVideo, INITIAL_STATE);
+  const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
 
   useEffect(() => {
     loadVideo();
