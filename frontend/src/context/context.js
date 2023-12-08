@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from "react";
-import { videoReducer } from "./reducer/videoReducer";
+import { videoReducer } from "./reducers/videoReducer";
 import {
   VIDEO_FAIL,
   VIDEO_REQUEST,
@@ -7,6 +7,12 @@ import {
 } from "./constants/videoConstants";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
+import { lastNewsReducer } from "./reducers/lastNewsReducer";
+import {
+  LAST_NEWS_FAIL,
+  LAST_NEWS_REQUEST,
+  LAST_NEWS_SUCCESS,
+} from "./constants/lastNewsConstants";
 
 export const HomeContext = createContext();
 
@@ -18,6 +24,11 @@ export const HomeContextProvider = ({ Children }) => {
     error: "",
     videos: [],
   };
+  const INITIAL_STATE_LAST_NEWS = {
+    loading: true,
+    error: "",
+    lastNews: [],
+  };
 
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
   const [stateLastNews, lastNewsDispatch] = useReducer(
@@ -27,6 +38,7 @@ export const HomeContextProvider = ({ Children }) => {
 
   useEffect(() => {
     loadVideo();
+    loadLastNews();
   }, []);
 
   const loadVideo = async () => {
@@ -54,6 +66,9 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
+
+
+
   return (
     <HomeContext.Provider
       value={{
@@ -62,7 +77,7 @@ export const HomeContextProvider = ({ Children }) => {
         videos: state.videos,
         loadingLastNews: stateLastNews.loading,
         errorLastNews: stateLastNews.error,
-        lastNews: stateLastNews.lastNews,
+        lastNews: stateLastNews.lastNews
       }}
     >
       {Children}
