@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./HomeWrapper.css";
+import { HomeContext } from "../../../context/context";
+import Loader from "../../loading/Loader";
 
 const HomeWrapper = () => {
+  const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
+  useContext(HomeContext);
+
   return (
     <div className="home-wrapper">
       <div className="container">
