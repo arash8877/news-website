@@ -8,22 +8,34 @@ const HomeWrapper = () => {
         <div className="columns is-flex-widescreen is-block-tablet is-align-items-start">
           <div className="column is-one-quarter-widescreen is-full-desktop">
             <div className="left-side-post">
-              <div className="left-side-top">
-                <div className="left-side-img">
-                  <div className="overlay"></div>
-                  <img
-                    src="https://img.freepik.com/free-photo/beautiful-aerial-shot-fronalpstock-mountains-switzerland-beautiful-pink-blue-sky_181624-9315.jpg?size=626&ext=jpg&ga=GA1.1.572310632.1696408268&semt=sph"
-                    alt=""
-                  />
+            {loadingLastNews ? (
+                <div className="left-side-top has-text-centered mt-6">
+                  <Loader />
                 </div>
-                <div className="post-info">
-                  <div className="post-cat">
-                    <span>test</span>
-                  </div>
-                  <div className="post-title">post title</div>
-                  <div className="post-date">15.11.2023</div>
-                </div>
-              </div>
+              ) : (
+                <>
+                  {lastNews.map((item) => {
+                    return (
+                      <div className="left-side-top" key={item.id}>
+                        <div className="left-side-img">
+                          <div className="overlay"></div>
+                          <img
+                            src={item.url}
+                            alt=""
+                          />
+                        </div>
+                        <div className="post-info">
+                          <div className="post-cat">
+                            <span>{item.category.name}</span>
+                          </div>
+                          <div className="post-title">{item.title}</div>
+                          <div className="post-date">{item.createdAt}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
           </div>
           <div className="column is-three-quarters is-full-tablet">
