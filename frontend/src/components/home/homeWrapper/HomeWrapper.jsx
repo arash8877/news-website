@@ -5,10 +5,10 @@ import Loader from "../../loading/Loader";
 
 const HomeWrapper = () => {
   const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
-  useContext(HomeContext);
+    useContext(HomeContext);
 
   return (
-<div className="home-wrapper">
+    <div className="home-wrapper">
       <div className="container">
         <div className="columns is-flex-widescreen is-block-tablet is-align-items-start">
           <div className="column is-one-quarter-widescreen is-full-desktop">
@@ -62,7 +62,6 @@ const HomeWrapper = () => {
         </div>
       </div>
     </div>
-  );
   );
 };
 
