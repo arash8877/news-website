@@ -40,6 +40,20 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
+  const loadLastNews = async () => {
+    try {
+      lastNewsDispatch({ type: LAST_NEWS_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/lastnews`);
+      lastNewsDispatch({ type: LAST_NEWS_SUCCESS, payload: data });
+    } catch (error) {
+      lastNewsDispatch({
+        type: LAST_NEWS_FAIL,
+        payload: error.response.data.message,
+      });
+      console.log(error);
+    }
+  };
+
   return (
     <HomeContext.Provider
       value={{
