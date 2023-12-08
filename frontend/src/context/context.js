@@ -20,6 +20,10 @@ export const HomeContextProvider = ({ Children }) => {
   };
 
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
+  const [stateLastNews, lastNewsDispatch] = useReducer(
+    lastNewsReducer,
+    INITIAL_STATE_LAST_NEWS
+  );
 
   useEffect(() => {
     loadVideo();
@@ -42,6 +46,9 @@ export const HomeContextProvider = ({ Children }) => {
         loading: state.loading,
         error: state.error,
         videos: state.videos,
+        loadingLastNews: stateLastNews.loading,
+        errorLastNews: stateLastNews.error,
+        lastNews: stateLastNews.lastNews,
       }}
     >
       {Children}
