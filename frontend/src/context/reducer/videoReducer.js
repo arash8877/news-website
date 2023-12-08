@@ -1,7 +1,7 @@
 import { VIDEO_REQUEST, VIDEO_SUCCESS, VIDEO_FAIL } from "../constants/videoConstants";
 
 
-export const reducerVideo = (state = {videos: [], action}) => {
+export const reducerVideo = (state = {videos: []}, action) => {
     switch(action.type){
         case VIDEO_REQUEST:
             return {loading: true, videos: []};
