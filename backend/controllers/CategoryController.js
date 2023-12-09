@@ -10,6 +10,16 @@ export const getCategory = async(req, res) => {
 }
 
 
+export const getCategoryForHomePage = async(req, res) => {
+    try {
+        const categories = await Category.findAll({});
+        res.json(categories);
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 export const createCategory = async (req, res) => {
     const name = req.body.name;
     try {
