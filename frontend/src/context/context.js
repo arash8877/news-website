@@ -1,4 +1,4 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
 import { videoReducer } from "./reducers/videoReducer";
 import {
   VIDEO_FAIL,
@@ -35,10 +35,12 @@ export const HomeContextProvider = ({ Children }) => {
     lastNewsReducer,
     INITIAL_STATE_LAST_NEWS
   );
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
     loadVideo();
     loadLastNews();
+    loadCategory();
   }, []);
 
   const loadVideo = async () => {
@@ -66,9 +68,10 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
-  const loadCategories = async () => {
+  const loadCategory = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/api/category/home`)
+      const res = await axios.get(`${baseUrl}/api/category/home`);
+      setCategory(res.data);
     } catch (error) {
       console.log(error);
     }
