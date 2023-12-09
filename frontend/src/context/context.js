@@ -66,6 +66,14 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
+  const loadCategories = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/api/category/home`)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
 
 
