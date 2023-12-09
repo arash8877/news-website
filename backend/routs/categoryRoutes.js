@@ -1,9 +1,11 @@
 import express from 'express';
 import {verifyToken} from '../middleware/VerifyToken';
-import { createCategory, deleteCategory, updateCategory } from '../controllers/CategoryController.js';
+import { createCategory, deleteCategory, getCategoryForHomePage, updateCategory } from '../controllers/CategoryController.js';
 
 
 const router = express.Router();
+
+router.get('/api/category/home', getCategoryForHomePage)
 
 router.get('/api/get-category', verifyToken, getCategory)
 router.post('/api/create-category', verifyToken, createCategory)
