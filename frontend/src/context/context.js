@@ -18,10 +18,9 @@ import {
   CATEGORY_POST_SUCCESS,
   CATEGORY_POST_FAIL,
 } from "./constants/categoryConstants";
+import { catPostReducer } from "./reducers/categoryReducer";
 
 export const HomeContext = createContext();
-
-
 
 // reducer or useReducer help managing/interact with an api.
 
@@ -47,7 +46,10 @@ export const HomeContextProvider = ({ Children }) => {
     lastNewsReducer,
     INITIAL_STATE_LAST_NEWS
   );
-  const [stateCatPost, catPostDispatch] = useReducer();
+  const [stateCatPost, catPostDispatch] = useReducer(
+    catPostReducer,
+    INITIAL_STATE_CAT_POST
+  );
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
@@ -75,6 +77,20 @@ export const HomeContextProvider = ({ Children }) => {
     } catch (error) {
       lastNewsDispatch({
         type: LAST_NEWS_FAIL,
+        payload: error.response.data.message,
+      });
+      console.log(error);
+    }
+  };
+
+  const loadCatPost = async () => {
+    try {
+      catPostDispatch({ type: CATEGORY_POST_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/cat-news${cat}`);
+      catPostDispatch({ type: CATEGORY_POST_SUCCESS, payload: data });
+    } catch (error) {
+      lastNewsDispatch({
+        type: CATEGORY_POST_FAIL,
         payload: error.response.data.message,
       });
       console.log(error);
