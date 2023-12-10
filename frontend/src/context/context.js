@@ -1,20 +1,27 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { videoReducer } from "./reducers/videoReducer";
+import axios from "axios";
+import { baseUrl } from "../utils/baseUrl";
+import { lastNewsReducer } from "./reducers/lastNewsReducer";
 import {
   VIDEO_FAIL,
   VIDEO_REQUEST,
   VIDEO_SUCCESS,
 } from "./constants/videoConstants";
-import axios from "axios";
-import { baseUrl } from "../utils/baseUrl";
-import { lastNewsReducer } from "./reducers/lastNewsReducer";
 import {
   LAST_NEWS_FAIL,
   LAST_NEWS_REQUEST,
   LAST_NEWS_SUCCESS,
 } from "./constants/lastNewsConstants";
+import {
+  CATEGORY_POST_REQUEST,
+  CATEGORY_POST_SUCCESS,
+  CATEGORY_POST_FAIL,
+} from "./constants/categoryConstants";
 
 export const HomeContext = createContext();
+
+
 
 // reducer or useReducer help managing/interact with an api.
 
@@ -29,12 +36,18 @@ export const HomeContextProvider = ({ Children }) => {
     error: "",
     lastNews: [],
   };
+  const INITIAL_STATE_CAT_POST = {
+    loading: true,
+    error: "",
+    news: [],
+  };
 
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
   const [stateLastNews, lastNewsDispatch] = useReducer(
     lastNewsReducer,
     INITIAL_STATE_LAST_NEWS
   );
+  const [stateCatPost, catPostDispatch] = useReducer();
   const [category, setCategory] = useState([]);
 
   useEffect(() => {
@@ -75,10 +88,7 @@ export const HomeContextProvider = ({ Children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
-
-
-
+  };
 
   return (
     <HomeContext.Provider
@@ -88,7 +98,7 @@ export const HomeContextProvider = ({ Children }) => {
         videos: state.videos,
         loadingLastNews: stateLastNews.loading,
         errorLastNews: stateLastNews.error,
-        lastNews: stateLastNews.lastNews
+        lastNews: stateLastNews.lastNews,
       }}
     >
       {Children}
