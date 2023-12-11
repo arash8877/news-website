@@ -56,6 +56,7 @@ export const HomeContextProvider = ({ Children }) => {
     loadVideo();
     loadLastNews();
     loadCategory();
+    loadCatPost();
   }, []);
 
   const loadVideo = async () => {
@@ -105,6 +106,8 @@ export const HomeContextProvider = ({ Children }) => {
       console.log(error);
     }
   };
+
+
 
   return (
     <HomeContext.Provider
