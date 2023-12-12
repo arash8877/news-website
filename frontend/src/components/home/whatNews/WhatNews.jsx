@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./WhatNews.css";
 import { Link, NavLink } from "react-router-dom";
+import { HomeContext } from "../../../context/Context";
 
 const WhatNews = () => {
+  const {category, loadingCatPost} = useContext(HomeContext);
   return (
     <div id="what-news" className="py-5">
       <div className="container">

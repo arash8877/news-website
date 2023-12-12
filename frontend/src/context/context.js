@@ -118,6 +118,10 @@ export const HomeContextProvider = ({ Children }) => {
         loadingLastNews: stateLastNews.loading,
         errorLastNews: stateLastNews.error,
         lastNews: stateLastNews.lastNews,
+        loadingCatPost: stateCatPost,
+        errorCatPst: stateCatPost.error,
+        news: stateCatPost.news,
+        category,
       }}
     >
       {Children}
