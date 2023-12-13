@@ -5,7 +5,7 @@ import { HomeContext } from "../../../context/context";
 import Loader from "../../loading/Loader";
 
 const WhatNews = () => {
-  const { category, loadingCatPost } = useContext(HomeContext);
+  const { category, loadingCatPost, news } = useContext(HomeContext);
   return (
     <div id="what-news" className="py-5">
       <div className="container">
@@ -37,12 +37,12 @@ const WhatNews = () => {
                   <h1 className="is-size-2 title">Whats up</h1>
                 </div>
               </div>
-              <div className="what-news-post mt-y">
-                {loadingCatPost ? (
-                  <div className="has-text-centered">
-                    <Loader />
-                  </div>
-                ) : (
+              {loadingCatPost ? (
+                <div className="has-text-centered">
+                  <Loader />
+                </div>
+              ) : (
+                <div className="what-news-post mt-6">
                   <div className="what-news-post-item">
                     <div className="what-news-post-item-img">
                       <Link to="/">
@@ -63,8 +63,8 @@ const WhatNews = () => {
                       </div>
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
