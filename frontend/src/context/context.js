@@ -87,7 +87,7 @@ export const HomeContextProvider = ({ Children }) => {
   const loadCatPost = async () => {
     try {
       catPostDispatch({ type: CATEGORY_POST_REQUEST });
-      const { data } = await axios.get(`${baseUrl}/api/news/cat-news${cat}`);
+      const { data } = await axios.get(`${baseUrl}/api/news/cat-news`);
       catPostDispatch({ type: CATEGORY_POST_SUCCESS, payload: data });
     } catch (error) {
       lastNewsDispatch({

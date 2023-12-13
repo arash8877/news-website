@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./WhatNews.css";
 import { Link, NavLink } from "react-router-dom";
-import { HomeContext } from "../../../context/Context";
+import { HomeContext } from "../../../context/context";
 import Loader from "../../loading/Loader";
 
 const WhatNews = () => {
