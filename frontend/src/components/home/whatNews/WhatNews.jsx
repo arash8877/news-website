@@ -52,11 +52,11 @@ const WhatNews = () => {
                               <img src={post.url} />
                             </Link>
                           </div>
-                          <div className="what-news-post-description">
+                          <div className="what-news-post-item-description">
                             <Link>
                               <p>{post.desc}</p>
                             </Link>
-                            <div className="what-news-item-date">
+                            <div className="what-news-post-item-date">
                               <p>{post.createdAt}</p>
                             </div>
                           </div>
