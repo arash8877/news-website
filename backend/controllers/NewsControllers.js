@@ -184,8 +184,8 @@ export const getCatNews = async (req, res) => {
     try {
         const hasCategory = req.query.cat;
         const news  = hasCategory
-        ? await News.findAll({where: {catId: hasCategory, order: ['id', 'DESC']}})
-        : await News.findAll({order: ['id', 'DESC']});
+        ? await News.findAll({limit: 4, where: {catId: hasCategory, order: ['id', 'DESC']}})
+        : await News.findAll({limit: 4, order: ['id', 'DESC']});
 
         res.json(news);
     } catch (error) {
