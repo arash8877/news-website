@@ -19,6 +19,7 @@ import {
   CATEGORY_POST_FAIL,
 } from "./constants/categoryConstants";
 import { catPostReducer } from "./reducers/categoryReducer";
+import { useLocation } from "react-router-dom";
 
 export const HomeContext = createContext();
 
@@ -51,6 +52,7 @@ export const HomeContextProvider = ({ Children }) => {
     INITIAL_STATE_CAT_POST
   );
   const [category, setCategory] = useState([]);
+  const cat = useLocation().search
 
   useEffect(() => {
     loadVideo();

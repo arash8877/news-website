@@ -1,11 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./WhatNews.css";
 import { Link, NavLink } from "react-router-dom";
 import { HomeContext } from "../../../context/context";
 import Loader from "../../loading/Loader";
 
 const WhatNews = () => {
-  const { category, loadingCatPost, news } = useContext(HomeContext);
+  const { category, loadingCatPost, news, loadCatPost } =
+    useContext(HomeContext);
+
+  useEffect(() => {
+    loadCatPost();
+  }, []);
+
   return (
     <div id="what-news" className="py-5">
       <div className="container">
@@ -24,15 +30,19 @@ const WhatNews = () => {
                     <li className="mr-5 has-text-weight-bold">
                       <NavLink to="/">All</NavLink>
                     </li>
-                    <li className="mr-5 has-text-weight-bold">
-                      <NavLink to="/">Fun</NavLink>
-                    </li>
-                    <li className="mr-5 has-text-weight-bold">
-                      <NavLink to="/">Social</NavLink>
-                    </li>
+                    {category &&
+                      category?.map((cat) => {
+                        return (
+                          <li
+                            className="mr-5 has-text-weight-bold"
+                            key={cat.id}
+                          >
+                            <NavLink to="/">{cat.name}</NavLink>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </div>
-
                 <div className="what-news-name">
                   <h1 className="is-size-2 title">Whats up</h1>
                 </div>
@@ -74,3 +84,15 @@ const WhatNews = () => {
 };
 
 export default WhatNews;
+
+{
+  /* 
+
+category && category?HomeContext.map((cat) => {
+                        return (
+                          <li className="mr-5 has-text-weight-bold" key={cat.id}>
+                        <NavLink to="/">{cat.name}</NavLink>
+                      </li>
+                        )
+                       }) */
+}
