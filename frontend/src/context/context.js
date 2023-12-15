@@ -41,6 +41,12 @@ export const HomeContextProvider = ({ Children }) => {
     error: "",
     news: [],
   };
+  const INITIAL_STATE_POPULAR_NEWS = {
+    loading: true,
+    error: "",
+    popularNews: [],
+  };
+  
 
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
   const [stateLastNews, lastNewsDispatch] = useReducer(
