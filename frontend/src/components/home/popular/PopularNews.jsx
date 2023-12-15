@@ -11,7 +11,11 @@ const PopularNews = () => {
     <div className="container mt-6">
       <div className="columns">
 {
-  loadingPopularNews && popularNews.pap()
+  loadingPopularNews ? (
+          <div className="column is-four-fifths has-background-white p-4 has-text-centered">
+            <Loader/>
+          </div>
+        ) : ()
 }
       </div>
     </div>
