@@ -3,6 +3,7 @@ import { videoReducer } from "./reducers/videoReducer";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import { lastNewsReducer } from "./reducers/lastNewsReducer";
+import { popularNewsReducer } from "./reducers/popularNewsReducer";
 import {
   VIDEO_FAIL,
   VIDEO_REQUEST,
