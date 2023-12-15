@@ -69,11 +69,13 @@ export const HomeContextProvider = ({ Children }) => {
   const [category, setCategory] = useState([]);
   const cat = useLocation().search
 
+
   useEffect(() => {
     loadVideo();
     loadLastNews();
     loadCategory();
     loadCatPost();
+    loadPopularNews();
   }, []);
 
   const loadVideo = async () => {
@@ -120,6 +122,20 @@ export const HomeContextProvider = ({ Children }) => {
       const res = await axios.get(`${baseUrl}/api/category/home`);
       setCategory(res.data);
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loadPopularNews = async () => {
+    try {
+      popularNewsDispatch({ type: POPULAR_NEWS_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/popular`);
+      popularNewsDispatch({ type: POPULAR_NEWS_SUCCESS, payload: data });
+    } catch (error) {
+      lastNewsDispatch({
+        type: POPULAR_NEWS_FAIL,
+        payload: error.response.data.message,
+      });
       console.log(error);
     }
   };
