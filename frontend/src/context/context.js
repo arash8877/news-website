@@ -18,6 +18,11 @@ import {
   CATEGORY_POST_SUCCESS,
   CATEGORY_POST_FAIL,
 } from "./constants/categoryConstants";
+import {
+  POPULAR_NEWS_REQUEST,
+  POPULAR_NEWS_SUCCESS,
+  POPULAR_NEWS_FAIL,
+} from "./constants/popularNewsConstants";
 import { catPostReducer } from "./reducers/categoryReducer";
 import { useLocation } from "react-router-dom";
 
@@ -46,7 +51,7 @@ export const HomeContextProvider = ({ Children }) => {
     error: "",
     popularNews: [],
   };
-  
+
 
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
   const [stateLastNews, lastNewsDispatch] = useReducer(
@@ -56,6 +61,10 @@ export const HomeContextProvider = ({ Children }) => {
   const [stateCatPost, catPostDispatch] = useReducer(
     catPostReducer,
     INITIAL_STATE_CAT_POST
+  );
+  const [statePopularNews, popularNewsDispatch] = useReducer(
+    popularNewsReducer,
+    INITIAL_STATE_POPULAR_NEWS
   );
   const [category, setCategory] = useState([]);
   const cat = useLocation().search
@@ -128,6 +137,9 @@ export const HomeContextProvider = ({ Children }) => {
         lastNews: stateLastNews.lastNews,
         loadingCatPost: stateCatPost,
         errorCatPst: stateCatPost.error,
+        loadingPopularNews: statePopularNews.loading,
+        errorPopularNews: statePopularNews.error,
+        popularNews: statePopularNews.popularNews,
         news: stateCatPost.news,
         category,
       }}
