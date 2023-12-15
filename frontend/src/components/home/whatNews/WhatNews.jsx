@@ -3,10 +3,16 @@ import "./WhatNews.css";
 import { Link, NavLink } from "react-router-dom";
 import { HomeContext } from "../../../context/context";
 import Loader from "../../loading/Loader";
+import { useLocation } from "react-router-dom";
 
 const WhatNews = () => {
   const { category, loadingCatPost, news, loadCatPost } =
     useContext(HomeContext);
+  const cat = useLocation().search;
+
+  useEffect(() => {
+    loadCatPost();
+  }, [cat]);
 
   useEffect(() => {
     loadCatPost();
@@ -37,7 +43,7 @@ const WhatNews = () => {
                             className="mr-5 has-text-weight-bold"
                             key={cat.id}
                           >
-                            <NavLink to="/">{cat.name}</NavLink>
+                            <NavLink to={`/?cat=${cat.id}`}>{cat.name}</NavLink>
                           </li>
                         );
                       })}
@@ -85,14 +91,4 @@ const WhatNews = () => {
 
 export default WhatNews;
 
-{
-  /* 
 
-category && category?HomeContext.map((cat) => {
-                        return (
-                          <li className="mr-5 has-text-weight-bold" key={cat.id}>
-                        <NavLink to="/">{cat.name}</NavLink>
-                      </li>
-                        )
-                       }) */
-}
