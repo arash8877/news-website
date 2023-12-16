@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const Comment = () => {
+    const [review, setReview] = useState("");
+
+
+    
   return (
     <div className="comment-section mt-6 mb-6">
             <form>
         <div className="field">
-            <textarea className='textarea' placeholder='Type your comment'></textarea>
+            <textarea className='textarea' placeholder='Type your comment' onChange={(e)=> setReview(e.target.value)}></textarea>
         </div>
         <div className="columns">
             <div className="column">
