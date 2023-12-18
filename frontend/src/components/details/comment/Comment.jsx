@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
+import { HomeContext } from "../../../context/context";
 
 const Comment = () => {
+  const {createComment} = useContext(HomeContext);
   const [review, setReview] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -9,6 +11,14 @@ const Comment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const data = {
+      newsId,
+      review,
+      name,
+      email,
+      subject
+    }
+    createComment();
   }
 
   const {id} = useParams();
