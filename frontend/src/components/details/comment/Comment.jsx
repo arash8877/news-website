@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Comment = () => {
   const [review, setReview] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
+  const {id} = useParams();
+  const newsId = id;
 
   return (
     <div className="comment-section mt-6 mb-6">
