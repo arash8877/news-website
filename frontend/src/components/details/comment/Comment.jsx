@@ -18,7 +18,7 @@ const Comment = () => {
       email,
       subject
     }
-    createComment();
+    createComment(data);
   }
 
   const {id} = useParams();

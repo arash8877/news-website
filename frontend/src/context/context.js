@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 import { videoReducer } from "./reducers/videoReducer";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { baseUrl } from "../utils/baseUrl";
 import { lastNewsReducer } from "./reducers/lastNewsReducer";
 import { popularNewsReducer } from "./reducers/popularNewsReducer";
@@ -143,9 +144,13 @@ export const HomeContextProvider = ({ Children }) => {
 
   const createComment = async (data) => {
     try {
-      popularNewsDispatch({ type: POPULAR_NEWS_REQUEST });
-      const { data } = await axios.get(`${baseUrl}/api/news/popular`);
-      popularNewsDispatch({ type: POPULAR_NEWS_SUCCESS, payload: data });
+      const res = await axios.post(`${baseUrl}/api/comment`, data);
+      toast.success(res.data, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
     } catch (error) {
       lastNewsDispatch({
         type: POPULAR_NEWS_FAIL,
