@@ -141,6 +141,20 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
+  const createComment = async (data) => {
+    try {
+      popularNewsDispatch({ type: POPULAR_NEWS_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/popular`);
+      popularNewsDispatch({ type: POPULAR_NEWS_SUCCESS, payload: data });
+    } catch (error) {
+      lastNewsDispatch({
+        type: POPULAR_NEWS_FAIL,
+        payload: error.response.data.message,
+      });
+      console.log(error);
+    }
+  };
+
 
 
   return (
@@ -159,6 +173,8 @@ export const HomeContextProvider = ({ Children }) => {
         popularNews: statePopularNews.popularNews,
         news: stateCatPost.news,
         category,
+        loadCatPost,
+        createComment,
       }}
     >
       {Children}
