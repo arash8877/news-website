@@ -1,9 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Content.css";
 import Comment from "../comment/Comment";
 import ViewComment from "../comment/ViewComment";
+import { HomeContext } from "../../../context/context";
 
 const Content = ({ data }) => {
+  const {getCommentsForSingleNews} = useContext(HomeContext);
+
+  useEffect(() => {
+    getCommentsForSingleNews(id);
+  }, [])
+
+
   return (
     <>
       <div className="details-content">
@@ -26,3 +34,14 @@ const Content = ({ data }) => {
 };
 
 export default Content;
+
+
+
+
+
+
+
+
+
+
+
