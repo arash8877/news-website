@@ -69,6 +69,7 @@ export const HomeContextProvider = ({ Children }) => {
     INITIAL_STATE_POPULAR_NEWS
   );
   const [category, setCategory] = useState([]);
+  const [newsComments, setNewsComments] = useState([]);
   const cat = useLocation().search
 
 
@@ -160,6 +161,15 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
+  const getCommentsForSingleNews = async (id) => {
+    try {
+      const res = await axios.get(`${baseUrl}/api/comment/${id}`);
+      setNewsComments(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
 
   return (
@@ -180,6 +190,8 @@ export const HomeContextProvider = ({ Children }) => {
         category,
         loadCatPost,
         createComment,
+        getCommentsForSingleNews,
+        newsComments,
       }}
     >
       {Children}
