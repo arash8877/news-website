@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Sidebar.css";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../../context/context";
@@ -21,21 +21,79 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <div className="social-media has-background-white p-5">
-        <h1 className="is-size-6 has-text-weight-bold mb-4">Share</h1>
-        <FacebookShareButton url={shareUrl}>
-          <FacebookIcon round={true} size={40} />
-        </FacebookShareButton>
-        <TwitterShareButton url={shareUrl}>
-          <TwitterIcon round={true} size={40} />
-        </TwitterShareButton>
-      </div>
-      <div className="details-ads has-text-centered mt-5">
+      <div className="logo mb-5 has-text-centered">
         <img
-          src="https://www.bizadmark.com/wp-content/uploads/2021/08/online-print-ads.jpg"
-          width="250"
+          src="https://img.freepik.com/free-photo/3d-rendering-illustration-letter-blocks-forming-word-news-white-background_181624-60840.jpg?w=1380&t=st=1698825775~exp=1698826375~hmac=adb8bea5716fa26f2958dfa1a54bf7e7f42bcb37201ff3f5e39caf9c3b2ce0bd"
+          alt="logo"
         />
       </div>
+      <ul>
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <span onClick={() => setShowNews(!showNews)}>News</span>
+
+          {showNews && (
+            <ul>
+              <li>
+                <Link to="/add-news">Add News</Link>
+              </li>
+              <li>
+                <Link to="/view-news">View News</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li>
+          <span onClick={() => setShowCategory(!showCategory)}>Categories</span>
+
+          {showCategory && (
+            <ul>
+              <li>
+                <Link to="/add-category">Add category</Link>
+              </li>
+              <li>
+                <Link to="/view-categories">View categories</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li>
+          <span onClick={() => setShowVideo(!showVideo)}>Videos</span>
+
+          {showVideo && (
+            <ul>
+              <li>
+                <Link to="/add-video">Add video</Link>
+              </li>
+              <li>
+                <Link to="/view-videos">View videos</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li>
+          <span onClick={() => setShowUsers(!showUsers)}>Users</span>
+
+          {showUsers && (
+            <ul>
+              <li>
+                <Link to="/add-user">Add user</Link>
+              </li>
+              <li>
+                <Link to="/view-users">View users</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li>
+          <Link to="/comment">Comments</Link>
+        </li>
+        <li>
+          <span onClick={logout}>Logout</span>
+        </li>
+      </ul>
     </div>
   );
 };
