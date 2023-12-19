@@ -10,6 +10,11 @@ import {
 } from "react-share";
 
 const Sidebar = () => {
+  const [showNews, setShowNews] = useState(false);
+  const [showCategory, setShowCategory] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [showUsers, setShowUsers] = useState(false);
+  const {logout} = useContext(AuthContext);
   const { id } = useParams();
 
   const shareUrl = `http://localhost:3000/details/${id}`;
