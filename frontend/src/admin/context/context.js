@@ -499,6 +499,25 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+
+    // ---------------------------------------------Comments -----------------------------------------------------
+
+    const getAllComments = async () => {
+      try {
+        const res = await axiosInterceptor.get(`${baseUrl}/api/comment`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -534,6 +553,7 @@ export const AuthContextProvider = ({ children }) => {
         getProfileInfo,
         profilePhoto,
         nameOfUser,
+        getAllComments
       }}
     >
       {children}
