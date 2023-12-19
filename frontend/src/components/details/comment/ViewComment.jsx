@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { BSArrowReturnLeft, BsArrowReturnLeft } from "react-icons/bs";
+import { BsArrowReturnLeft } from "react-icons/bs";
 import { HomeContext } from "../../../context/context";
 
 const ViewComment = () => {

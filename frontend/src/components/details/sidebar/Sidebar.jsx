@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Sidebar.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { AuthContext } from "../../../context/context";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -25,7 +26,10 @@ const Sidebar = () => {
         </TwitterShareButton>
       </div>
       <div className="details-ads has-text-centered mt-5">
-        <img src="https://www.bizadmark.com/wp-content/uploads/2021/08/online-print-ads.jpg" width='250'/>
+        <img
+          src="https://www.bizadmark.com/wp-content/uploads/2021/08/online-print-ads.jpg"
+          width="250"
+        />
       </div>
     </div>
   );
