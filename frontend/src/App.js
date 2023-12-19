@@ -14,6 +14,7 @@ import ViewUsers from "./admin/dashboard/components/users/ViewUsers";
 import AddUser from "./admin/dashboard/components/users/AddUser";
 import EditUser from "./admin/dashboard/components/users/EditUser";
 import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
+import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -47,6 +48,8 @@ function App() {
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/edit-user/:id" element={<EditUser />} />
         <Route path="/update-profile/:id" element={<UpdateProfile />} />
+
+        <Route path="/comment" element={<ViewCommentAdmin/>} />
       </Routes>
       <ToastContainer />
     </>
