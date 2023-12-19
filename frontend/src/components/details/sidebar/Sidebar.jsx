@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "./Sidebar.css";
 import { Link, useParams } from "react-router-dom";
-import { AuthContext } from "../../../context/context";
+import { AuthContext } from "../../../admin/context/context";
 import {
   FacebookShareButton,
   FacebookIcon,
