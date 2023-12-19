@@ -1,16 +1,15 @@
-import React, {useContext} from "react";
+import React, { useContext, useEffect } from "react";
 import "./Content.css";
 import Comment from "../comment/Comment";
 import ViewComment from "../comment/ViewComment";
 import { HomeContext } from "../../../context/context";
 
 const Content = ({ data }) => {
-  const {getCommentsForSingleNews} = useContext(HomeContext);
+  const { getCommentsForSingleNews } = useContext(HomeContext);
 
-  useEffect(() => {
+  useEffect((id) => {
     getCommentsForSingleNews(id);
-  }, [])
-
+  }, []);
 
   return (
     <>
@@ -34,14 +33,3 @@ const Content = ({ data }) => {
 };
 
 export default Content;
-
-
-
-
-
-
-
-
-
-
-
