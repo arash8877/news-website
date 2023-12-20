@@ -3,22 +3,28 @@ import Dashboard from "../../Dashboard";
 import { AuthContext } from "../../../context/context";
 
 const ViewCommentAdmin = () => {
-  const { getAllComments } = useContext(AuthContext);
+  const {
+    getAllComments,
+    comments,
+    deleteComment,
+    activateComment,
+    deactivateComment,
+  } = useContext(AuthContext);
 
   useEffect(() => {
     getAllComments();
   }, []);
 
-  
   return (
     <Dashboard>
       <table className="table is-fullwidth">
         <thead className="is-fullwidth">
           <tr>
-            <th>Number</th>
+          <th>Number</th>
             <th>Subject</th>
             <th>Content</th>
             <th>Email</th>
+            <th>Status</th>
             <th>Delete</th>
           </tr>
         </thead>
