@@ -532,6 +532,32 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const activateComment = async (id) => {
+    const data = {
+      isActive: true,
+    };
+    try {
+      const res = await axiosInterceptor.put(
+        `${baseUrl}/api/comment/active/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      getAllComments();
+      toast.success(res.data.message, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -568,6 +594,9 @@ export const AuthContextProvider = ({ children }) => {
         profilePhoto,
         nameOfUser,
         getAllComments,
+        comments,
+        deleteComment,
+        activateComment,
       }}
     >
       {children}
