@@ -25,6 +25,7 @@ export const AuthContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [profilePhoto, setProfilePhoto] = useState("");
   const [nameOfUser, setNameOfUser] = useState("");
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -440,14 +441,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const res = await axiosInterceptor.delete(
-        `${baseUrl}/api/users/logout`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axiosInterceptor.delete(`${baseUrl}/api/users/logout`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       toast.success(res.data, {
         position: "bottom-center",
         autoClose: 3000,
@@ -470,7 +468,8 @@ export const AuthContextProvider = ({ children }) => {
       formData.append("file", data.file);
 
       const res = await axiosInterceptor.put(
-        `${baseUrl}/api/users/profile/${data.id}`, formData,
+        `${baseUrl}/api/users/profile/${data.id}`,
+        formData,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -478,45 +477,60 @@ export const AuthContextProvider = ({ children }) => {
         }
       );
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   const getProfileInfo = async () => {
     try {
-      const res = await axiosInterceptor.get(
-        `${baseUrl}/api/users/profile`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axiosInterceptor.get(`${baseUrl}/api/users/profile`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       setProfilePhoto(res.data.url);
       setNameOfUser(res.data.name);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
+  // ---------------------------------------------Comments -----------------------------------------------------
 
-    // ---------------------------------------------Comments -----------------------------------------------------
+  const getAllComments = async () => {
+    try {
+      const res = await axiosInterceptor.get(`${baseUrl}/api/comment`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setComments(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const getAllComments = async () => {
-      try {
-        const res = await axiosInterceptor.get(`${baseUrl}/api/comment`, {
+  const deleteComment = async (id) => {
+    try {
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/comment/${id}`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-        
-      } catch (error) {
-        console.log(error);
-      }
+        }
+      );
+      toast.success(res.data.message, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      getAllComments();
+    } catch (error) {
+      console.log(error);
     }
-
-
-
+  };
 
   return (
     <AuthContext.Provider
@@ -553,11 +567,10 @@ export const AuthContextProvider = ({ children }) => {
         getProfileInfo,
         profilePhoto,
         nameOfUser,
-        getAllComments
+        getAllComments,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
-
