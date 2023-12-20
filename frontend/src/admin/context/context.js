@@ -558,6 +558,32 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const deactivateComment = async (id) => {
+    const data = {
+      isActive: false,
+    };
+    try {
+      const res = await axiosInterceptor.put(
+        `${baseUrl}/api/comment/deactivate/${id}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      getAllComments();
+      toast.success(res.data.message, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
