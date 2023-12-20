@@ -20,7 +20,7 @@ const ViewCommentAdmin = () => {
       <table className="table is-fullwidth">
         <thead className="is-fullwidth">
           <tr>
-          <th>Number</th>
+            <th>Number</th>
             <th>Subject</th>
             <th>Content</th>
             <th>Email</th>
@@ -29,15 +29,41 @@ const ViewCommentAdmin = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>subject111</td>
-            <td>this is a comment</td>
-            <td>test@email.com</td>
-            <td>
-              <button className="button is-danger">Delete</button>
-            </td>
-          </tr>
+          {comments?.map((comment, index) => {
+            return (
+              <tr key={comment.id}>
+                <td>{index + 1}</td>
+                <td>{comment.subject}</td>
+                <td>{comment.description}</td>
+                <td>{comment.email}</td>
+                <td>
+                  {comment.isActive ? (
+                    <button
+                      className="button is-success"
+                      onClick={() => deactivateComment(comment.id)}
+                    >
+                      Active
+                    </button>
+                  ) : (
+                    <button
+                      className="button is-warning"
+                      onClick={() => activateComment(comment.id)}
+                    >
+                      Inactive
+                    </button>
+                  )}
+                </td>
+                <td>
+                  <button
+                    className="button is-danger"
+                    onClick={() => deleteComment(comment.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </Dashboard>
