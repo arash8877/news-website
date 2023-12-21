@@ -9,8 +9,10 @@ import {
 import { AuthContext } from "../../../context/context";
 
 const Information = () => {
-  const avatarUrl= "https://st3.depositphotos.com/19428878/37071/v/450/depositphotos_370714622-stock-illustration-businessman-icon-vector-male-avatar.jpg";
-  const { userId, getProfileInfo, profilePhoto } = useContext(AuthContext);
+  const avatarUrl =
+    "https://st3.depositphotos.com/19428878/37071/v/450/depositphotos_370714622-stock-illustration-businessman-icon-vector-male-avatar.jpg";
+  const { userId, getProfileInfo, profilePhoto, users, news, comments } =
+    useContext(AuthContext);
 
   // useEffect(() => {
   //   getProfileInfo();
@@ -32,7 +34,7 @@ const Information = () => {
             <Link to={`/update-profile/${userId}`}>
               <img
                 className="image profile-photo"
-                src= {profilePhoto ? profilePhoto : avatarUrl}
+                src={profilePhoto ? profilePhoto : avatarUrl}
                 alt="profile-photo"
               />
             </Link>
@@ -43,17 +45,17 @@ const Information = () => {
         <div className="info-item">
           <BsFillCapslockFill />
           <h4>News</h4>
-          <span>25</span>
+          <span>{news.length}</span>
         </div>
         <div className="info-item">
           <BsFillPersonPlusFill />
           <h4>Users</h4>
-          <span>8</span>
+          <span>{users.length}</span>
         </div>
         <div className="info-item">
           <BsChatDots />
           <h4>Comments</h4>
-          <span>66</span>
+          <span>{comments.length}</span>
         </div>
       </div>
     </div>
