@@ -19,9 +19,12 @@ import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Details from "./pages/Details";
-
+import { useContext } from "react";
+import { AuthContext } from "./admin/context/context";
 
 function App() {
+  const { userId } = useContext(AuthContext);
+
   return (
     <>
       <Routes>
@@ -31,25 +34,30 @@ function App() {
         <Route path="/details/:id" element={<Details />} />
         <Route path="/administrator" element={<Login />} />
 
-        <Route path="/dashboard" element={<Main />} />
+        //if the user is logged in, then has access to these routes:
 
-        <Route path="/add-news" element={<AddNews />} />
-        <Route path="/view-news" element={<ViewNews />} />
-        <Route path="/edit-news/:id" element={<EditNews />} />
+        {userId && (
+          <>
+            <Route path="/dashboard" element={<Main />} />
 
-        <Route path="/view-categories" element={<ViewCategories />} />
-        <Route path="/add-category" element={<AddCategory />} />
-        <Route path="/edit-category/:id" element={<EditCategory />} />
+            <Route path="/add-news" element={<AddNews />} />
+            <Route path="/view-news" element={<ViewNews />} />
+            <Route path="/edit-news/:id" element={<EditNews />} />
 
-        <Route path="/view-videos" element={<ViewVideos />} />
-        <Route path="/add-video" element={<AddVideo />} />
+            <Route path="/view-categories" element={<ViewCategories />} />
+            <Route path="/add-category" element={<AddCategory />} />
+            <Route path="/edit-category/:id" element={<EditCategory />} />
 
-        <Route path="/view-users" element={<ViewUsers />} />
-        <Route path="/add-user" element={<AddUser />} />
-        <Route path="/edit-user/:id" element={<EditUser />} />
-        <Route path="/update-profile/:id" element={<UpdateProfile />} />
+            <Route path="/view-videos" element={<ViewVideos />} />
+            <Route path="/add-video" element={<AddVideo />} />
 
-        <Route path="/comment" element={<ViewCommentAdmin/>} />
+            <Route path="/view-users" element={<ViewUsers />} />
+            <Route path="/add-user" element={<AddUser />} />
+            <Route path="/edit-user/:id" element={<EditUser />} />
+            <Route path="/update-profile/:id" element={<UpdateProfile />} />
+            <Route path="/comment" element={<ViewCommentAdmin />} />
+          </>
+        )}
       </Routes>
       <ToastContainer />
     </>
