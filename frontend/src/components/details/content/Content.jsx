@@ -5,10 +5,11 @@ import ViewComment from "../comment/ViewComment";
 import { HomeContext } from "../../../context/context";
 
 const Content = ({ data }) => {
-  const { getCommentsForSingleNews } = useContext(HomeContext);
+  const { getCommentsForSingleNews, getNumViewsOfNews } = useContext(HomeContext);
 
   useEffect((id) => {
     getCommentsForSingleNews(id);
+    getNumViewsOfNews(id);
   }, []);
 
   return (
