@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./HomeWrapper.css";
 import { HomeContext } from "../../../context/context";
 import Loader from "../../loading/Loader";
+import { Link } from "react-router-dom";
 
 const HomeWrapper = () => {
   const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
@@ -22,20 +23,19 @@ const HomeWrapper = () => {
                   {lastNews.map((item) => {
                     return (
                       <div className="left-side-top" key={item.id}>
-                        <div className="left-side-img">
-                          <div className="overlay"></div>
-                          <img
-                            src={item.url}
-                            alt=""
-                          />
-                        </div>
-                        <div className="post-info">
-                          <div className="post-cat">
-                            <span>{item.category.name}</span>
+                        <Link to={`/details/${item.id}`} state= {item}>
+                          <div className="left-side-img">
+                            <div className="overlay"></div>
+                            <img src={item.url} alt="" />
                           </div>
-                          <div className="post-title">{item.title}</div>
-                          <div className="post-date">{item.createdAt}</div>
-                        </div>
+                          <div className="post-info">
+                            <div className="post-cat">
+                              <span>{item.category.name}</span>
+                            </div>
+                            <div className="post-title">{item.title}</div>
+                            <div className="post-date">{item.createdAt}</div>
+                          </div>
+                        </Link>
                       </div>
                     );
                   })}
