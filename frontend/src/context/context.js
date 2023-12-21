@@ -26,7 +26,7 @@ import {
   POPULAR_NEWS_FAIL,
 } from "./constants/popularNewsConstants";
 import { catPostReducer } from "./reducers/categoryReducer";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const HomeContext = createContext();
 
@@ -54,7 +54,6 @@ export const HomeContextProvider = ({ Children }) => {
     popularNews: [],
   };
 
-
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
   const [stateLastNews, lastNewsDispatch] = useReducer(
     lastNewsReducer,
@@ -70,8 +69,8 @@ export const HomeContextProvider = ({ Children }) => {
   );
   const [category, setCategory] = useState([]);
   const [newsComments, setNewsComments] = useState([]);
-  const cat = useLocation().search
-
+  const navigate = useNavigate();
+  const cat = useLocation().search;
 
   useEffect(() => {
     loadVideo();
@@ -143,6 +142,15 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
+  const getNumViewsOfNews = async (id) => {
+    try {
+      const res = await axios.get(`${baseUrl}/api/news/details/${id}`);
+      loadPopularNews();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const createComment = async (data) => {
     try {
       const res = await axios.post(`${baseUrl}/api/comment`, data);
@@ -170,7 +178,21 @@ export const HomeContextProvider = ({ Children }) => {
     }
   };
 
-
+  const handleEmail = async (data) => {
+    try {
+      const res = await axios.post(`${baseUrl}/api/send-email`, data);
+     
+      toast.success(res.data, {
+        position: "bottom-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <HomeContext.Provider
@@ -192,6 +214,8 @@ export const HomeContextProvider = ({ Children }) => {
         createComment,
         getCommentsForSingleNews,
         newsComments,
+        getNumViewsOfNews,
+        handleEmail,
       }}
     >
       {Children}
