@@ -9,7 +9,8 @@ const Comment = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
 
-
+  const { id } = useParams();
+  const newsId = id;
 
   const reset = () => {
     setName("");
@@ -30,14 +31,12 @@ const Comment = () => {
     createComment(data);
   };
 
-  const { id } = useParams();
-  const newsId = id;
-
   return (
     <div className="comment-section mt-6 mb-6">
       <form>
         <div className="field">
           <textarea
+            value={review}
             className="textarea"
             placeholder="Type your comment"
             onChange={(e) => setReview(e.target.value)}
@@ -46,6 +45,7 @@ const Comment = () => {
         <div className="columns">
           <div className="column">
             <input
+              value={name}
               type="text"
               className="input"
               placeholder="Your name"
@@ -54,6 +54,7 @@ const Comment = () => {
           </div>
           <div className="column">
             <input
+              value={email}
               type="email"
               className="input"
               placeholder="Your email"
@@ -63,6 +64,7 @@ const Comment = () => {
         </div>
         <div className="field">
           <input
+            value={subject}
             type="text"
             className="input"
             placeholder="Subject"
