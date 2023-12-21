@@ -14,9 +14,6 @@ const WhatNews = () => {
     loadCatPost();
   }, [cat]);
 
-  useEffect(() => {
-    loadCatPost();
-  }, []);
 
   return (
     <div id="what-news" className="py-5">
@@ -64,12 +61,12 @@ const WhatNews = () => {
                       return (
                         <div className="what-news-post-item" key={post.id}>
                           <div className="what-news-post-item-img">
-                            <Link to="/">
+                            <Link to={`/details/${post.id}`} state={post}>
                               <img src={post.url} />
                             </Link>
                           </div>
                           <div className="what-news-post-item-description">
-                            <Link>
+                            <Link to={`/details/${post.id}`} state={post}>
                               <p>{post.desc}</p>
                             </Link>
                             <div className="what-news-post-item-date">
@@ -90,5 +87,3 @@ const WhatNews = () => {
 };
 
 export default WhatNews;
-
-
