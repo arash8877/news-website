@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -9,7 +9,7 @@ const Sidebar = () => {
   const [showCategory, setShowCategory] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
-  const {logout} = useContext(AuthContext);
+  const { logout, admin } = useContext(AuthContext);
 
   return (
     <div className="sidebar">
@@ -37,50 +37,60 @@ const Sidebar = () => {
             </ul>
           )}
         </li>
-        <li>
-          <span onClick={() => setShowCategory(!showCategory)}>Categories</span>
 
-          {showCategory && (
-            <ul>
-              <li>
-                <Link to="/add-category">Add category</Link>
-              </li>
-              <li>
-                <Link to="/view-categories">View categories</Link>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li>
-          <span onClick={() => setShowVideo(!showVideo)}>Videos</span>
+        {admin ? (
+          <>
+            <li>
+              <span onClick={() => setShowCategory(!showCategory)}>
+                Categories
+              </span>
 
-          {showVideo && (
-            <ul>
-              <li>
-                <Link to="/add-video">Add video</Link>
-              </li>
-              <li>
-                <Link to="/view-videos">View videos</Link>
-              </li>
-            </ul>
-          )}
-        </li>
-        <li>
-          <span onClick={() => setShowUsers(!showUsers)}>Users</span>
+              {showCategory && (
+                <ul>
+                  <li>
+                    <Link to="/add-category">Add category</Link>
+                  </li>
+                  <li>
+                    <Link to="/view-categories">View categories</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <span onClick={() => setShowVideo(!showVideo)}>Videos</span>
 
-          {showUsers && (
-            <ul>
-              <li>
-                <Link to="/add-user">Add user</Link>
-              </li>
-              <li>
-                <Link to="/view-users">View users</Link>
-              </li>
-            </ul>
-          )}
-        </li>
+              {showVideo && (
+                <ul>
+                  <li>
+                    <Link to="/add-video">Add video</Link>
+                  </li>
+                  <li>
+                    <Link to="/view-videos">View videos</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <span onClick={() => setShowUsers(!showUsers)}>Users</span>
+
+              {showUsers && (
+                <ul>
+                  <li>
+                    <Link to="/add-user">Add user</Link>
+                  </li>
+                  <li>
+                    <Link to="/view-users">View users</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+          </>
+        ) : (
+          ""
+        )}
+
         <li>
-          <Link to="">Comments</Link>
+          <Link to="/comment">Comments</Link>
         </li>
         <li>
           <span onClick={logout}>Logout</span>
