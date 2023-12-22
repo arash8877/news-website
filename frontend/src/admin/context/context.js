@@ -29,6 +29,11 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     refreshToken();
     getProfileInfo();
+
+    //to get the latest:
+    getAllUsers();
+    getAllComments();
+    handleNews();
   }, []);
 
   const refreshToken = async () => {
