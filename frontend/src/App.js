@@ -15,6 +15,7 @@ import AddUser from "./admin/dashboard/components/users/AddUser";
 import EditUser from "./admin/dashboard/components/users/EditUser";
 import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
 import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
+import CheckAdmin from "./admin/auth/CheckAdmin";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -33,9 +34,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/administrator" element={<Login />} />
-
         //if the user is logged in, then has access to these routes:
-
         {userId && (
           <>
             <Route path="/dashboard" element={<Main />} />
@@ -44,20 +43,24 @@ function App() {
             <Route path="/view-news" element={<ViewNews />} />
             <Route path="/edit-news/:id" element={<EditNews />} />
 
-            <Route path="/view-categories" element={<ViewCategories />} />
-            <Route path="/add-category" element={<AddCategory />} />
-            <Route path="/edit-category/:id" element={<EditCategory />} />
+            <Route element={<CheckAdmin />}>
+              <Route path="/view-categories" element={<ViewCategories />} />
+              <Route path="/add-category" element={<AddCategory />} />
+              <Route path="/edit-category/:id" element={<EditCategory />} />
 
-            <Route path="/view-videos" element={<ViewVideos />} />
-            <Route path="/add-video" element={<AddVideo />} />
+              <Route path="/view-videos" element={<ViewVideos />} />
+              <Route path="/add-video" element={<AddVideo />} />
 
-            <Route path="/view-users" element={<ViewUsers />} />
-            <Route path="/add-user" element={<AddUser />} />
-            <Route path="/edit-user/:id" element={<EditUser />} />
+              <Route path="/view-users" element={<ViewUsers />} />
+              <Route path="/add-user" element={<AddUser />} />
+              <Route path="/edit-user/:id" element={<EditUser />} />
+            </Route>
+
             <Route path="/update-profile/:id" element={<UpdateProfile />} />
             <Route path="/comment" element={<ViewCommentAdmin />} />
           </>
         )}
+        {/* <Route path="*" elemen={<?/>}/> */}
       </Routes>
       <ToastContainer />
     </>
