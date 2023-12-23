@@ -15,6 +15,7 @@ import AddUser from "./admin/dashboard/components/users/AddUser";
 import EditUser from "./admin/dashboard/components/users/EditUser";
 import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
 import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
+import NotFound from "./components/NotFound/NotFound";
 import CheckAdmin from "./admin/auth/CheckAdmin";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
@@ -60,7 +61,7 @@ function App() {
             <Route path="/comment" element={<ViewCommentAdmin />} />
           </>
         )}
-        {/* <Route path="*" elemen={<?/>}/> */}
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
       <ToastContainer />
     </>
