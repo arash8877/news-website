@@ -8,7 +8,7 @@ import {
   getAllComments,
   getAllCommentsForSingleNews,
   updateComment,
-} from "../controllers/CommentController.js";
+} from "../controllers/CommentControllers.js";
 
 const router = express.Router();
 

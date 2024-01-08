@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyToken } from "../middleware/VerifyToken";
+import { verifyToken } from "../middleware/VerifyToken.js";
 import {
   createVideo,
   deleteVideo,

@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
-import db from "../config/Database";
-import News from "./newsModel";
+import db from "../config/Database.js";
+import News from "../models/newsModel.js";
 
 const {DataTypes} = Sequelize;
 

@@ -6,10 +6,10 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import userRoutes from "./routs/userRoutes.js"; //have given a new name "userRoutes"
 import categoryRoutes from "./routs/categoryRoutes.js";
-import videoRoutes from "./controllers/VideoController.js";
-import newsRoutes from "./controllers/NewsController.js";
-import commentRoutes from "./controllers/CommentController.js";
-import sendEmailRoutes from "./controllers/EmailMsgController.js";
+import videoRoutes from "./routs/videoRouters.js";
+import newsRoutes from "./routs/newsRoutes.js";
+import commentRoutes from "./routs/commentRoutes.js";
+import sendEmailRoutes from "./routs/sendEmailRoutes.js";
 
 // Database username: news
 // Database password: UOhc!YW8rlo*lhdt

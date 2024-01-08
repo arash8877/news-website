@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
-import db from "../config/Database";
-import Category from "./categoryModel";
+import db from "../config/Database.js";
+import Category from "../models/categoryModel.js";
+import Users from "./userModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -18,7 +19,7 @@ const News = db.define(
   { freezeTableName: true }
 );
 
-Users.hsMany(News);
+Users.hasMany(News);
 News.belongsTo(Users, {foreignKey: 'userId'});
 
 Category.hasMany(News);

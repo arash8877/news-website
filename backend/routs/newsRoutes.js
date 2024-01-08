@@ -9,8 +9,8 @@ import {
   getNewsDetails,
   popularNews,
   updateNews,
-} from "../controllers/NewsController.js";
-import { verifyToken } from "../middleware/VerifyToken";
+} from "../controllers/NewsControllers.js";
+import { verifyToken } from "../middleware/VerifyToken.js";
 
 const router = express.Router();
 
