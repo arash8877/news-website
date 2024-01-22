@@ -14,6 +14,8 @@ import sendEmailRoutes from "./routs/sendEmailRoutes.js";
 // Database username: news
 // Database password: UOhc!YW8rlo*lhdt
 
+// Database username: Arash
+// Database password: UWRlx6/aBL@jd5o.
 
 dotenv.config();
 
