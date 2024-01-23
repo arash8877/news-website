@@ -1,7 +1,7 @@
 import express from "express";
 import db from "./config/Database.js";
 import dotenv from "dotenv";
-import cors from 'cors';
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import userRoutes from "./routs/userRoutes.js"; //have given a new name "userRoutes"
@@ -23,13 +23,13 @@ const app = express();
 
 try {
   await db.authenticate();
-  console.log("database connected");
   await db.sync();
+  console.log("database connected");
 } catch (error) {
   console.log("DB error***", error);
 }
 
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 app.use(fileUpload()); // a package that helps to upload file/image.
 app.use(express.static("public")); // to be able to read the static files in the 'public' folder
