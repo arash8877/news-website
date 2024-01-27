@@ -1,5 +1,5 @@
 import Users from "../models/userModel.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import hash from "bcryptjs";
 import jwt from "jsonwebtoken";
 import path from "path";
@@ -19,6 +19,9 @@ export const Register = async (req, res) => {
   if (password !== confPassword) {
     res.json({ error: "password is not the same!" });
   }
+
+  const salt = await bcrypt.genSalt();
+  const hashPassword = await bcrypt.hash(password, salt);
   try {
     const foundEmail = await Users.findOne({ where: { email: email } });
     if (foundEmail) {
@@ -27,7 +30,7 @@ export const Register = async (req, res) => {
     await Users.create({
       name: name,
       email: email,
-      password: await hash(password, 10),
+      password: hashPassword,
       isAdmin: isAdmin,
     });
     res.json({ message: "Register successfully done." });
