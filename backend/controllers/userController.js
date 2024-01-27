@@ -22,9 +22,10 @@ export const Register = async (req, res) => {
 
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
+
   try {
-    const foundEmail = await Users.findOne({ where: { email: email } });
-    if (foundEmail) {
+    const findEmail = await Users.findOne({ where: { email: email } });
+    if (findEmail) {
       return res.json({ error: "This email exist. Use another email!" });
     }
     await Users.create({
@@ -40,6 +41,7 @@ export const Register = async (req, res) => {
 };
 
 export const Login = async (req, res) => {
+
   try {
     const findUser = await Users.findAll({
       where: { email: req.body.email },
@@ -96,7 +98,7 @@ export const Login = async (req, res) => {
       msg: "you are successfully logged in.",
     });
   } catch (error) {
-    res.json({ error: "The user doesn't exist!" });
+    res.json({ error: "Email or password is not correct!" });
   }
 };
 
