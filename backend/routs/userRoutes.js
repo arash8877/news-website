@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/token", refreshToken)
 
 router.get("/api/users", verifyToken, getAllUsers);
-router.post("/api/users/register", verifyToken, Register);
+router.post("/api/users/register", Register);
 router.post("/api/users/login", Login);
 router.get("/api/users/profile", verifyToken, Profile);
 router.put("/api/users/profile/:id", verifyToken, updateProfile);
