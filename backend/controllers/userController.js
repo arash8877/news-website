@@ -84,7 +84,7 @@ export const Login = async (req, res) => {
       }
     );
 
-    res.cookie("refreshToken", refreshToken, {
+    res.cookie("refreshToken", refreshToken, { //to save refreshToken in the cookie of the browser of the client
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, //to convert 1d to milliseconds
     });
