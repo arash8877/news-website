@@ -153,15 +153,14 @@ export const updateUser = async (req, res) => {
     await Users.update(
       {
         name: name,
-        email,
-        email,
+        email: email,
         password: hashPassword,
         isAdmin: isAdmin,
       },
       {
         where: {
           id: req.body.id, // you can get the id of the user from params as well.
-        }, //  req.params.id
+        },                 //  req.params.id
       }
     );
 
