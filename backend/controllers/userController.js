@@ -63,7 +63,7 @@ export const Login = async (req, res) => {
       { userId, name, email, isAdmin },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "45s",
+        expiresIn: "220s",
       }
     );
 
