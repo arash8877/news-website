@@ -106,14 +106,15 @@ export const Logout = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.json("Couldn't find any token");
-    const user = await Users.findOne({ where: {refresh_token: refreshToken} });
-    if (!user) return res.json("The user is not found!");
+    const user = await Users.findOne({refresh_token: refreshToken});
+    if (!user) return res.json("User does not exist!");
     const clr = null;
     await Users.update({ refresh_token: clr }, { where: { id: user.id } });
-    await res.clearCookie("refreshToken");
-    res.json("You logged out successfully");
+    res.clearCookie("refreshToken");
+    res.json("You logged out successfully.");
   } catch (error) {
     console.log(error);
+    res.status(500).json("Internal Server Error");
   }
 };
 
@@ -132,7 +133,7 @@ export const deleteUser = async (req, res) => {
         id: req.params.id,
       },
     });
-    res.json({ message: "The user is delete successfully." });
+    res.json({ message: "The user deleted successfully." });
   } catch (error) {
     console.log(error);
   }
@@ -142,7 +143,7 @@ export const updateUser = async (req, res) => {
   const { name, email, password, confPassword, isAdmin } = req.body;
   if (password !== confPassword) {
     return res.json({
-      error: "Password and  confirmed password are not match!",
+      error: "Password and  con med password are not match!",
     });
   }
   const salt = await bcrypt.genSalt();
