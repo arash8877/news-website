@@ -143,7 +143,7 @@ export const updateUser = async (req, res) => {
   const { name, email, password, confPassword, isAdmin } = req.body;
   if (password !== confPassword) {
     return res.json({
-      error: "Password and  con med password are not match!",
+      error: "Password and confPassword are not the same!",
     });
   }
   const salt = await bcrypt.genSalt();
