@@ -41,7 +41,6 @@ export const Register = async (req, res) => {
 };
 
 export const Login = async (req, res) => {
-
   try {
     const findUser = await Users.findAll({
       where: { email: req.body.email },
@@ -84,7 +83,8 @@ export const Login = async (req, res) => {
       }
     );
 
-    res.cookie("refreshToken", refreshToken, { //to save refreshToken in the cookie of the browser of the client
+    res.cookie("refreshToken", refreshToken, {
+      //to save refreshToken in the cookie of the browser of the client
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, //to convert 1d to milliseconds
     });
@@ -106,7 +106,8 @@ export const Logout = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
     if (!refreshToken) return res.json("Couldn't find any token");
-    const user = await Users.findOne({refresh_token: refreshToken});
+    const user = await Users.findOne({ refresh_token: refreshToken });
+    console.log("********", user);
     if (!user) return res.json("User does not exist!");
     const clr = null;
     await Users.update({ refresh_token: clr }, { where: { id: user.id } });
@@ -160,7 +161,7 @@ export const updateUser = async (req, res) => {
       {
         where: {
           id: req.body.id, // you can get the id of the user from params as well.
-        },                 //  req.params.id
+        }, //  req.params.id
       }
     );
 
