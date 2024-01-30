@@ -200,10 +200,10 @@ export const updateProfile = async (req, res) => {
         "The size of the image shouldn't be larger than 1 mega bite"
       );
 
-    // if (user.image) {
-    //   const filePath = `./public/avatars/${user.image}`; //to remove the previous image in the server
-    //   fs.unlinkSync(filePath);
-    // }
+    if (user.image) {
+      const filePath = `./public/avatars/${user.image}`; //to remove the previous image in the server
+      fs.unlinkSync(filePath);
+    }
 
     file.mv(`./public/avatars/${fileName}`, (err) => {
       if (err) return res.json({ message: err.message });
