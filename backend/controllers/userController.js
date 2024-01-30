@@ -1,6 +1,5 @@
 import Users from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import hash from "bcryptjs";
 import jwt from "jsonwebtoken";
 import path from "path";
 import fs from "fs";
@@ -17,7 +16,7 @@ export const getAllUsers = async (req, res) => {
 export const Register = async (req, res) => {
   const { name, email, password, confPassword, isAdmin } = req.body;
   if (password !== confPassword) {
-    res.json({ error: "password is not the same!" });
+    res.json({ error: "password is not match!" });
   }
 
   const salt = await bcrypt.genSalt();
@@ -177,8 +176,7 @@ export const updateProfile = async (req, res) => {
       id: req.params.id,
     },
   });
-
-  if (!user) return res.status(404).json({ msg: "The user is not exist!" });
+  if (!user) return res.status(404).json({ message: "User is not exist!" });
   let fileName = "";
   if (req.files === null) {
     // if the user during updating his profile, doesn't send any image(file)
@@ -189,8 +187,8 @@ export const updateProfile = async (req, res) => {
     const ext = path.extname(file.name); // path.extname get the extension of a file (pasvand) fx .jpg
     let dateNow = Math.round(Date.now());
     fileName = dateNow + ext; // to change the name of the image that the user uploads.
-    res.json("upload....."); // to avoid overwriting. if the previous image that user has uploaded
-    console.log(fileName); // has the same name as the new uploaded image, they will be overwrite.
+    // to avoid overwriting. if the previous image that user has uploaded
+    // has the same name as the new uploaded image, they will be overwrite.
     const allowedType = [".png", ".jpg", ".jpeg"];
     if (!allowedType.includes(ext.toLowerCase())) {
       return res.json(
@@ -202,10 +200,10 @@ export const updateProfile = async (req, res) => {
         "The size of the image shouldn't be larger than 1 mega bite"
       );
 
-    if (user.image) {
-      const filePath = `./public/avatars/${user.image}`; //to remove the previous image in the server
-      fs.unlinkSync(filePath);
-    }
+    // if (user.image) {
+    //   const filePath = `./public/avatars/${user.image}`; //to remove the previous image in the server
+    //   fs.unlinkSync(filePath);
+    // }
 
     file.mv(`./public/avatars/${fileName}`, (err) => {
       if (err) return res.json({ message: err.message });
@@ -218,14 +216,14 @@ export const updateProfile = async (req, res) => {
       error: "Password and confirm password are not the same!",
     });
   }
-
   const salt = await bcrypt.genSalt();
-  const hashPassword = await bcrypt.hash(password, salt);
-
+  const hasPassword = await bcrypt.hash(password, salt);
   const url = `${req.protocol}://${req.get("host")}/avatars/${fileName}`;
+  console.log("********", url);
+
   try {
     await Users.update(
-      { name: name, password: hashPassword, image: fileName, url: url },
+      { name: name, password: hasPassword, image: fileName, url: url },
       {
         where: {
           id: req.params.id,
