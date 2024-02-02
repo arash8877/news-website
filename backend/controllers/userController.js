@@ -241,6 +241,7 @@ export const Profile = async (req, res) => {
   try {
     const id = req.userId; // instead of get data of the user from 'front'
     const user = await Users.findByPk(id);
+    console.log(user)
     if (user) {
       res.json({
         id: user.id,
@@ -254,3 +255,4 @@ export const Profile = async (req, res) => {
     console.log(error);
   }
 };
+//every user can just edit its own profile, when the user is login.
