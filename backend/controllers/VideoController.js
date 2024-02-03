@@ -12,8 +12,8 @@ export const getAllVideos = async (req, res) => {
 };
 
 export const createVideo = async (req, res) => {
-  if (req.file == 0) {
-    return res.json({ message: "No video is chosen!" });
+  if (req.files == null) {
+    return res.json({ message: "Choose a video file!" });
   }
   const file = req.files.file;
   const fileSize = file.data.length;
@@ -29,14 +29,14 @@ export const createVideo = async (req, res) => {
     });
   }
   if (fileSize > 5000000) {
-    return res.json({ msg: "Size of the file should be less than 5Mb!" });
+    return res.json({ message: "Size of the file should be less than 5Mb!" });
   }
   file.mv(`./public/videos/${fileName}`, async (err) => {
     //mv is a method to move
-    if (err) return res.json({ msg: err.message });
+    if (err) return res.json({ message: err.message });
     try {
       await Video.create({ video: fileName, url: url });
-      res.json({ msg: "video is added successfully." });
+      res.json({ message: "Video uploaded successfully." });
     } catch (error) {
       console.log(error);
     }
