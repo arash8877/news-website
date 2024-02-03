@@ -5,7 +5,7 @@ import fs from "fs";
 export const getAllVideos = async (req, res) => {
   try {
     const videos = await Video.findAll({});
-    res.json("all videos");
+    res.json(videos);
   } catch (error) {
     console.log(error);
   }
@@ -57,13 +57,13 @@ export const deleteVideo = async (req, res) => {
     where: { id: req.params.id },
   });
 
-  if (!video) return res.json({ msg: "video is not find!" });
+  if (!video) return res.json({ message: "video is not found!" });
   //need to delete the video in the data base and also in the folder public/videos
   try {
     const filePath = `./public/videos/${video.video}`; //finding name of the video
     fs.unlinkSync(filePath); //fs can find something in the system and delete it
     await Video.destroy({ where: { id: req.params.id } }); //deleting the video in the data base
-    res.json({ msg: "video is deleted successfully." });
+    res.json({ message: "video is deleted successfully." });
   } catch (error) {
     console.log(error);
   }
