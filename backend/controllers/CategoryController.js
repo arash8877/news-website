@@ -22,6 +22,7 @@ export const getCategoryForHomePage = async(req, res) => {
 
 export const createCategory = async (req, res) => {
     const name = req.body.name;
+    if (!name) return res.json("Category name is required!") 
     try {
         await Category.create({
             name: name,
