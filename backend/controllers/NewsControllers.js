@@ -49,7 +49,7 @@ export const createNews = async (req, res) => {
         image: fileName,
         url: url,
       });
-      res.json({ msg: "new is posted successfully." });
+      res.json({ message: "news is posted successfully." });
     } catch (error) {
       console.log(error.message);
     }
