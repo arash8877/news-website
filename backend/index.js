@@ -23,8 +23,8 @@ const app = express();
 
 try {
   await db.authenticate();
-  await db.sync();
   console.log("database connected");
+  await db.sync();
 } catch (error) {
   console.log("DB error***", error);
 }

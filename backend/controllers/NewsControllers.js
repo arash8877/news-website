@@ -155,8 +155,10 @@ export const getLastNews = async (req, res) => {
             include: [{model: Users, attributes: ['id', 'name', 'email', 'url']}, 
                       {model: Category}]
         });
+        res.status(200).json({ news });
     } catch (error) {
         console.log(error);
+        res.status(500).send('Internal Server Error');
     }
 };
 
