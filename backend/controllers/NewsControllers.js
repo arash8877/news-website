@@ -70,7 +70,7 @@ export const getNewsById = async (req, res) => {
 
 export const updateNews = async (req, res) => {
   const news = await News.findOne({ where: { id: req.params.id } });
-  if (!news) return res.json({ msg: "no data is found!" });
+  if (!news) return res.json({ message: "No data found!" });
 
   let fileName = "";
   if (req.files === null) {
@@ -85,16 +85,16 @@ export const updateNews = async (req, res) => {
     fileName = dateNow + ext;
     const allowedType = [".png", ".jpg", ".jpeg"];
 
-    if (!allowedType.includes(ext.toLocaleLowerCase())) {
+    if (!allowedType.includes(ext.toLowerCase())) {
       return res.json({
         msg: "Type of the image is not allowed. use just png, jpg or jpeg type.",
       });
     }
     if (fileSize > 5000000)
-      return res.json({ msg: "Size of the image should be less than 5Mb!" });
+      return res.json({ message: "Size of the image should be less than 5Mb!" });
 
     file.mv(`./public/images/${fileName}`, (err) => {
-      return res.json({ msg: err.message });
+      return res.json({ message: err.message });
     });
 
     //when user wants to update the image, then the previous image should be deleted
@@ -118,6 +118,7 @@ export const updateNews = async (req, res) => {
         image: fileName,
         url
     }, {where: {id: req.params.id}});
+    res.json("Post updated successfully!")
 
   } catch (error) {
     console.log(error);
@@ -193,3 +194,13 @@ export const getCatNews = async (req, res) => {
         console.log(error);
     }
 }
+
+
+
+
+
+
+
+
+
+
