@@ -87,26 +87,26 @@ export const updateNews = async (req, res) => {
 
     if (!allowedType.includes(ext.toLowerCase())) {
       return res.json({
-        msg: "Type of the image is not allowed. use just png, jpg or jpeg type.",
+        message: "Type of the image is not allowed. use just png, jpg or jpeg type.",
       });
     }
     if (fileSize > 5000000)
       return res.json({ message: "Size of the image should be less than 5Mb!" });
 
-    file.mv(`./public/images/${fileName}`, (err) => {
-      return res.json({ message: err.message });
-    });
-
     //when user wants to update the image, then the previous image should be deleted
     const filePath = `./public/images/${news.image}`;
     fs.unlinkSync(filePath);
+
+    file.mv(`./public/images/${fileName}`, (err) => {
+      return res.json({ message: err.message });
+    });
   }
 
   //now data in the database should be updated
   const title = req.body.title; 
   const desc = req.body.desc; 
-  const catId = req.body.catId;
   const userId = req.body.userId;
+  const catId = req.body.catId;
   const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
 
   try {
