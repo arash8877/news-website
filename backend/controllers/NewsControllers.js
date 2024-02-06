@@ -129,11 +129,16 @@ export const updateNews = async (req, res) => {
 export const deleteNews = async (req, res) => {
     const news = await News.findOne({where: {id: req.params.id}});
 
-    if (!news) return res.json({msg: 'Data is not found!'});
+    if (!news) return res.json({message: 'Data is not found!'});
 
     try {
         const filePath = `/public/images/${news.image}`;
-        fs.unlinkSync(filePath);
+        
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        } else {
+          console.log(`File not found: ${filePath}`);
+        }
         await News.destroy({where: {id: req.params.id}});
         res.json({msg: 'news is deleted successfully.'});
     } catch (error) {
