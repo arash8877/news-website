@@ -163,9 +163,9 @@ export const getLastNews = async (req, res) => {
 };
 
 
-export const getNewsDetails = async (req, res) => {
+export const getNewsDetail = async (req, res) => {
     try {
-        const response = await findOne({where: {id: req.params.id}});
+        const response = await News.findOne({where: {id: req.params.id}});
         const numViews = response.numViews + 1;
         await News.update({numViews}, {where: {id: req.params.id}});
         res.json(response)

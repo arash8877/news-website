@@ -6,7 +6,7 @@ import {
   getLastNews,
   getNews,
   getNewsById,
-  getNewsDetails,
+  getNewsDetail,
   popularNews,
   updateNews,
 } from "../controllers/NewsControllers.js";
@@ -15,7 +15,7 @@ import { verifyToken } from "../middleware/VerifyToken.js";
 const router = express.Router();
 
 router.get("/api/news/last-news", getLastNews);
-router.get("/api/news/details/:id", getNewsDetails);
+router.get("/api/news/detail/:id", getNewsDetail);
 router.get("/api/news/popular", popularNews);
 router.get("/api/news/cat-news", getCatNews);
 
