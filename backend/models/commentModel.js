@@ -4,15 +4,32 @@ import News from "../models/newsModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Comments = db.define(
-  "comments",
+const Comments = db.define("comments",
   {
-    newsId: { type: DataTypes.INTEGER, allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: false },
-    name: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false },
-    subject: { type: DataTypes.STRING, allowNull: false },
-    isActive: { type: DataTypes.BOOLEAN, defaultValue: false },
+    newsId: { 
+        type: DataTypes.INTEGER, 
+        allowNull: false 
+    },
+    description: { 
+        type: DataTypes.TEXT, 
+        allowNull: false 
+    },
+    name: { 
+        type: DataTypes.STRING, 
+        allowNull: false 
+    },
+    email: {
+      type: DataTypes.STRING(320),
+      allowNull: false,
+      validate: { isEmail: true },
+    },
+    subject: { 
+        type: DataTypes.STRING, 
+        allowNull: false 
+    },
+    isActive: { 
+        type: DataTypes.BOOLEAN, 
+        defaultValue: false },
   },
   { freezeTableName: true }
 );

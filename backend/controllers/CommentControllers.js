@@ -3,6 +3,7 @@ import Comments from "../models/commentModel.js"
  export const getAllComments = async (req, res) => {
     try {
         const comments = await Comments.findAll({});
+        res.json(comments)
     } catch (error) {
         console.log(error)
     }
@@ -19,9 +20,10 @@ import Comments from "../models/commentModel.js"
             email,
             subject
         })
-        res.json('comment is sent seccssussfully and will be shown after Admin verifies it.')
+        res.json('Your comment is sent and will be posted after verifying by Admin.')
     } catch (error) {
-        res.json(error);
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
  };
 
