@@ -193,8 +193,17 @@ export const getCatNews = async (req, res) => {
     try {
         const hasCategory = req.query.cat;
         const news  = hasCategory
-        ? await News.findAll({limit: 4, where: {catId: hasCategory, order: ['id', 'DESC'], include: [{model: Users, attributes: ['id', 'name', 'email', 'url']}]}})
-        : await News.findAll({limit: 4, order: ['id', 'DESC'], include: [{model: Users, attributes: ['id', 'name', 'email', 'url']}]});
+        ? await News.findAll({
+          limit: 4,
+          where: { catId: hasCategory },
+          order: [['id', 'DESC']],
+          include: [{ model: Users, attributes: ['id', 'name', 'email', 'url'] }],
+        })
+      : await News.findAll({
+          limit: 4,
+          order: [['id', 'DESC']],
+          include: [{ model: Users, attributes: ['id', 'name', 'email', 'url'] }],
+        });
 
         res.json(news);
     } catch (error) {
