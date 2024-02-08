@@ -63,9 +63,9 @@ export const activeComment = async (req, res) => {
   try {
     await Comments.update(
       { isActive: isActive },
-      { where: { id: req.params.body } }
+      { where: { id: req.params.id } }
     );
-    res.json("comment is activated/shown.");
+    res.json("comment is activated/shown");
   } catch (error) {
     res.json(error);
   }
