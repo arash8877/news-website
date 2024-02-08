@@ -87,7 +87,10 @@ export const deactivateComment = async (req, res) => {
 export const getAllCommentsForSingleNews = async (req, res) => {
   try {
     const newsId = req.params.newsId;
-    const comments = await Comments.findAll({ where: { newsId: newsId } });
+    const comments = await Comments.findAll({ 
+      where: { newsId: newsId } 
+    });
+    res.json(comments);
   } catch (error) {
     res.json(error);
   }
