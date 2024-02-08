@@ -11,10 +11,8 @@ export const getAllComments = async (req, res) => {
 
 export const createComment = async (req, res) => {
   const { newsId, description, name, email, subject } = req.body;
-  const commentData = { newsId, description, subject };
-  console.log("**************", commentData);
+
   try {
-    console.log("**************", name);
     await Comments.create({
       newsId,
       description,
@@ -43,7 +41,7 @@ export const updateComment = async (req, res) => {
       },
       { where: { id: req.params.id } }
     );
-    res.json("comment is edited successfully.");
+    res.json("comment is updated successfully.");
   } catch (error) {
     res.json(error);
   }
