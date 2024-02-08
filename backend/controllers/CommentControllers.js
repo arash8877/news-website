@@ -49,7 +49,9 @@ export const updateComment = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
   try {
-    await Comments.destroy({ where: { id: req.body.id } });
+    await Comments.destroy({ 
+        where: { id: req.params.id } 
+    });
     res.json("the comment is deleted successfully.");
   } catch (error) {
     console.log(error);
