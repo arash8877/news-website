@@ -2,8 +2,8 @@ import React from "react";
 import "./auth.css";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-import { useContext } from "react";
-import { AuthContext } from "../context/context";
+// import { useContext } from "react";
+// import { AuthContext } from "../context/context";
 
 const formSchema = Yup.object({
      email: Yup.string().required("Please Enter your Email correctly!"),
@@ -13,7 +13,7 @@ const formSchema = Yup.object({
 
 const Login = () => {
 
-     const {login,error} = useContext(AuthContext)
+    //  const {login,error} = useContext(AuthContext)
 
      const formik = useFormik({
           initialValues: {
@@ -21,7 +21,7 @@ const Login = () => {
                password: "",
           },
           onSubmit: (values) => {
-               login(values);
+              //  login(values);
           },
           validationSchema: formSchema
  })
@@ -36,10 +36,10 @@ const Login = () => {
             <div className="column is-4">
               <form className="box" onSubmit={formik.handleSubmit}>
                 <h1 className="title has-text-centered mb-5">
-                  Login
+                  Login to Admin Panel
                 </h1>
                 <h1 className="has-text-centered has-text-danger py-3">
-                  {error}
+                  {/* {error} */}
                 </h1>
                 <div className="field">
                   <label className="label">Email</label>
@@ -47,7 +47,7 @@ const Login = () => {
                     <input
                       type="text"
                       className="input"
-                      placeholder="Email"
+                      placeholder="Email Address"
                       value={formik.values.email}
                       onChange={formik.handleChange("email")}
                       onBlur={formik.handleBlur("email")}
