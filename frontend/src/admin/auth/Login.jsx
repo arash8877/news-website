@@ -13,7 +13,7 @@ const formSchema = Yup.object({ //to handle form-validation
 
 const Login = () => {
 
-    const {login} = useContext(AuthContext)
+    const {login, error} = useContext(AuthContext)
 
      const formik = useFormik({
           initialValues: {
@@ -39,7 +39,7 @@ const Login = () => {
                   Login to Admin Panel
                 </h1>
                 <h1 className="has-text-centered has-text-danger py-3">
-                  {/* {error} */}
+                  {error}
                 </h1>
                 <div className="field">
                   <label className="label">Email</label>
