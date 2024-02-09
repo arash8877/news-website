@@ -9,7 +9,7 @@ import categoryRoutes from "./routs/categoryRoutes.js";
 import videoRoutes from "./routs/videoRouters.js";
 import newsRoutes from "./routs/newsRoutes.js";
 import commentRoutes from "./routs/commentRoutes.js";
-import sendEmailRoutes from "./routs/sendEmailRoutes.js";
+import sendEmailRoutes from "./routs/sendEmailRouter.js";
 
 // Database username: news
 // Database password: UOhc!YW8rlo*lhdt
