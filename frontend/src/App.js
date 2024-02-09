@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./admin/dashboard/Dashboard";
 // import ViewNews from "./admin/dashboard/components/news/ViewNews";
 // import AddNews from "./admin/dashboard/components/news/AddNews";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import ViewCategories from "./admin/dashboard/components/category/ViewCategories";
@@ -30,12 +30,12 @@ function App() {
 
   return (
     <>
-    <Routes>
-      <Route path="/administrator" element={<Login/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
-    </Routes>
+      <Routes>
+        <Route path="/administrator" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+      <ToastContainer />
     </>
-
   );
 }
 
