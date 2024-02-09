@@ -21,6 +21,7 @@ const Login = () => {
                password: "",
           },
           onSubmit: (values) => {
+            console.log(values)
               //  login(values);
           },
           validationSchema: formSchema
