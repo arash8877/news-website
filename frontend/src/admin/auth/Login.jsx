@@ -2,18 +2,18 @@ import React from "react";
 import "./auth.css";
 import {useFormik} from "formik";
 import * as Yup from "yup";
-// import { useContext } from "react";
-// import { AuthContext } from "../context/context";
+import { useContext } from "react";
+import { AuthContext } from "../context/context";
 
-const formSchema = Yup.object({
-     email: Yup.string().required("Please Enter your Email correctly!"),
-     password: Yup.string().required("Please enter your password.")
+const formSchema = Yup.object({ //to handle form-validation
+     email: Yup.string().required("Email is required!"),
+     password: Yup.string().required("Password is required!")
 })
 
 
 const Login = () => {
 
-    //  const {login,error} = useContext(AuthContext)
+    const {login} = useContext(AuthContext)
 
      const formik = useFormik({
           initialValues: {
@@ -21,8 +21,7 @@ const Login = () => {
                password: "",
           },
           onSubmit: (values) => {
-            console.log(values)
-              //  login(values);
+              login(values);
           },
           validationSchema: formSchema
  })
