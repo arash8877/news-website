@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -6,7 +7,8 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     try {
-      console.log(inputs);
+        const res = await axios.post("http://localhost:5000/api/users/login", inputs);
+        console.log(res)
     } catch (error) {
       console.log(error);
     }
