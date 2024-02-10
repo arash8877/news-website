@@ -12,6 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   const [userId, setUserId] = useState("");
   const [token, setToken] = useState("");
   const [admin, setAdmin] = useState(null);
+  const [expire, setExpire] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +26,10 @@ export const AuthContextProvider = ({ children }) => {
       const res = await axios.get("http://localhost:5000/token")
       setToken(res.data.accessToken);
       const decoded = jwtDecode(res.data.accessToken);
-      console.log(decoded)
+      setName(decoded.name);
+      setUserId(decoded.userId);
+      setAdmin(decoded.isAdmin);
+      setExpire(decoded.expire);
     } catch (error) {
       console.log(error)
     }
@@ -60,9 +64,32 @@ export const AuthContextProvider = ({ children }) => {
   };
 
 
+//interceptor (in axios) helps to update the token automatically when the token is expired
+  const axiosInterceptor = axios.create();
+
+  axiosInterceptor.interceptors.request.use(
+    async (config) => {
+      const currentDate = new Date();
+      if(expire * 1000 < currentDate.getTime()) { //expire*1000 to convert expire to millisecond
+         const res = await axios.get("http://localhost:5000/token"); //expire * 1000 < currentDate.getTime() ==>
+         config.headers.Authorization = `Bearer ${res.data.accessToken}`;// to check if the token is expired
+         setToken(res.data.accessToken); 
+         const decoded = jwtDecode(res.data.accessToken);
+         setName(decoded.name);
+         setUserId(decoded.userId);
+         setAdmin(decoded.isAdmin);
+         setExpire(decoded.expire);                                          
+      }
+      return config;
+    }, (error) => {
+      return Promise.reject(error);
+    }
+  )
+
+
   const getAllUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/users", {
+      const res = await axiosInterceptor.get("http://localhost:5000/api/users", {
         headers: {
           authorization: `Bearer ${token}`
         }
