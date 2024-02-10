@@ -1,6 +1,7 @@
-import { useState, createContext } from "react";
+import { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
@@ -12,6 +13,23 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+   refreshToken()
+  }, [])
+  
+
+
+  const refreshToken = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/token")
+      setToken(res.data.accessToken);
+      const decoded = jwtDecode(res.data.accessToken);
+      console.log(decoded)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   
   const login = async (inputs) => {
