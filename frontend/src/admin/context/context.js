@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
 
-
+  
   const login = async (inputs) => {
     try {
       const res = await axios.post(
@@ -41,8 +41,26 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+
+  const getAllUsers = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/users", {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      console.log(res)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+
+
   return (
-    <AuthContext.Provider value={{ login, error }}>
+    <AuthContext.Provider value={{ login, error, getAllUsers }}>
       {children}
     </AuthContext.Provider>
   );
