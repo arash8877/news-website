@@ -25,3 +25,7 @@ router.delete("/api/users/:id", verifyToken, deleteUser);
 router.delete("/api/users/logout", verifyToken, Logout);
 
 export default router;
+
+
+
+
