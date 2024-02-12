@@ -11,6 +11,9 @@ const Dashboard = () => {
       <Sidebar />
       <div className="main-info">
         <Information />
+        <div className="main">
+          welcome to Admin Panel
+        </div>
       </div>
     </div>
   );

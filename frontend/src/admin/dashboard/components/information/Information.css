@@ -1,0 +1,50 @@
+.information{
+    width: 100%;
+    padding: 20px 0 70px 0;
+}
+
+.profile-photo{
+    width: 70px;
+    height: 70px;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info-item{
+    width: calc(33% - 20px);
+    background: rgb(166,230,235);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    border-radius: 5px;
+}
+
+.info-item:nth-child(2){
+    background: rgb(255, 164, 161);
+}
+
+.info-item:nth-child(3){
+    background: rgb(171, 255, 196);
+}
+
+.info-item h4{
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.info-item span{
+    font-size: 23px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.info-item svg{
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 6px;
+}
