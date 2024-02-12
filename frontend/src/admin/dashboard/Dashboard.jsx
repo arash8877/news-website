@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/context";
+import "./index.css";
 import Sidebar from "./components/sidebar/Sidebar";
 import Information from "./components/information/Information";
 
