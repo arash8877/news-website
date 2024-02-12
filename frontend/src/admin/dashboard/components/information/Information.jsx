@@ -23,6 +23,24 @@ const Information = () => {
 
   return (
     <div className="information">
+      <div className="view-web is-flex is-align-items-center is-justify-content-space-between mb-5">
+        <div className="view-webpage">
+          <a href="/" className="button has-background-success has-text-white">
+            View Website
+          </a>
+        </div>
+        <div className="view-profile">
+          <span>
+            <Link to={`/update-profile/${userId}`}>
+              <img
+                className="image profile-photo"
+                src={profilePhoto ? profilePhoto : avatarUrl}
+                alt="profile-photo"
+              />
+            </Link>
+          </span>
+        </div>
+      </div>
 
     </div>
   );
