@@ -41,7 +41,23 @@ const Information = () => {
           </span>
         </div>
       </div>
-
+      <div className="info">
+        <div className="info-item">
+          <BsFillCapslockFill />
+          <h4>News</h4>
+          {/* <span>{news.length}</span> */}
+        </div>
+        <div className="info-item">
+          <BsFillPersonPlusFill />
+          <h4>Users</h4>
+          {/* <span>{users.length}</span> */}
+        </div>
+        <div className="info-item">
+          <BsChatDots />
+          <h4>Comments</h4>
+          {/* <span>{comments.length}</span> */}
+        </div>
+      </div>
     </div>
   );
 };
