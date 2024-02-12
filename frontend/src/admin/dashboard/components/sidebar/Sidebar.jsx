@@ -19,7 +19,83 @@ const Sidebar = () => {
           alt="logo"
         />
       </div>
+      <ul>
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <span onClick={() => setShowNews(!showNews)}>News</span>
 
+          {showNews && (
+            <ul>
+              <li>
+                <Link to="/add-news">Add News</Link>
+              </li>
+              <li>
+                <Link to="/view-news">View News</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
+        {admin ? (
+          <>
+            <li>
+              <span onClick={() => setShowCategory(!showCategory)}>
+                Categories
+              </span>
+
+              {showCategory && (
+                <ul>
+                  <li>
+                    <Link to="/add-category">Add category</Link>
+                  </li>
+                  <li>
+                    <Link to="/view-categories">View categories</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <span onClick={() => setShowVideo(!showVideo)}>Videos</span>
+
+              {showVideo && (
+                <ul>
+                  <li>
+                    <Link to="/add-video">Add video</Link>
+                  </li>
+                  <li>
+                    <Link to="/view-videos">View videos</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <span onClick={() => setShowUsers(!showUsers)}>Users</span>
+
+              {showUsers && (
+                <ul>
+                  <li>
+                    <Link to="/add-user">Add user</Link>
+                  </li>
+                  <li>
+                    <Link to="/view-users">View users</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+          </>
+        ) : (
+          ""
+        )}
+
+        <li>
+          <Link to="/comment">Comments</Link>
+        </li>
+        <li>
+          <span onClick={logout}>Logout</span>
+        </li>
+      </ul>
     </div>
   );
 };
