@@ -52,6 +52,23 @@ const AddNews = () => {
             </p>
           </div>
         </div>
+        <div className="field">
+          <label htmlFor="" className="label">
+            Description
+          </label>
+          <div className="control">
+            <textarea
+              className="textarea"
+              placeholder="Description of the news"
+              value={formik.values.desc}
+              onChange={formik.handleChange("desc")}
+              onBlur={formik.handleBlur("desc")}
+            ></textarea>
+            <p className="help has-text-danger">
+              {formik.touched.desc && formik.errors.desc}
+            </p>
+          </div>
+        </div>
 
       </form>
     </Dashboard>
