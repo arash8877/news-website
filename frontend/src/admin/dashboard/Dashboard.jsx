@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { Children, useContext } from "react";
 import { AuthContext } from "../context/context";
 import "./index.css";
 import Sidebar from "./components/sidebar/Sidebar";
 import Information from "./components/information/Information";
 
-const Dashboard = () => {
+const Dashboard = ({Children}) => {
   const { getAllUsers } = useContext(AuthContext);
 
   return (
@@ -13,7 +13,7 @@ const Dashboard = () => {
       <div className="main-info">
         <Information />
         <div className="main">
-          welcome to Admin Panel
+          {Children}
         </div>
       </div>
     </div>
