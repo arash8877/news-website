@@ -1,23 +1,21 @@
-import React, { Children, useContext } from "react";
-import { AuthContext } from "../context/context";
-import "./index.css";
-import Sidebar from "./components/sidebar/Sidebar";
-import Information from "./components/information/Information";
+import React from 'react'
+import Sidebar from './components/sidebar/Sidebar'
+import Information from './components/information/Information'
+import "./index.css"
 
-const Dashboard = ({Children}) => {
-  const { getAllUsers } = useContext(AuthContext);
 
+const Dashboard = ({children}) => {
   return (
     <div className="dashboard-wrapper">
       <Sidebar />
       <div className="main-info">
         <Information />
         <div className="main">
-          {Children}
+           {children}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default Dashboard;

@@ -102,9 +102,22 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+
+
+
+
+
+
+
   return (
     <AuthContext.Provider value={{ login, error, getAllUsers }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+
+
+
+
+
