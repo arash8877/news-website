@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import Dashboard from '../../Dashboard';
+import React, { useContext, useEffect, useState } from "react";
+import Dashboard from "../../Dashboard";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { AuthContext } from "../../../context/context";
 
 const formSchema = Yup.object({
   title: Yup.string().required("Title is required!"),
@@ -10,10 +11,10 @@ const formSchema = Yup.object({
 });
 
 const AddNews = () => {
-
   const [categoryList, setCategoryList] = useState([]);
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
+  const { axiosInterceptor, token, createNews } = useContext(AuthContext);
 
   const loadImage = (e) => {
     const image = e.target.files[0];
@@ -21,6 +22,25 @@ const AddNews = () => {
     setPreview(URL.createObjectURL(image));
   };
 
+  useEffect(() => {
+    getCategory();
+  }, []); //I didn't put try-catch directly inside the useEffect as async,await can't be inside a callback.
+
+  const getCategory = async () => {
+    try {
+      const res = await axiosInterceptor.get(
+        "http://localhost:300/api/get-category",
+        {
+          Headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCategoryList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -43,7 +63,7 @@ const AddNews = () => {
 
   return (
     <Dashboard>
-    <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="field">
           <label htmlFor="" className="label">
             Title
@@ -127,7 +147,7 @@ const AddNews = () => {
         </div>
       </form>
     </Dashboard>
-  )
-}
+  );
+};
 
-export default AddNews
+export default AddNews;
