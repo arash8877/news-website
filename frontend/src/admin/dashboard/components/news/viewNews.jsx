@@ -39,7 +39,17 @@ const ViewNews = () => {
           </tr>
         </thead>
 
-        <tbody></tbody>
+        <tbody>
+        <tr>
+            <td>Number</td>
+            <td>Title</td>
+            <td>Description</td>
+            <td>Image</td>
+            <td>Author</td>
+            <td><button className="button is-success">Edit</button></td>
+            <td><button className="button is-danger">Delete</button></td>
+          </tr>
+        </tbody>
       </table>
     </Dashboard>
   );
