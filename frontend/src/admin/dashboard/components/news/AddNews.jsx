@@ -7,7 +7,7 @@ import { AuthContext } from "../../../context/context";
 const formSchema = Yup.object({
   title: Yup.string().required("Title is required!"),
   desc: Yup.string().required("Description is required!"),
-  catId: Yup.string().required("Choose a category"),
+  catId: Yup.string().required("Choose a category!"),
 });
 
 const AddNews = () => {
@@ -49,7 +49,7 @@ const AddNews = () => {
       catId: "",
       file: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values) => { //onSubmit, get the values of the initialValues and send them to data base
       const data = {
         title: values.title,
         desc: values.desc,
