@@ -29,13 +29,14 @@ const AddNews = () => {
   const getCategory = async () => {
     try {
       const res = await axiosInterceptor.get(
-        "http://localhost:300/api/get-category",
+        "http://localhost:5000/api/get-category",
         {
           Headers: {
             authorization: `Bearer ${token}`,
           },
         }
       );
+      console.log(res)
       setCategoryList(res.data);
     } catch (error) {
       console.log(error);

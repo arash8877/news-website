@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-  
+
 
 //interceptor (in axios) helps to update the token automatically when the token is expired
     const axiosInterceptor = axios.create();
@@ -144,7 +144,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ login, error, getAllUsers }}>
+    <AuthContext.Provider value={{ login, error, getAllUsers, axiosInterceptor }}>
       {children}
     </AuthContext.Provider>
   );
