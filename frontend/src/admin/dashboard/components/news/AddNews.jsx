@@ -3,13 +3,23 @@ import Dashboard from '../../Dashboard';
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
-
+const formSchema = Yup.object({
+  title: Yup.string().required("Title is required!"),
+  desc: Yup.string().required("Description is required!"),
+  catId: Yup.string().required("Choose a category"),
+});
 
 const AddNews = () => {
 
   const [categoryList, setCategoryList] = useState([]);
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
+
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setFile(image);
+    setPreview(URL.createObjectURL(image));
+  };
 
 
   const formik = useFormik({
