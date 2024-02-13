@@ -93,7 +93,28 @@ const AddNews = () => {
             </div>
           </div>
         </div>
-
+        <div className="field mt-5">
+          <label htmlFor="" className="label">
+            Image
+          </label>
+          <div className="control">
+            <input type="file" className="input" onChange={loadImage} />
+            {preview ? (
+              <figure className="mt-3">
+                <img src={preview} width="250" alt="news-image" />
+              </figure>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="field mt-6">
+            <div className="control">
+              <button type="submit" className="button is-success px-6">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </Dashboard>
   )
