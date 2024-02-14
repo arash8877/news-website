@@ -157,6 +157,24 @@ const handleNews = async () => {
 };
 
 
+const deleteNews = async (id) => {
+  try {
+    const res = await axiosInterceptor.delete(`${baseUrl}/api/news/${id}`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    toast.success(res.data.msg, {
+      position: "bottom-center",
+      autoClose: 3000,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
+    handleNews();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 
 
 // ---------------------------------------------Category-----------------------------------------------------
@@ -185,7 +203,7 @@ const handleNews = async () => {
 
 
   return (
-    <AuthContext.Provider value={{ login, error, getAllUsers,createNews, axiosInterceptor, handleNews, news }}>
+    <AuthContext.Provider value={{ login, error, getAllUsers,createNews, axiosInterceptor, handleNews, news, deleteNews }}>
       {children}
     </AuthContext.Provider>
   );

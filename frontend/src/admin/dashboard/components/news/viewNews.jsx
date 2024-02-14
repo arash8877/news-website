@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/context";
 
 const ViewNews = () => {
-  const { news, deleteNews, handleNews } = useContext(AuthContext);
+  const { news, handleNews, deleteNews } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState("");
 
@@ -46,10 +46,9 @@ const ViewNews = () => {
                 <td>{index + 1}</td>
                 <td>{item.title}</td>
                 <td>{item.desc}</td>
-                <td>{item.user.name}</td> 
+                <td>{item?.user?.name}</td> 
                 <td>
                   <img src={item.url} width="100" />
-                  
                 </td>
                 <td>
                   <Link
