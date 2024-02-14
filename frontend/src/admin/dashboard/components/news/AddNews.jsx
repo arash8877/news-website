@@ -36,7 +36,6 @@ const AddNews = () => {
           },
         }
       );
-      console.log(res)
       setCategoryList(res.data);
     } catch (error) {
       console.log(error);
@@ -101,7 +100,7 @@ const AddNews = () => {
           </div>
         </div>
         <div className="field">
-          <label htmlFor="" className="label">
+          <label className="label">
             Category
           </label>
           <div className="control">
