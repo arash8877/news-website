@@ -3,6 +3,7 @@ import Dashboard from "../../Dashboard";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../context/context";
+import { baseUrl } from "../../../../utils/baseUrl";
 
 const formSchema = Yup.object({
   title: Yup.string().required("Title is required!"),
@@ -12,7 +13,7 @@ const formSchema = Yup.object({
 
 const AddNews = () => {
   const [categoryList, setCategoryList] = useState([]);
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState([]);
   const [preview, setPreview] = useState("");
   const { axiosInterceptor, token, createNews } = useContext(AuthContext);
 
@@ -29,7 +30,7 @@ const AddNews = () => {
   const getCategory = async () => {
     try {
       const res = await axiosInterceptor.get(
-        "http://localhost:5000/api/get-category",
+        `${baseUrl}/api/get-category`,
         {
           Headers: {
             authorization: `Bearer ${token}`,
@@ -54,7 +55,7 @@ const AddNews = () => {
         title: values.title,
         desc: values.desc,
         catId: values.catId,
-        file: file,
+        file: file, //file comes from state, not from formik
       }
       createNews(data);
     },

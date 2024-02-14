@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/context";
 
 const ViewNews = () => {
-  const { news, deleteNews } = useContext(AuthContext);
+  const { news, deleteNews, handleNews } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState("");
 
@@ -14,9 +14,9 @@ const ViewNews = () => {
     setId(id);
   };
 
-  //   useEffect(() => {
-  //     handleNews();
-  //   }, []);
+    useEffect(() => {
+      handleNews();
+    }, []);
 
   return (
     <Dashboard>
@@ -32,23 +32,45 @@ const ViewNews = () => {
             <th>Number</th>
             <th>Title</th>
             <th>Description</th>
-            <th>Image</th>
             <th>Author</th>
+            <th>Image</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
 
         <tbody>
-        <tr>
-            <td>Number</td>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Image</td>
-            <td>Author</td>
-            <td><button className="button is-success">Edit</button></td>
-            <td><button className="button is-danger">Delete</button></td>
-          </tr>
+          {news?.map((item, index) => {
+            return (
+              <tr key={item.id}>
+                <td>{index + 1}</td>
+                <td>{item.title}</td>
+                <td>{item.desc}</td>
+                <td>{item.user.name}</td> 
+                <td>
+                  <img src={item.url} width="100" />
+                  
+                </td>
+                <td>
+                  <Link
+                    state={item}
+                    to={`/edit-news/${item.id}`}
+                    className="button is-info"
+                  >
+                    Edit
+                  </Link>
+                </td>
+                <td>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className="button is-danger"
+                  >
+                    <span onClick={() => handleId(item.id)}>Delete</span>
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </Dashboard>

@@ -9,6 +9,10 @@
     align-items: center;
     justify-content: center;
  }
+
+ table tr :nth-child(5) {
+    text-align: center !important;
+ }
  
  .delete-modal {
      width: 450px;

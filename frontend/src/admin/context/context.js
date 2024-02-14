@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
+import { baseUrl } from "../../utils/baseUrl";
 
 export const AuthContext = createContext();
 
@@ -13,10 +14,12 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [admin, setAdmin] = useState(null);
   const [expire, setExpire] = useState("");
+  const [news, setNews] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     refreshToken();
+    handleNews();
   }, []);
 
   const refreshToken = async () => {
@@ -126,13 +129,28 @@ const createNews = async (data) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    toast.success(res.data.msg, {
-      position: "bottom-center",
+    toast.success(res.data.message, {
+      position: "top-center",
       autoClose: 3000,
       closeOnClick: true,
       pauseOnHover: true,
     });
     navigate("/view-news");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+const handleNews = async () => {
+  try {
+    const res = await axiosInterceptor.get(`${baseUrl}/api/news`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res.data)
+    setNews(res.data);
   } catch (error) {
     console.log(error);
   }
@@ -167,7 +185,7 @@ const createNews = async (data) => {
 
 
   return (
-    <AuthContext.Provider value={{ login, error, getAllUsers,createNews, axiosInterceptor }}>
+    <AuthContext.Provider value={{ login, error, getAllUsers,createNews, axiosInterceptor, handleNews, news }}>
       {children}
     </AuthContext.Provider>
   );
