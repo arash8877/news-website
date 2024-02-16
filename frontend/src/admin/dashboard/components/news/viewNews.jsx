@@ -64,7 +64,7 @@ const ViewNews = () => {
                     onClick={() => setShowModal(true)}
                     className="button is-danger"
                   >
-                    <span onClick={() => deleteNews(item.id)}>Delete</span>
+                    <span onClick={() => handleId(item.id)}>Delete</span>
                   </button>
                 </td>
               </tr>
@@ -72,6 +72,31 @@ const ViewNews = () => {
           })}
         </tbody>
       </table>
+
+      {showModal ? (
+        <div className="modal-overlay">
+          <div className="delete-modal has-text-centered">
+            <h1>Are you sure you want to delete?</h1>
+            <button
+              onClick={() => deleteNews(id)}
+              className="button is-danger mr-5"
+            >
+              <span onClick={() => setShowModal(false)}>Yes</span>
+            </button>
+            <button
+              onClick={() => setShowModal(false)}
+              className="button is-success"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+
+
     </Dashboard>
   );
 };
