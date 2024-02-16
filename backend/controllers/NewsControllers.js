@@ -128,11 +128,12 @@ export const updateNews = async (req, res) => {
 
 export const deleteNews = async (req, res) => {
     const news = await News.findOne({where: {id: req.params.id}});
+    
 
     if (!news) return res.json({message: 'Data is not found!'});
 
     try {
-        const filePath = `/public/images/${news.image}`;
+        const filePath = `./public/images/${news.image}`;
         
         if (fs.existsSync(filePath)) {
           fs.unlinkSync(filePath);
@@ -140,9 +141,10 @@ export const deleteNews = async (req, res) => {
           console.log(`File not found: ${filePath}`);
         }
         await News.destroy({where: {id: req.params.id}});
-        res.json({msg: 'news is deleted successfully.'});
+        res.json({message: 'news is deleted successfully.'});
     } catch (error) {
-        console.log(error);
+      console.error('Error deleting news:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
 };
 

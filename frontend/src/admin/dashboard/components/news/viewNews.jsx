@@ -64,7 +64,7 @@ const ViewNews = () => {
                     onClick={() => setShowModal(true)}
                     className="button is-danger"
                   >
-                    <span onClick={() => handleId(item.id)}>Delete</span>
+                    <span onClick={() => deleteNews(item.id)}>Delete</span>
                   </button>
                 </td>
               </tr>

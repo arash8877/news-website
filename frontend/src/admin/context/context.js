@@ -162,8 +162,8 @@ const deleteNews = async (id) => {
     const res = await axiosInterceptor.delete(`${baseUrl}/api/news/${id}`, {
       headers: { authorization: `Bearer ${token}` },
     });
-    toast.success(res.data.msg, {
-      position: "bottom-center",
+    toast.success(res.data.message, {
+      position: "top-center",
       autoClose: 3000,
       closeOnClick: true,
       pauseOnHover: true,
