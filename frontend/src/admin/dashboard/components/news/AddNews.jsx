@@ -27,21 +27,42 @@ const AddNews = () => {
     getCategory();
   }, []); //I didn't put try-catch directly inside the useEffect as async,await can't be inside a callback.
 
+  // const getCategory = async () => {
+  //   try {
+  //     const res = await axiosInterceptor.get(
+  //       `${baseUrl}/api/get-category`,
+  //       {
+  //         headers: {
+  //           authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     setCategoryList(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const getCategory = async () => {
     try {
       const res = await axiosInterceptor.get(
         `${baseUrl}/api/get-category`,
         {
-          Headers: {
+          headers: {
             authorization: `Bearer ${token}`,
           },
         }
       );
-      setCategoryList(res.data);
+      if (Array.isArray(res.data)) {
+        setCategoryList(res.data);
+      } else {
+        console.error("Invalid response format. Expected an array.");
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
+  
 
   const formik = useFormik({
     initialValues: {

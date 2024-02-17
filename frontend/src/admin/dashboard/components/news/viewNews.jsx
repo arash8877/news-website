@@ -63,8 +63,9 @@ const ViewNews = () => {
                   <button
                     onClick={() => setShowModal(true)}
                     className="button is-danger"
+                    //using the span is a trick to pass "id" out of the loop and deliver it to the modal.
                   >
-                    <span onClick={() => handleId(item.id)}>Delete</span>
+                    <span onClick={() => handleId(item.id)}>Delete</span> 
                   </button>
                 </td>
               </tr>
