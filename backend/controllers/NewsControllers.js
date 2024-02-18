@@ -31,15 +31,15 @@ export const createNews = async (req, res) => {
 
   if (!allowedType.includes(ext.toLocaleLowerCase())) {
     return res.json({
-      msg: "Type of the image is not allowed. use just png, jpg or jpeg type.",
+      message: "Oops! Type of the image is not allowed. use just png, jpg or jpeg type.",
     });
   }
   if (fileSize > 5000000) {
-    return res.json({ msg: "Size of the image should be less than 5Mb!" });
+    return res.json({ message: "Oops! Size of the image should be less than 5Mb!" });
   }
 
   file.mv(`./public/images/${fileName}`, async (err) => {
-    if (err) return res.json({ msg: err.message });
+    if (err) return res.json({ message: err.message });
     try {
       await News.create({
         title: title,
@@ -87,11 +87,11 @@ export const updateNews = async (req, res) => {
 
     if (!allowedType.includes(ext.toLowerCase())) {
       return res.json({
-        message: "Type of the image is not allowed. use just png, jpg or jpeg type.",
+        message: "Oops! Type of the image is not allowed. use just png, jpg or jpeg type.",
       });
     }
     if (fileSize > 5000000)
-      return res.json({ message: "Size of the image should be less than 5Mb!" });
+      return res.json({ message: "Oops! Size of the image should be less than 5Mb!" });
 
     //when user wants to update the image, then the previous image should be deleted
     const filePath = `./public/images/${news.image}`;

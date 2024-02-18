@@ -16,7 +16,7 @@ const AddNews = () => {
   const [file, setFile] = useState([]);
   const [preview, setPreview] = useState("");
   const { axiosInterceptor, token, createNews } = useContext(AuthContext);
-
+  console.log(categoryList);
   const loadImage = (e) => {
     const image = e.target.files[0];
     setFile(image);
@@ -27,32 +27,15 @@ const AddNews = () => {
     getCategory();
   }, []); //I didn't put try-catch directly inside the useEffect as async,await can't be inside a callback.
 
-  // const getCategory = async () => {
-  //   try {
-  //     const res = await axiosInterceptor.get(
-  //       `${baseUrl}/api/get-category`,
-  //       {
-  //         headers: {
-  //           authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     setCategoryList(res.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
 
   const getCategory = async () => {
     try {
-      const res = await axiosInterceptor.get(
-        `${baseUrl}/api/get-category`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axiosInterceptor.get(`${baseUrl}/api/get-category`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       if (Array.isArray(res.data)) {
         setCategoryList(res.data);
       } else {
@@ -62,7 +45,6 @@ const AddNews = () => {
       console.error(error);
     }
   };
-  
 
   const formik = useFormik({
     initialValues: {
@@ -71,13 +53,14 @@ const AddNews = () => {
       catId: "",
       file: "",
     },
-    onSubmit: (values) => { //onSubmit, get the values of the initialValues and send them to data base
+    onSubmit: (values) => {
+      //onSubmit, get the values of the initialValues and send them to data base
       const data = {
         title: values.title,
         desc: values.desc,
         catId: values.catId,
         file: file, //file comes from state, not from formik
-      }
+      };
       createNews(data);
     },
     validationSchema: formSchema,
@@ -122,9 +105,7 @@ const AddNews = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">
-            Category
-          </label>
+          <label className="label">Category</label>
           <div className="control">
             <div className="select is-fullwidth">
               <select

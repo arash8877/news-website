@@ -15,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
   const [expire, setExpire] = useState("");
   const [news, setNews] = useState([]);
+  const [category, setCategory] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -149,7 +150,7 @@ const handleNews = async () => {
         authorization: `Bearer ${token}`,
       },
     });
-    console.log(res.data)
+    // console.log(res.data)
     setNews(res.data);
   } catch (error) {
     console.log(error);
@@ -179,6 +180,22 @@ const deleteNews = async (id) => {
 
 // ---------------------------------------------Category-----------------------------------------------------
 
+const getCategories = async (values) => {
+  try {
+    const res = await axiosInterceptor.get(
+      `${baseUrl}/api/get-category`,
+      values,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    setCategory(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 
