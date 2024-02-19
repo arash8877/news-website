@@ -25,7 +25,14 @@ const EditNews = () => {
       setPreview(URL.createObjectURL(image));
     };
 
-    
+    const {id} = useParams();
+
+    useEffect(() => {
+      getCategory();
+      getSingleNews(id);
+    }, [])
+
+
 
   const getCategory = async () => {
     try {
