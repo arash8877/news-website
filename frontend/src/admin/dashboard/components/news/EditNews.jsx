@@ -91,6 +91,30 @@ const EditNews = () => {
             </p>
           </div>
         </div>
+        <div className="field">
+          <label htmlFor="" className="label">
+            Category
+          </label>
+          <div className="control">
+            <div className="select is-fullwidth">
+              <select
+                defaultValue={singleNews.catId}
+                onChange={formik.handleChange("catId")}
+                onBlur={formik.handleBlur("catId")}
+              >
+                <option>Choose a category</option>
+                {categoryList.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+              <p className="help has-text-danger">
+                {formik.touched.catId && formik.errors.catId}
+              </p>
+            </div>
+          </div>
+        </div>
       </form>
     </Dashboard>
   );
