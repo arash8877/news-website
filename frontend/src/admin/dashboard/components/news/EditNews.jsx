@@ -35,6 +35,25 @@ const EditNews = () => {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      title: singleNews.title,
+      desc: singleNews.desc,
+      catId: singleNews.catId,
+      file: "",
+    },
+    onSubmit: (values) => {
+      const data = {
+        title: values.title,
+        desc: values.desc,
+        catId: values.catId,
+        file: file,
+      }
+      createNews(data);
+    },
+    validationSchema: formSchema,
+  });
+
 
 
   return <div>EditNews</div>;
