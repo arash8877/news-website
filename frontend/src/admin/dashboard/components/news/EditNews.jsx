@@ -18,6 +18,15 @@ const EditNews = () => {
   const { axiosInterceptor, token, createNews, getSingleNews, singleNews } =
     useContext(AuthContext);
 
+
+    const loadImage = (e) => {
+      const image = e.target.files[0];
+      setFile(image);
+      setPreview(URL.createObjectURL(image));
+    };
+
+    
+
   const getCategory = async () => {
     try {
       const res = await axiosInterceptor.get(
