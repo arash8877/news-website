@@ -4,6 +4,9 @@ import fs from "fs";
 import Category from "../models/categoryModel.js";
 import Users from "../models/userModel.js";
 
+
+//----------------------------------------getNews-------------------------------------------------------
+
 export const getNews = async (req, res) => {
   try {
     const news = await News.findAll({
@@ -14,6 +17,9 @@ export const getNews = async (req, res) => {
     console.log(error);
   }
 };
+
+
+//----------------------------------------createNews-------------------------------------------------------
 
 export const createNews = async (req, res) => {
   if (req.files == null) return res.json({ error: "Please choose an image" }); // we make mandatory that every news should have an image
@@ -56,6 +62,8 @@ export const createNews = async (req, res) => {
   });
 };
 
+//----------------------------------------getNewsById-------------------------------------------------------
+
 export const getNewsById = async (req, res) => {
   // or const getSingleNews
   try {
@@ -67,6 +75,8 @@ export const getNewsById = async (req, res) => {
     console.log(error);
   }
 };
+
+//----------------------------------------updateNews-------------------------------------------------------
 
 export const updateNews = async (req, res) => {
   const news = await News.findOne({ where: { id: req.params.id } });
@@ -118,12 +128,14 @@ export const updateNews = async (req, res) => {
         image: fileName,
         url
     }, {where: {id: req.params.id}});
-    res.json("Post updated successfully!")
+    res.json({ message: "Post updated successfully!" })
 
   } catch (error) {
     console.log(error);
   }
 };
+
+//----------------------------------------deleteNews-------------------------------------------------------
 
 
 export const deleteNews = async (req, res) => {
@@ -149,6 +161,8 @@ export const deleteNews = async (req, res) => {
 };
 
 
+//----------------------------------------getLastNews-------------------------------------------------------
+
 export const getLastNews = async (req, res) => {
     try {
         const news = await News.findAll({
@@ -165,6 +179,8 @@ export const getLastNews = async (req, res) => {
 };
 
 
+//----------------------------------------getNewsDetail-------------------------------------------------------
+
 export const getNewsDetail = async (req, res) => {
     try {
         const response = await News.findOne({where: {id: req.params.id}});
@@ -176,6 +192,8 @@ export const getNewsDetail = async (req, res) => {
     }
 };
 
+
+//----------------------------------------popularNews-------------------------------------------------------
 
 export const popularNews = async (req, res) => {
     try {
@@ -189,6 +207,9 @@ export const popularNews = async (req, res) => {
         console.log(error);
     }
 };
+
+
+//----------------------------------------getCatNews-------------------------------------------------------
 
 
 export const getCatNews = async (req, res) => {

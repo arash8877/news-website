@@ -15,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
   const [expire, setExpire] = useState("");
   const [news, setNews] = useState([]);
+  const [singleNews, setSingleNews] = useState([]);
   const [category, setCategory] = useState([]);
   const navigate = useNavigate();
 
@@ -46,7 +47,7 @@ export const AuthContextProvider = ({ children }) => {
         const currentDate = new Date();
         if (expire * 1000 < currentDate.getTime()) {
           //expire*1000 to convert expire to millisecond
-          const res = await axios.get("http://localhost:5000/token"); //expire * 1000 < currentDate.getTime() ==>
+          const res = await axios.get(`${baseUrl}/token`); //expire * 1000 < currentDate.getTime() ==>
           config.headers.Authorization = `Bearer ${res.data.accessToken}`; // to check if the token is expired
           setToken(res.data.accessToken);
           const decoded = jwtDecode(res.data.accessToken);
@@ -176,6 +177,51 @@ const deleteNews = async (id) => {
 };
 
 
+const getSingleNews = async (id) => {
+  try {
+    const res = axiosInterceptor.get(`${baseUrl}/api/news/${id}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res)
+    // setSingleNews(res.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+const updateNews = async (data) => {
+  const formData = new FormData();
+  formData.append("title", data.title);
+  formData.append("desc", data.desc);
+  formData.append("catId", data.catId);
+  formData.append("userId", userId);
+  formData.append("file", data.file);
+  try {
+    const res = await axiosInterceptor.put(
+      `${baseUrl}/api/news/${data.id}`,
+      formData,
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    toast.success(res.data.message, {
+      position: "top-center",
+      autoClose: 3000,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
+    navigate("/view-news");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 
 // ---------------------------------------------Category-----------------------------------------------------
@@ -220,7 +266,7 @@ const getCategories = async (values) => {
 
 
   return (
-    <AuthContext.Provider value={{ login, error, getAllUsers,createNews, axiosInterceptor, handleNews, news, deleteNews }}>
+    <AuthContext.Provider value={{ login, error, getAllUsers,createNews, axiosInterceptor, handleNews, news, deleteNews, getSingleNews, singleNews, updateNews }}>
       {children}
     </AuthContext.Provider>
   );

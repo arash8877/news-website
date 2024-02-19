@@ -3,7 +3,8 @@ import Dashboard from "../../Dashboard";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../context/context";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { baseUrl } from "../../../../utils/baseUrl";
 
 const formSchema = Yup.object({
   title: Yup.string().required("Title is required!"),
@@ -15,35 +16,30 @@ const EditNews = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
-  const { axiosInterceptor, token, createNews, getSingleNews, singleNews } =
+  const { axiosInterceptor, token, getSingleNews, updateNews } =
     useContext(AuthContext);
 
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setFile(image);
+    setPreview(URL.createObjectURL(image));
+  };
 
-    const loadImage = (e) => {
-      const image = e.target.files[0];
-      setFile(image);
-      setPreview(URL.createObjectURL(image));
-    };
+  const { id } = useParams();
+  const {state} = useLocation();
 
-    const {id} = useParams();
-
-    useEffect(() => {
-      getCategory();
-      getSingleNews(id);
-    }, [])
-
-
+  useEffect(() => {
+    getCategory();
+    getSingleNews(id);
+  }, []);
 
   const getCategory = async () => {
     try {
-      const res = await axiosInterceptor.get(
-        "http://localhost:300/api/get-category",
-        {
-          Headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axiosInterceptor.get(`${baseUrl}/api/get-category`, {
+        Headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       setCategoryList(res.data);
     } catch (error) {
       console.log(error);
@@ -52,9 +48,9 @@ const EditNews = () => {
 
   const formik = useFormik({
     initialValues: {
-      title: singleNews.title,
-      desc: singleNews.desc,
-      catId: singleNews.catId,
+      title: state.title,
+      desc: state.desc,
+      catId: state.catId,
       file: "",
     },
     onSubmit: (values) => {
@@ -63,8 +59,9 @@ const EditNews = () => {
         desc: values.desc,
         catId: values.catId,
         file: file,
+        id: id,
       };
-      createNews(data);
+      updateNews(data);
     },
     validationSchema: formSchema,
   });
@@ -81,7 +78,7 @@ const EditNews = () => {
               type="text"
               className="input"
               placeholder="title"
-              defaultValue={singleNews.title}
+              defaultValue={state.title}
               onChange={formik.handleChange("title")}
               onBlur={formik.handleBlur("title")}
             />
@@ -98,7 +95,7 @@ const EditNews = () => {
             <textarea
               className="textarea"
               placeholder="Description of the news"
-              defaultValue={singleNews.desc}
+              defaultValue={state.desc}
               onChange={formik.handleChange("desc")}
               onBlur={formik.handleBlur("desc")}
             ></textarea>
@@ -114,7 +111,7 @@ const EditNews = () => {
           <div className="control">
             <div className="select is-fullwidth">
               <select
-                defaultValue={singleNews.catId}
+                defaultValue={state.catId}
                 onChange={formik.handleChange("catId")}
                 onBlur={formik.handleBlur("catId")}
               >
