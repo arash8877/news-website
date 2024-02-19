@@ -17,7 +17,25 @@ const EditNews = () => {
   const [preview, setPreview] = useState("");
   const { axiosInterceptor, token, createNews, getSingleNews, singleNews } = useContext(AuthContext);
 
-  
+
+
+  const getCategory = async () => {
+    try {
+      const res = await axiosInterceptor.get(
+        "http://localhost:300/api/get-category",
+        {
+          Headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCategoryList(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
 
   return <div>EditNews</div>;
 };
