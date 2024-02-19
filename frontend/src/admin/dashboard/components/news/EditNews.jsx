@@ -15,9 +15,8 @@ const EditNews = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
-  const { axiosInterceptor, token, createNews, getSingleNews, singleNews } = useContext(AuthContext);
-
-
+  const { axiosInterceptor, token, createNews, getSingleNews, singleNews } =
+    useContext(AuthContext);
 
   const getCategory = async () => {
     try {
@@ -48,15 +47,36 @@ const EditNews = () => {
         desc: values.desc,
         catId: values.catId,
         file: file,
-      }
+      };
       createNews(data);
     },
     validationSchema: formSchema,
   });
 
-
-
-  return <div>EditNews</div>;
+  return (
+    <Dashboard>
+      <form onSubmit={formik.handleSubmit}>
+        <div className="field">
+          <label htmlFor="" className="label">
+            Title
+          </label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="title"
+              defaultValue={singleNews.title}
+              onChange={formik.handleChange("title")}
+              onBlur={formik.handleBlur("title")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.title && formik.errors.title}
+            </p>
+          </div>
+        </div>
+      </form>
+    </Dashboard>
+  );
 };
 
 export default EditNews;
