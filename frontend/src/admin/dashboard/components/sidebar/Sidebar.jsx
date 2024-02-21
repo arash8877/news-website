@@ -45,7 +45,7 @@ const Sidebar = () => {
           {showCategories && (
             <ul>
               <li>
-                <Link to="/add-news">Add Category</Link>
+                <Link to="/add-category">Add Category</Link>
               </li>
               <li>
                 <Link to="/view-category">View Categories</Link>
