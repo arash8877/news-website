@@ -234,7 +234,7 @@ export const AuthContextProvider = ({ children }) => {
           },
         }
       );
-      toast.success(res.data.msg, {
+      toast.success(res.data.message, {
         position: "top-center",
         autoClose: 3000,
         closeOnClick: true,
@@ -245,6 +245,25 @@ export const AuthContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const deleteCategory = async(id)=> {
+    try {
+      const res = await axiosInterceptor.delete(`${baseUrl}/api/delete-category/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      toast.success(res.data, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      getCategories()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // ---------------------------------------------Video  -----------------------------------------------------
 
@@ -266,7 +285,10 @@ export const AuthContextProvider = ({ children }) => {
         getSingleNews,
         singleNews,
         updateNews,
+        getCategories,
         createCategory,
+        category,
+        deleteCategory,
       }}
     >
       {children}

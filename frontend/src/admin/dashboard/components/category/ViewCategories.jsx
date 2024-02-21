@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Dashboard from "../../Dashboard";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/context";
 
 const ViewCategories = () => {
+  const { getCategories, category, deleteCategory } = useContext(AuthContext);
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <Dashboard>
       <div className="is-flex is-justify-content-end">
@@ -22,22 +29,34 @@ const ViewCategories = () => {
         </thead>
 
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>test!</td>
-                <td>
-                    <Link to="/" className="button is-info">Edit</Link>
-                </td>
-                <td>
-                    <button className="button is-danger">Delete</button>
-                </td>
-            </tr>
+          {category &&
+            category.map((cat, index) => {
+              return (
+                <tr key={cat.id}>
+                  <td>{index + 1}</td>
+                  <td>{cat.name}</td>
+                  <td>
+                    <Link
+                      state={cat}
+                      to={`/update-category/${cat.id}`}
+                      className="button is-info"
+                    >
+                      Edit
+                    </Link>
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => deleteCategory(cat.id)}
+                      className="button is-danger"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
-
-
       </table>
-
-
     </Dashboard>
   );
 };

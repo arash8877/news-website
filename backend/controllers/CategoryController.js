@@ -27,7 +27,7 @@ export const createCategory = async (req, res) => {
         await Category.create({
             name: name,
         })
-        res.json('the category has been added.')
+        res.json({message:'the category has been added.'})
     } catch (error) {
         console.log(error)
     }
