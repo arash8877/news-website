@@ -6,9 +6,9 @@ import AddNews from "./admin/dashboard/components/news/AddNews";
 import { ToastContainer } from "react-toastify";
 import EditNews from "./admin/dashboard/components/news/EditNews";
 import Main from "./admin/dashboard/components/main/Main";
+import ViewCategories from "./admin/dashboard/components/category/ViewCategories";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
-// import ViewCategories from "./admin/dashboard/components/category/ViewCategories";
 // import AddCategory from "./admin/dashboard/components/category/AddCategory";
 // import EditCategory from "./admin/dashboard/components/category/EditCategory";
 // import ViewVideos from "./admin/dashboard/components/videos/ViewVideos";
@@ -38,6 +38,8 @@ function App() {
         <Route path="/view-news" element={<ViewNews/>} />
         <Route path="/add-news" element={<AddNews />} />
         <Route path="/edit-news/:id" element={<EditNews />} />
+
+        <Route path="/view-category" element={<ViewCategories/>} />
       </Routes>
       <ToastContainer />
     </>

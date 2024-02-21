@@ -48,7 +48,7 @@ const Sidebar = () => {
                 <Link to="/add-news">Add Category</Link>
               </li>
               <li>
-                <Link to="/view-news">View Categories</Link>
+                <Link to="/view-category">View Categories</Link>
               </li>
             </ul>
           )}
