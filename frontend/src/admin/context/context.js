@@ -246,28 +246,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const deleteCategory = async (id) => {
-    try {
-      const res = await axiosInterceptor.delete(
-        `${baseUrl}/api/delete-category/${id}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      toast.success(res.data, {
-        position: "top-center",
-        autoClose: 3000,
-        closeOnClick: true,
-        pauseOnHover: true,
-      });
-      getCategories();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const editCategory = async (values) => {
     try {
       const res = await axiosInterceptor.put(
@@ -290,6 +268,29 @@ export const AuthContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const deleteCategory = async (id) => {
+    try {
+      const res = await axiosInterceptor.delete(
+        `${baseUrl}/api/delete-category/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success(res.data, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      getCategories();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   // ---------------------------------------------Video  -----------------------------------------------------
 

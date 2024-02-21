@@ -54,6 +54,21 @@ const Sidebar = () => {
           )}
         </li>
 
+        <li>
+          <span onClick={() => setShowVideo(!showVideo)}>Videos</span>
+
+          {showVideo && (
+            <ul>
+              <li>
+                <Link to="/add-video">Add Video</Link>
+              </li>
+              <li>
+                <Link to="/view-video">View Videos</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
 
 
 

@@ -27,7 +27,7 @@ export const createCategory = async (req, res) => {
         await Category.create({
             name: name,
         })
-        res.json({message:'the category has been added.'})
+        res.json({message:'Category created successfully.'})
     } catch (error) {
         console.log(error)
     }
@@ -51,7 +51,7 @@ export const deleteCategory = async (req, res) => {
         await Category.destroy({
             where: {id: req.params.id}
         })
-        res.json('the category is deleted successfully')
+        res.json('Category deleted successfully.')
     } catch (error) {
         console.log(error)
     }
