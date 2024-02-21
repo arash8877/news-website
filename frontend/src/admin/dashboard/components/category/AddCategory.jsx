@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Dashboard from "../../Dashboard";
 
 import * as Yup from "yup";
@@ -14,9 +14,23 @@ const formSchema = Yup.object({
 });
 
 const AddCategory = () => {
+    const {createCategory} = useContext(AuthContext)
+
+      
+           const formik = useFormik({
+                initialValues: {
+                     name: "",
+                },
+                onSubmit: (values) => {
+                  createCategory(values);
+                },
+                validationSchema: formSchema
+           })
+
+
   return (
     <Dashboard>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <div className="field">
           <label className="label">Category Name</label>
           <div className="control">
@@ -24,7 +38,12 @@ const AddCategory = () => {
               type="text"
               className="input"
               placeholder="Name for the category"
+              onChange={formik.handleChange("name")}
+              onBlur={formik.handleBlur("name")}
             />
+            <p className="help has-text-danger">
+              {formik.touched.name && formik.errors.name}
+           </p>
           </div>
         </div>
         <div className="field">
