@@ -9,7 +9,7 @@ import { baseUrl } from "../../../../utils/baseUrl";
 const formSchema = Yup.object({
   name: Yup.string()
     .min(3, "The name should have minimum 3 characters!")
-    .max(3, "The name should have maximum 15 characters!")
+    .max(15, "The name should have maximum 15 characters!")
     .required("Name is required!"),
 });
 
