@@ -38,7 +38,7 @@ const ViewCategories = () => {
                   <td>
                     <Link
                       state={cat}
-                      to={`/update-category/${cat.id}`}
+                      to={`/edit-category/${cat.id}`}
                       className="button is-info"
                     >
                       Edit

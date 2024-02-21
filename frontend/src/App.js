@@ -8,9 +8,9 @@ import EditNews from "./admin/dashboard/components/news/EditNews";
 import Main from "./admin/dashboard/components/main/Main";
 import ViewCategories from "./admin/dashboard/components/category/ViewCategories";
 import AddCategory from "./admin/dashboard/components/category/AddCategory";
+import EditCategory from "./admin/dashboard/components/category/EditCategory";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
-// import EditCategory from "./admin/dashboard/components/category/EditCategory";
 // import ViewVideos from "./admin/dashboard/components/videos/ViewVideos";
 // import AddVideo from "./admin/dashboard/components/videos/AddVideo";
 // import ViewUsers from "./admin/dashboard/components/users/ViewUsers";
@@ -41,6 +41,7 @@ function App() {
 
         <Route path="/view-category" element={<ViewCategories />} />
         <Route path="/add-category" element={<AddCategory />} />
+        <Route path="/edit-category/:id" element={<EditCategory />} />
       </Routes>
       <ToastContainer />
     </>
