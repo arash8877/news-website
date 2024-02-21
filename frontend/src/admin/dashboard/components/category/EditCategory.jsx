@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Dashboard from "../../Dashboard";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { AuthContext } from "../../../context/context";
-import { baseUrl } from "../../../../utils/baseUrl";
 
 const formSchema = Yup.object({
   name: Yup.string()
@@ -14,14 +13,17 @@ const formSchema = Yup.object({
 });
 
 const EditCategory = () => {
-    const {state} = useLocation();
+  const { state } = useLocation();
+  const { editCategory } = useContext(AuthContext);
+  const { id } = useParams();
 
   const formik = useFormik({
     initialValues: {
       name: state.name,
+      id: id,
     },
     onSubmit: (values) => {
-      //   createCategory(values);
+      editCategory(values);
     },
     validationSchema: formSchema,
   });
@@ -40,7 +42,7 @@ const EditCategory = () => {
             <input
               type="text"
               className="input"
-              placeholder="Name for the category"
+              placeholder="Name of category"
               defaultValue={state.name}
               onChange={formik.handleChange("name")}
               onBlur={formik.handleBlur("name")}
@@ -58,6 +60,7 @@ const EditCategory = () => {
           </div>
         </div>
       </form>
+
     </Dashboard>
   );
 };

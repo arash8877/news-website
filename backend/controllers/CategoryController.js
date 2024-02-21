@@ -33,15 +33,16 @@ export const createCategory = async (req, res) => {
     }
 }
 
-export const updateCategory = async (req, res) => {
+
+export const updateCategory = async(req,res)=> {
     const name = req.body.name;
     try {
-        await Category.update({name: name}, {
-            where: {id: req.params.id}
-        })
-        res.json('updating is succeeded.')
+         await Category.update({name: name},{
+              where: {id: req.params.id}
+         })
+         res.json("Category updated successfully!")
     } catch (error) {
-        console.log(error)
+         console.log(error);
     }
 }
 

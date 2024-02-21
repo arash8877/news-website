@@ -9,7 +9,7 @@ router.get('/api/category/home', getCategoryForHomePage)
 
 router.get('/api/get-category', getCategory)
 router.post('/api/create-category', verifyToken, createCategory)
-router.put('/api/update-category/:id', verifyToken, updateCategory)
+router.put('/api/edit-category/:id', verifyToken, updateCategory)
 router.delete('/api/delete-category/:id', verifyToken, deleteCategory)
 
 export default router;
