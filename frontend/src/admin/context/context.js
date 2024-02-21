@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const refreshToken = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/token");
+      const res = await axios.get(`${baseUrl}/token`);
       setToken(res.data.accessToken);
       const decoded = jwtDecode(res.data.accessToken);
       setName(decoded.name);
@@ -65,13 +65,13 @@ export const AuthContextProvider = ({ children }) => {
 
 
 
-
+    
 // ---------------------------------------------Login-----------------------------------------------------
 
   const login = async (inputs) => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users/login",
+        `${baseUrl}/api/users/login`,
         inputs
       );
 
@@ -101,7 +101,7 @@ export const AuthContextProvider = ({ children }) => {
   const getAllUsers = async () => {
     try {
       const res = await axiosInterceptor.get(
-        "http://localhost:5000/api/users",
+        `${baseUrl}/api/users`,
         {
           headers: {
             authorization: `Bearer ${token}`,
@@ -151,7 +151,6 @@ const handleNews = async () => {
         authorization: `Bearer ${token}`,
       },
     });
-    // console.log(res.data)
     setNews(res.data);
   } catch (error) {
     console.log(error);
@@ -184,8 +183,8 @@ const getSingleNews = async (id) => {
         authorization: `Bearer ${token}`,
       },
     });
-    console.log(res)
-    // setSingleNews(res.data);
+    // console.log(res)
+    setSingleNews(res.data);
   } catch (error) {
     console.log(error);
   }
@@ -193,34 +192,32 @@ const getSingleNews = async (id) => {
 
 
 
-const updateNews = async (data) => {
+const updateNews = async(data)=>{
   const formData = new FormData();
   formData.append("title", data.title);
   formData.append("desc", data.desc);
   formData.append("catId", data.catId);
   formData.append("userId", userId);
   formData.append("file", data.file);
+  console.log(data.file)
   try {
-    const res = await axiosInterceptor.put(
-      `${baseUrl}/api/news/${data.id}`,
-      formData,
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
+    const res = await axiosInterceptor.put(`${baseUrl}/api/news/${data.id}`,formData, {
+      headers: {
+        authorization: `Bearer ${token}`
       }
-    );
-    toast.success(res.data.message, {
-      position: "top-center",
+    })
+    toast.success(res.data.msg, {
+      position: "bottom-center",
       autoClose: 3000,
       closeOnClick: true,
       pauseOnHover: true,
     });
     navigate("/view-news");
+    
   } catch (error) {
-    console.log(error);
+    console.error("Error updating news:", error);
   }
-};
+}
 
 
 

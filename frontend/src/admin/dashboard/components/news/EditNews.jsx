@@ -61,6 +61,7 @@ const EditNews = () => {
         file: file,
         id: id,
       };
+      console.log(data)
       updateNews(data);
     },
     validationSchema: formSchema,

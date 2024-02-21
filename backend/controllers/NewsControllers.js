@@ -104,11 +104,11 @@ export const updateNews = async (req, res) => {
       return res.json({ message: "Oops! Size of the image should be less than 5Mb!" });
 
     //when user wants to update the image, then the previous image should be deleted
-    const filePath = `./public/images/${news.image}`;
+    const filePath = `/public/images/${news.image}`;
     fs.unlinkSync(filePath);
 
-    file.mv(`./public/images/${fileName}`, (err) => {
-      return res.json({ message: err.message });
+    await file.mv(`./public/images/${fileName}`, (err) => {
+      if (err) return res.json({ message: err.message });
     });
   }
 
@@ -121,12 +121,12 @@ export const updateNews = async (req, res) => {
 
   try {
     await News.update({
-        title,
-        desc,
-        catId,
-        userId,
-        image: fileName,
-        url
+      title: title,
+      desc: desc,
+      userId: userId,
+      catId: catId,
+      image: fileName,
+      url: url,
     }, {where: {id: req.params.id}});
     res.json({ message: "Post updated successfully!" })
 

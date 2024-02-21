@@ -16,7 +16,6 @@ const AddNews = () => {
   const [file, setFile] = useState([]);
   const [preview, setPreview] = useState("");
   const { axiosInterceptor, token, createNews } = useContext(AuthContext);
-  console.log(categoryList);
   const loadImage = (e) => {
     const image = e.target.files[0];
     setFile(image);

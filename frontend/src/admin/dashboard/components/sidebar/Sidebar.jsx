@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context/context";
 
 const Sidebar = () => {
   const [showNews, setShowNews] = useState(false);
-  const [showCategory, setShowCategory] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
   const { logout, admin } = useContext(AuthContext);
@@ -38,7 +38,26 @@ const Sidebar = () => {
           )}
         </li>
 
-        {admin ? (
+
+        <li>
+          <span onClick={() => setShowCategories(!showCategories)}>Categories</span>
+
+          {showCategories && (
+            <ul>
+              <li>
+                <Link to="/add-news">Add Category</Link>
+              </li>
+              <li>
+                <Link to="/view-news">View Categories</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
+
+
+
+        {/* {admin ? (
           <>
             <li>
               <span onClick={() => setShowCategory(!showCategory)}>
@@ -94,7 +113,7 @@ const Sidebar = () => {
         </li>
         <li>
           <span onClick={logout}>Logout</span>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
