@@ -297,7 +297,7 @@ export const AuthContextProvider = ({ children }) => {
 
   
   const createVideo = async(data) => {
-    const formData = new FormData();
+    const formData = new FormData(); //FormData is a javaScript function
     formData.append("file", data.file)
     try {
       const res = await axiosInterceptor.post(`${baseUrl}/api/create-video`, formData,{
@@ -305,18 +305,19 @@ export const AuthContextProvider = ({ children }) => {
           authorization: `Bearer ${token}`
         }
       })
-      if(res.data.error){
-        setErrorVideo(res.data.error)
+  
+      if(res.data.message){
+        setErrorVideo(res.data.message)
       }
-     if(res.data.msg){
-      toast.success(res.data.msg, {
-        position: "top-center",
-        autoClose: 3000,
-        closeOnClick: true,
-        pauseOnHover: true,
-      });
-      navigate("/view-video");
-     }
+    //  if(res.data.message){
+    //   toast.success(res.data.message, {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //   });
+    //   navigate("/view-video");
+    //  }
     } catch (error) {
       console.log(error);
     }

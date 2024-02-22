@@ -8,6 +8,8 @@ const AddVideo = () => {
   const { createVideo, errorVideo } = useContext(AuthContext);
   const [file, setFile] = useState({});
 
+  console.log(errorVideo)
+
   const formik = useFormik({
     initialValues: {
       file: "",
@@ -18,6 +20,7 @@ const AddVideo = () => {
       };
       createVideo(data);
     },
+    
   });
 
   return (

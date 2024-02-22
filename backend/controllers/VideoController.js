@@ -23,9 +23,9 @@ export const createVideo = async (req, res) => {
   const url = `${req.protocol}://${req.get("host")}/videos/${fileName}`;
   const allowedType = [".mp4"];
 
-  if (!allowedType.includes(ext.toLocaleLowerCase())) {
+  if (!allowedType.includes(ext.toLowerCase())) {
     return res.json({
-      msg: "Type of the file is not allowed. use just mp4 type.",
+      message: "Invalid video format! use mp4 format.",
     });
   }
   if (fileSize > 5000000) {
@@ -42,6 +42,8 @@ export const createVideo = async (req, res) => {
     }
   });
 };
+
+
 
 export const getSingleVideo = async (req, res) => {
   try {
