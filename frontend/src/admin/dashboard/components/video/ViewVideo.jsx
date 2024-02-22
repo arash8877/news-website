@@ -1,10 +1,17 @@
-import React, {useContext} from "react";
+import React, { useContext, useEffect } from "react";
 import Dashboard from "../../Dashboard";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/context";
 
 const ViewVideo = () => {
-    const {getAllVideo,allVideo,deleteVideo} = useContext(AuthContext)
+  const { getAllVideos, allVideos, deleteVideo } = useContext(AuthContext);
+
+  useEffect(() => {
+    getAllVideos();
+  }, [])
+  
+
+
   return (
     <Dashboard>
       <div className="is-flex is-justify-content-end">
@@ -21,8 +28,8 @@ const ViewVideo = () => {
           </tr>
         </thead>
         <tbody>
-          {allVideo &&
-            allVideo.map((video, index) => (
+          {allVideos &&
+            allVideos.map((video, index) => (
               <tr key={video.id}>
                 <td>{index + 1}</td>
                 <td>

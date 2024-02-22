@@ -18,6 +18,7 @@ export const AuthContextProvider = ({ children }) => {
   const [singleNews, setSingleNews] = useState([]);
   const [category, setCategory] = useState([]);
   const [errorVideo, setErrorVideo] = useState("");
+  const [allVideos, setAllVideos] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -323,6 +324,42 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+  const getAllVideos = async() => {
+    try {
+      const res = await axiosInterceptor.get(`${baseUrl}/api/get-video`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      setAllVideos(res.data)
+      console.log(res)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  const deleteVideo = async(id)=>{
+    console.log(id)
+    // try {
+    //     const res = await axiosJWT.delete(`${baseUrl}/api/delete-video/${id}`, {
+    //       headers: {
+    //         authorization: `Bearer ${token}`
+    //       }
+    //     })
+    //     toast.success(res.data.msg, {
+    //       position: "bottom-center",
+    //       autoClose: 3000,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //     });
+    //     getAllVideo()
+        
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  }
+
   // ---------------------------------------------User -----------------------------------------------------
 
   // ---------------------------------------------Comments -----------------------------------------------------
@@ -348,6 +385,9 @@ export const AuthContextProvider = ({ children }) => {
         editCategory,
         createVideo,
         errorVideo,
+        getAllVideos,
+        allVideos,
+        deleteVideo
       }}
     >
       {children}
