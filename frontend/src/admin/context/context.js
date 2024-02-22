@@ -17,6 +17,7 @@ export const AuthContextProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [singleNews, setSingleNews] = useState([]);
   const [category, setCategory] = useState([]);
+  const [errorVideo, setErrorVideo] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -294,6 +295,33 @@ export const AuthContextProvider = ({ children }) => {
 
   // ---------------------------------------------Video  -----------------------------------------------------
 
+  
+  const createVideo = async(data) => {
+    const formData = new FormData();
+    formData.append("file", data.file)
+    try {
+      const res = await axiosInterceptor.post(`${baseUrl}/api/create-video`, formData,{
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      if(res.data.error){
+        setErrorVideo(res.data.error)
+      }
+     if(res.data.msg){
+      toast.success(res.data.msg, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/view-video");
+     }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // ---------------------------------------------User -----------------------------------------------------
 
   // ---------------------------------------------Comments -----------------------------------------------------
@@ -317,6 +345,8 @@ export const AuthContextProvider = ({ children }) => {
         category,
         deleteCategory,
         editCategory,
+        createVideo,
+        errorVideo,
       }}
     >
       {children}

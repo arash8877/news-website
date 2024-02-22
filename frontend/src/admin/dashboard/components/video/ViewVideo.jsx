@@ -33,7 +33,7 @@ const ViewVideo = () => {
                     className="button is-danger"
                     onClick={() => deleteVideo(video.id)}
                   >
-                    حذف
+                    Delete
                   </button>
                 </td>
               </tr>
