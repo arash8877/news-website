@@ -13,7 +13,7 @@ export const getAllVideos = async (req, res) => {
 
 export const createVideo = async (req, res) => {
   if (req.files == null) {
-    return res.json({ message: "Choose a video file!" });
+    return res.json({ error: "Choose a video file!" });
   }
   const file = req.files.file;
   const fileSize = file.data.length;
@@ -25,11 +25,11 @@ export const createVideo = async (req, res) => {
 
   if (!allowedType.includes(ext.toLowerCase())) {
     return res.json({
-      message: "Invalid video format! use mp4 format.",
+      error: "Invalid video format! use mp4 format.",
     });
   }
   if (fileSize > 5000000) {
-    return res.json({ message: "Size of the file should be less than 5Mb!" });
+    return res.json({ error: "Size of the file should be less than 5Mb!" });
   }
   file.mv(`./public/videos/${fileName}`, async (err) => {
     //mv is a method to move

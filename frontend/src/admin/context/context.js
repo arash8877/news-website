@@ -306,18 +306,18 @@ export const AuthContextProvider = ({ children }) => {
         }
       })
   
-      if(res.data.message){
-        setErrorVideo(res.data.message)
+      if(res.data.error){
+        setErrorVideo(res.data.error)
       }
-    //  if(res.data.message){
-    //   toast.success(res.data.message, {
-    //     position: "top-center",
-    //     autoClose: 3000,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //   });
-    //   navigate("/view-video");
-    //  }
+     if(res.data.message){
+      toast.success(res.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/view-video");
+     }
     } catch (error) {
       console.log(error);
     }
