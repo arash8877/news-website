@@ -332,7 +332,6 @@ export const AuthContextProvider = ({ children }) => {
         }
       })
       setAllVideos(res.data)
-      console.log(res)
     } catch (error) {
       console.log(error);
     }
@@ -340,24 +339,23 @@ export const AuthContextProvider = ({ children }) => {
 
 
   const deleteVideo = async(id)=>{
-    console.log(id)
-    // try {
-    //     const res = await axiosJWT.delete(`${baseUrl}/api/delete-video/${id}`, {
-    //       headers: {
-    //         authorization: `Bearer ${token}`
-    //       }
-    //     })
-    //     toast.success(res.data.msg, {
-    //       position: "bottom-center",
-    //       autoClose: 3000,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //     });
-    //     getAllVideo()
+    try {
+        const res = await axiosInterceptor.delete(`${baseUrl}/api/delete-video/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          }
+        })
+        toast.success(res.data.message, {
+          position: "top-center",
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+        getAllVideos()
         
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // ---------------------------------------------User -----------------------------------------------------
