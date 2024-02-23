@@ -69,6 +69,21 @@ const Sidebar = () => {
           )}
         </li>
 
+        <li>
+          <span onClick={() => setShowUsers(!showUsers)}>Users</span>
+
+          {showUsers && (
+            <ul>
+              <li>
+                <Link to="/add-user">Add User</Link>
+              </li>
+              <li>
+                <Link to="/view-users">View Users</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
 
 
 

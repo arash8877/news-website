@@ -11,10 +11,10 @@ import AddCategory from "./admin/dashboard/components/category/AddCategory";
 import EditCategory from "./admin/dashboard/components/category/EditCategory";
 import ViewVideo from "./admin/dashboard/components/video/ViewVideo";
 import AddVideo from "./admin/dashboard/components/video/AddVideo";
+import ViewUsers from "./admin/dashboard/components/user/ViewUsers";
+import AddUser from "./admin/dashboard/components/user/AddUser";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
-// import ViewUsers from "./admin/dashboard/components/users/ViewUsers";
-// import AddUser from "./admin/dashboard/components/users/AddUser";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
 // import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
 // import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
@@ -33,6 +33,7 @@ function App() {
   return (
     <>
       <Routes>
+
         <Route path="/administrator" element={<Login />} />
         <Route path="/dashboard" element={<Main/>} />
         <Route path="/view-news" element={<ViewNews/>} />
@@ -45,6 +46,10 @@ function App() {
 
         <Route path="/view-video" element={<ViewVideo />} />
         <Route path="/add-video" element={<AddVideo />} />
+
+        <Route path="/view-users" element={<ViewUsers />} />
+        <Route path="/add-user" element={<AddUser />} />
+        
       </Routes>
       <ToastContainer />
     </>
