@@ -9,21 +9,21 @@ import { AuthContext } from "../../../context/context";
 
 const formSchema = Yup.object({
     name: Yup.string()
-      .min(3, "")
-      .max(15, "")
-      .required(""),
+      .min(3, "Name should have minimum 3 characters!")
+      .max(15, "Name should have maximum 15 characters!")
+      .required("Name is required!"),
     email: Yup.string()
       .email("")
-      .required(" "),
+      .required("Email is required!"),
     password: Yup.string()
-      .min(4, "")
-      .max(20, "")
-      .required(""),
+      .min(4, "Password should have minimum 4 characters!")
+      .max(20, "Password should have maximum 15 characters!")
+      .required("Password is required!"),
     confPassword: Yup.string()
-      .min(4, "")
-      .max(20, "")
-      .required(""),
-    isAdmin: Yup.string().required(""),
+      .min(4, "Password should have minimum 4 characters!")
+      .max(20, "Password should have maximum 15 characters!")
+      .required("Confirm password is required!"),
+    isAdmin: Yup.string().required("Rol is required!"),
   });
 
 
