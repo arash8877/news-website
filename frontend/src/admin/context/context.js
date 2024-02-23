@@ -19,6 +19,7 @@ export const AuthContextProvider = ({ children }) => {
   const [category, setCategory] = useState([]);
   const [errorVideo, setErrorVideo] = useState("");
   const [allVideos, setAllVideos] = useState([]);
+  const [registerError, setRegisterError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -89,6 +90,29 @@ export const AuthContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const register = async(inputs) => {
+    try {
+      const res = await axiosInterceptor.post(`${baseUrl}/api/users/register`, inputs, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      if(res.data.error){
+        setRegisterError(res.data.error)
+      }else{
+        toast.success(res.data.message, {
+          position: "top-center",
+          autoClose: 3000,
+          closeOnClick: true,
+          pauseOnHover: true,
+        });
+        navigate("/view-users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // ---------------------------------------------Users-----------------------------------------------------
 
@@ -385,7 +409,8 @@ export const AuthContextProvider = ({ children }) => {
         errorVideo,
         getAllVideos,
         allVideos,
-        deleteVideo
+        deleteVideo,
+        register,
       }}
     >
       {children}

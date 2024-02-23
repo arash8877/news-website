@@ -4,50 +4,45 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../../../context/context"; 
-
+import { AuthContext } from "../../../context/context";
 
 const formSchema = Yup.object({
-    name: Yup.string()
-      .min(3, "Name should have minimum 3 characters!")
-      .max(15, "Name should have maximum 15 characters!")
-      .required("Name is required!"),
-    email: Yup.string()
-      .email("")
-      .required("Email is required!"),
-    password: Yup.string()
-      .min(4, "Password should have minimum 4 characters!")
-      .max(20, "Password should have maximum 15 characters!")
-      .required("Password is required!"),
-    confPassword: Yup.string()
-      .min(4, "Password should have minimum 4 characters!")
-      .max(20, "Password should have maximum 15 characters!")
-      .required("Confirm password is required!"),
-    isAdmin: Yup.string().required("Rol is required!"),
-  });
-
+  name: Yup.string()
+    .min(3, "Name should have minimum 3 characters!")
+    .max(15, "Name should have maximum 15 characters!")
+    .required("Name is required!"),
+  email: Yup.string().email("Enter your email!").required("Email is required!"),
+  password: Yup.string()
+    .min(4, "Password should have minimum 4 characters!")
+    .max(20, "Password should have maximum 15 characters!")
+    .required("Password is required!"),
+  confPassword: Yup.string()
+    .min(4, "Password should have minimum 4 characters!")
+    .max(20, "Password should have maximum 15 characters!")
+    .required("Confirm password is required!"),
+  isAdmin: Yup.string().required("Rol is required!"),
+});
 
 const AddUser = () => {
-    const { register, registerError } = useContext(AuthContext);
+  const { register, registerError } = useContext(AuthContext);
 
-    const formik = useFormik({
-      initialValues: {
-        name: "",
-        email: "",
-        password: "",
-        confPassword: "",
-        isAdmin: "",
-      },
-      onSubmit: (values) => {
-        register(values);
-      },
-      validationSchema: formSchema,
-    });
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      confPassword: "",
+      isAdmin: "",
+    },
+    onSubmit: (values) => {
+      register(values);
+    },
+    validationSchema: formSchema,
+  });
 
-    
   return (
     <Dashboard>
-    <div className="is-flex is-justify-content-end">
+      <div className="is-flex is-justify-content-end">
         <Link to="/view-users" className="button px-6 is-success mb-6">
           View Users
         </Link>
@@ -73,7 +68,7 @@ const AddUser = () => {
           </div>
         </div>
         <div className="field">
-          <label className="label">ایمیل</label>
+          <label className="label">Email</label>
           <div className="control">
             <input
               type="text"
@@ -131,7 +126,7 @@ const AddUser = () => {
               >
                 <option>Choose</option>
                 <option value="0">Author</option>
-                <option value="1">Manager</option>
+                <option value="1">Admin</option>
               </select>
               <p className="help has-text-danger">
                 {formik.touched.isAdmin && formik.errors.isAdmin}
