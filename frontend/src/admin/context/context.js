@@ -411,6 +411,7 @@ export const AuthContextProvider = ({ children }) => {
         allVideos,
         deleteVideo,
         register,
+        registerError
       }}
     >
       {children}
