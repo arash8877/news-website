@@ -96,13 +96,13 @@ const ViewNews = () => {
         ""
       )}
 
-
-
     </Dashboard>
   );
 };
 
 export default ViewNews;
+
+
 
 {
   /* about callback function here:
