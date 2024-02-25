@@ -4,7 +4,7 @@ import { AuthContext } from "../../../context/context";
 import { Link } from "react-router-dom";
 
 const ViewUsers = () => {
-  const { getAllUsers, users, news, handleNews, deleteNews } = useContext(AuthContext);
+  const { getAllUsers, users, handleNews, deleteUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState("");
 
@@ -18,7 +18,6 @@ const ViewUsers = () => {
 
     }, []);
 
-   console.log(users)
 
   return (
     <Dashboard>
@@ -41,18 +40,34 @@ const ViewUsers = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Arash</td>
-            <td>arash@gmail.com</td>
-            <td>Manager</td>
-            <td>
-              <Link to="/" className="button is-info">Edit</Link>
-            </td>
-            <td>
-              <button className="button is-danger ">Delete</button>
-            </td>
-          </tr>
+          {users?.map((user, index) => {
+            return (
+              <tr key={user.id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.isAdmin ? "Admin" : "Author"}</td>
+                <td>
+                  <Link state={user} className="button is-info" to={`/edit-user/${user.id}`}>
+                    Edit
+                  </Link>
+                </td>
+                <td>
+                  {
+                    user.isAdmin ? 
+                    (
+                      <button className="button is-danger" disabled>
+                        ------
+                      </button>
+                    )
+                    : (
+                      <button className="button is-danger" onClick={()=> deleteUser(user.id)}>Delete</button>
+                    )
+                  }
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
