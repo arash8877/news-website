@@ -20,6 +20,7 @@ export const AuthContextProvider = ({ children }) => {
   const [errorVideo, setErrorVideo] = useState("");
   const [allVideos, setAllVideos] = useState([]);
   const [registerError, setRegisterError] = useState("");
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -123,7 +124,7 @@ export const AuthContextProvider = ({ children }) => {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log("getAllusers", res);
+      setUsers(res.data)
     } catch (error) {
       console.log(error);
     }
@@ -411,7 +412,8 @@ export const AuthContextProvider = ({ children }) => {
         allVideos,
         deleteVideo,
         register,
-        registerError
+        registerError,
+        users,
       }}
     >
       {children}

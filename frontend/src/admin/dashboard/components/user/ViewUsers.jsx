@@ -4,7 +4,7 @@ import { AuthContext } from "../../../context/context";
 import { Link } from "react-router-dom";
 
 const ViewUsers = () => {
-  const { news, handleNews, deleteNews } = useContext(AuthContext);
+  const { getAllUsers, users, news, handleNews, deleteNews } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState("");
 
@@ -14,8 +14,11 @@ const ViewUsers = () => {
 
     useEffect(() => {
       handleNews();
+      getAllUsers();
+
     }, []);
 
+   console.log(users)
 
   return (
     <Dashboard>
