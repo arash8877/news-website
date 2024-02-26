@@ -1,9 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import Dashboard from "../../Dashboard";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
 import { AuthContext } from "../../../context/context";
 
 const formSchema = Yup.object({
@@ -11,7 +10,6 @@ const formSchema = Yup.object({
     .min(3, "Name should have minimum 3 characters!")
     .max(15, "Name should have maximum 15 characters!")
     .required("Name is required!"),
-  email: Yup.string().email("Enter your email!").required("Email is required!"),
   password: Yup.string()
     .min(4, "Password should have minimum 4 characters!")
     .max(20, "Password should have maximum 15 characters!")
@@ -20,7 +18,6 @@ const formSchema = Yup.object({
     .min(4, "Password should have minimum 4 characters!")
     .max(20, "Password should have maximum 15 characters!")
     .required("Confirm password is required!"),
-  isAdmin: Yup.string().required("Rol is required!"),
 });
 
 const AddUser = () => {
@@ -29,10 +26,8 @@ const AddUser = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      email: "",
       password: "",
       confPassword: "",
-      isAdmin: "",
     },
     onSubmit: (values) => {
       register(values);
