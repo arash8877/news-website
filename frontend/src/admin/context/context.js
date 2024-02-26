@@ -115,6 +115,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+
   // ---------------------------------------------Users-----------------------------------------------------
 
   const getAllUsers = async () => {
@@ -425,6 +426,25 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+  const logout = async()=> {
+    try {
+      const res = await axiosInterceptor.delete(`${baseUrl}/api/users/logout`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      navigate("/")
+      toast.success(res.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   // ---------------------------------------------Comments -----------------------------------------------------
 
   return (
@@ -455,7 +475,9 @@ export const AuthContextProvider = ({ children }) => {
         registerError,
         users,
         editUser,
-        deleteUser
+        deleteUser,
+        logout,
+        userId,
       }}
     >
       {children}

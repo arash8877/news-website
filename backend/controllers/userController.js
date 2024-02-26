@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import path from "path";
 import fs from "fs";
 
+//---------------------getAllUsers--------------------------------------------
 export const getAllUsers = async (req, res) => {
   try {
     const users = await Users.findAll({});
@@ -13,6 +14,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+//---------------------Register--------------------------------------------
 export const Register = async (req, res) => {
   const { name, email, password, confPassword, isAdmin } = req.body;
   if (password !== confPassword) {
@@ -39,6 +41,8 @@ export const Register = async (req, res) => {
   }
 };
 
+
+//---------------------Login--------------------------------------------
 export const Login = async (req, res) => {
   try {
     const findUser = await Users.findAll({
@@ -101,23 +105,29 @@ export const Login = async (req, res) => {
   }
 };
 
-export const Logout = async (req, res) => {
+//---------------------Logout--------------------------------------------
+export const Logout = async(req,res)=> {
   try {
     const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.json("Couldn't find any token");
-    const user = await Users.findOne({ refresh_token: refreshToken });
-    console.log("********", user);
-    if (!user) return res.json("User does not exist!");
+    if(!refreshToken) return res.json("Couldn't find any token")
+    const user = await Users.findOne({where:{refresh_token: refreshToken}});
+    if(!user) return res.json("User doesn't exist!")
     const clr = null;
-    await Users.update({ refresh_token: clr }, { where: { id: user.id } });
-    res.clearCookie("refreshToken");
-    res.json("You logged out successfully.");
+    await Users.update({
+      refresh_token: clr
+    }, {
+      where: {
+        id: user.id
+      }
+    })
+    res.clearCookie("refreshToken")
+    res.json({message: "You logged out successfully"})
   } catch (error) {
     console.log(error);
-    res.status(500).json("Internal Server Error");
   }
-};
+}
 
+//---------------------deleteUser--------------------------------------------
 export const deleteUser = async (req, res) => {
   const user = await Users.findOne({
     where: {
@@ -139,6 +149,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
+//---------------------updateUser--------------------------------------------
 export const updateUser = async (req, res) => {
   const { name, email, password, confPassword, isAdmin } = req.body;
   if (password !== confPassword) {
@@ -170,6 +181,8 @@ export const updateUser = async (req, res) => {
   }
 };
 
+
+//---------------------updateProfile--------------------------------------------
 export const updateProfile = async (req, res) => {
   const user = await Users.findOne({
     where: {
@@ -236,6 +249,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
+//---------------------Profile--------------------------------------------
 export const Profile = async (req, res) => {
   //this function is to send info of the profile back to the user.
   try {

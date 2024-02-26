@@ -84,6 +84,10 @@ const Sidebar = () => {
           )}
         </li>
 
+        <li>
+          <span onClick={logout}>Log out</span>
+        </li>
+
 
 
 

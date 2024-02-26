@@ -14,10 +14,10 @@ import AddVideo from "./admin/dashboard/components/video/AddVideo";
 import ViewUsers from "./admin/dashboard/components/user/ViewUsers";
 import AddUser from "./admin/dashboard/components/user/AddUser";
 import EditUser from "./admin/dashboard/components/user/EditUser";
+import UpdateProfile from "./admin/dashboard/components/user/UpdateProfile";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
-// import UpdateProfile from "./admin/dashboard/components/users/UpdateProfile";
 // import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
 // import NotFound from "./components/NotFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
@@ -34,6 +34,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Dashboard />} />
 
         <Route path="/administrator" element={<Login />} />
         <Route path="/dashboard" element={<Main/>} />
@@ -51,6 +52,7 @@ function App() {
         <Route path="/view-users" element={<ViewUsers />} />
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/edit-user/:id" element={<EditUser />} />
+        <Route path="/update-profile/:id" element={<UpdateProfile />} />
         
       </Routes>
       <ToastContainer />
