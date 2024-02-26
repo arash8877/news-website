@@ -23,24 +23,22 @@ const formSchema = Yup.object({
   isAdmin: Yup.string().required("Rol is required!"),
 });
 
-
 const EditUser = () => {
-  const {state} = useLocation();
+  const { state } = useLocation();
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
+      name: state.name,
+      email: state.email,
       password: "",
       confPassword: "",
       isAdmin: "",
     },
     onSubmit: (values) => {
-      console.log(values)
+      console.log(values);
     },
     validationSchema: formSchema,
   });
-
 
   return (
     <Dashboard>
@@ -50,7 +48,24 @@ const EditUser = () => {
         </Link>
       </div>
       <div className="is-flex mb-5 is-size-4">Edit User</div>
-      <div>{state.id}</div>
+      <form>
+        <div className="field">
+          <label className="label">Full Name</label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="Type your name"
+              defaultValue={state.name}
+              onChange={formik.handleChange("name")}
+              onBlur={formik.handleBlur("name")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.name && formik.errors.name}
+            </p>
+          </div>
+        </div>
+      </form>
     </Dashboard>
   );
 };
