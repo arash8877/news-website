@@ -13,6 +13,7 @@ import ViewVideo from "./admin/dashboard/components/video/ViewVideo";
 import AddVideo from "./admin/dashboard/components/video/AddVideo";
 import ViewUsers from "./admin/dashboard/components/user/ViewUsers";
 import AddUser from "./admin/dashboard/components/user/AddUser";
+import EditUser from "./admin/dashboard/components/user/EditUser";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
@@ -49,6 +50,7 @@ function App() {
 
         <Route path="/view-users" element={<ViewUsers />} />
         <Route path="/add-user" element={<AddUser />} />
+        <Route path="/edit-user/:id" element={<EditUser />} />
         
       </Routes>
       <ToastContainer />

@@ -57,7 +57,7 @@ const ViewUsers = () => {
                     user.isAdmin ? 
                     (
                       <button className="button is-danger" disabled>
-                        ------
+                        Can't Deleted
                       </button>
                     )
                     : (
