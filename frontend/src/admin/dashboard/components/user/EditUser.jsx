@@ -1,10 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import Dashboard from "../../Dashboard";
 import { Link, useLocation, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useContext } from "react";
-import { AuthContext } from "../../../context/context";
+import { AuthContext } from "../../../context/context"; 
 
 const formSchema = Yup.object({
   name: Yup.string()
@@ -25,6 +24,9 @@ const formSchema = Yup.object({
 
 const EditUser = () => {
   const { state } = useLocation();
+  const {id} = useParams();
+  const { editUser } = useContext(AuthContext);
+
 
   const formik = useFormik({
     initialValues: {
@@ -33,9 +35,10 @@ const EditUser = () => {
       password: "",
       confPassword: "",
       isAdmin: "",
+      id: id,
     },
     onSubmit: (values) => {
-      console.log(values);
+      editUser(values);
     },
     validationSchema: formSchema,
   });

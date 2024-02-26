@@ -385,6 +385,26 @@ export const AuthContextProvider = ({ children }) => {
 
   // ---------------------------------------------User -----------------------------------------------------
 
+  const editUser = async(value)=>{
+    try {
+      const res = await axiosInterceptor.put(`${baseUrl}/api/users/${value.id}`, value,{
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      toast.success(res.data.message, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/view-users");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
   const deleteUser = async(id)=> {
     try {
       const res = await axiosInterceptor.delete(`${baseUrl}/api/users/${id}`,{
@@ -392,6 +412,7 @@ export const AuthContextProvider = ({ children }) => {
           authorization: `Bearer ${token}`
         }
       })
+      console.log(res)
       toast.success(res.data.message, {
         position: "bottom-center",
         autoClose: 3000,
@@ -433,6 +454,7 @@ export const AuthContextProvider = ({ children }) => {
         register,
         registerError,
         users,
+        editUser
       }}
     >
       {children}
