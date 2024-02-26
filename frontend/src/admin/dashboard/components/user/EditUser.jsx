@@ -48,7 +48,7 @@ const EditUser = () => {
         </Link>
       </div>
       <div className="is-flex mb-5 is-size-4">Edit User</div>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         <div className="field">
           <label className="label">Full Name</label>
           <div className="control">
@@ -62,6 +62,22 @@ const EditUser = () => {
             />
             <p className="help has-text-danger">
               {formik.touched.name && formik.errors.name}
+            </p>
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Email</label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter your email"
+              defaultValue={state.email}
+              onChange={formik.handleChange("email")}
+              onBlur={formik.handleBlur("email")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.email && formik.errors.email}
             </p>
           </div>
         </div>
