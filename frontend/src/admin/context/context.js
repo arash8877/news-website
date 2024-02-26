@@ -414,7 +414,7 @@ export const AuthContextProvider = ({ children }) => {
       })
       console.log(res)
       toast.success(res.data.message, {
-        position: "bottom-center",
+        position: "top-center",
         autoClose: 3000,
         closeOnClick: true,
         pauseOnHover: true,
@@ -454,7 +454,8 @@ export const AuthContextProvider = ({ children }) => {
         register,
         registerError,
         users,
-        editUser
+        editUser,
+        deleteUser
       }}
     >
       {children}
