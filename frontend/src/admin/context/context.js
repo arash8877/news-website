@@ -153,7 +153,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   
-  const profile = async () => {
+  const getProfileInfo = async () => {
     try {
       const res = await axiosInterceptor.get(`${baseUrl}/api/users/profile`, {
         headers: {
@@ -516,6 +516,9 @@ export const AuthContextProvider = ({ children }) => {
         logout,
         userId,
         editUserProfile,
+        getProfileInfo,
+        profilePhoto,
+        
       }}
     >
       {children}
