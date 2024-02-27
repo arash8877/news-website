@@ -14,12 +14,12 @@ const Information = () => {
   const { userId, getProfileInfo, profilePhoto, users, news, comments } =
     useContext(AuthContext);
 
-  useEffect(() => {
-    getProfileInfo();
-  }, []);
+  // useEffect(() => {
+  //   getProfileInfo();
+  // }, []);
   // if put getProfileInfo() in a useEffect here, whenever all sub-components in the sidebar renders
   // the useEffect triggers and getProfileInfo() will be rendered which is not optimal!
-  // instead, I put getProfileInfo() in useEffect in the 'context' and in the 'login'
+  // instead, I put getProfileInfo() in 1-useEffect in the 'context' and in 2-'login'
 
   return (
     <div className="information">

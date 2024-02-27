@@ -28,6 +28,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     refreshToken();
     handleNews();
+    getProfileInfo();
   }, []);
 
   const refreshToken = async () => {
@@ -88,6 +89,7 @@ export const AuthContextProvider = ({ children }) => {
         setUserId(res.data.userId);
         setToken(res.data.accessToken);
         setAdmin(res.data.isAdmin);
+        getProfileInfo();
       }
     } catch (error) {
       console.log(error);
@@ -518,6 +520,7 @@ export const AuthContextProvider = ({ children }) => {
         editUserProfile,
         getProfileInfo,
         profilePhoto,
+        profileName,
         
       }}
     >
