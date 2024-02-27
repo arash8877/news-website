@@ -46,7 +46,21 @@ const HomeWrapper = () => {
           </div>
         </div>
       </div>
+      <div className="column is-three-quarters-widescreen is-full-tablet">
+            <div className="post-left-side">
+              {
+                loading ? (
+                  <div className="has-text-centered">
+                    <Loader />
+                  </div>
+                ) : (
+                  <video src={videos.url} controls width="100%" height="100%"></video>
+                )
+              }
+            </div>
+          </div>
     </div>
+    
   );
 };
 
