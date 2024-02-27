@@ -1,0 +1,15 @@
+ul.nav-ul li a{
+    color: white !important;
+    font-style: 18px;
+}
+
+
+ul.nav-ul li {
+    margin-left: 25px;
+    padding-left: 25px;
+    border-left: 1px solid #fff;
+}
+
+/* ul li:last-child{
+    border: none;
+} */
