@@ -15,13 +15,13 @@ import ViewUsers from "./admin/dashboard/components/user/ViewUsers";
 import AddUser from "./admin/dashboard/components/user/AddUser";
 import EditUser from "./admin/dashboard/components/user/EditUser";
 import UpdateProfile from "./admin/dashboard/components/user/UpdateProfile";
+import HomePage from "./pages/HomePage";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
 // import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
 // import NotFound from "./components/NotFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
-// import HomePage from "./pages/HomePage";
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
 // import Details from "./pages/Details";
@@ -34,11 +34,11 @@ function App() {
   return (
     <>
       <Routes>
-        {/* <Route path="/" element={<Dashboard />} /> */}
+        <Route path="/" element={<HomePage />} />
 
         <Route path="/administrator" element={<Login />} />
-        <Route path="/dashboard" element={<Main/>} />
-        <Route path="/view-news" element={<ViewNews/>} />
+        <Route path="/dashboard" element={<Main />} />
+        <Route path="/view-news" element={<ViewNews />} />
         <Route path="/add-news" element={<AddNews />} />
         <Route path="/edit-news/:id" element={<EditNews />} />
 
@@ -53,7 +53,6 @@ function App() {
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/edit-user/:id" element={<EditUser />} />
         <Route path="/update-profile/:id" element={<UpdateProfile />} />
-        
       </Routes>
       <ToastContainer />
     </>
