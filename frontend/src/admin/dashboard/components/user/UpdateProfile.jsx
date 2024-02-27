@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 import Dashboard from "../../Dashboard";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../../../context/context";
 
 const formSchema = Yup.object({
   name: Yup.string()
@@ -22,38 +23,43 @@ const formSchema = Yup.object({
 });
 
 const UpdateProfile = () => {
-    // const {updateProfile} = useContext(AuthContext)
-    const {id} = useParams()
-    const [file, setFile] = useState([]);
-    const [preview, setPreview] = useState("")
-  
-  
-    const loadImage = (e) => {
-      const image = e.target.files[0];
-      setFile(image)
-      setPreview(URL.createObjectURL(image))
-    }
+  const {editUserProfile} = useContext(AuthContext)
+  const { id } = useParams();
+  const [file, setFile] = useState([]);
+  const [preview, setPreview] = useState("");
 
+  const loadImage = (e) => {
+    const image = e.target.files[0];
+    setFile(image);
+    setPreview(URL.createObjectURL(image));
+  };
   const formik = useFormik({
     initialValues: {
       name: "",
       password: "",
       confPassword: "",
-      id: "id",
+      id: id,
       file: "",
     },
     onSubmit: (values) => {
-      //   const data = {
-      //     title: values.title,
-      //     desc: values.desc,
-      //     catId: values.catId,
-      //     file: file,
-      //   };
-      //   createNews(data);
-      console.log(values);
+      console.log("Form submitted!");
+         const data = {
+              name: values.name,
+              password: values.password,
+              confPassword: values.confPassword,
+              id:id,
+              file: file,
+         }
+        //  editUserProfile(data);
+        console.log(data)
     },
-    validationSchema: formSchema,
-  });
+    validationSchema: formSchema
+  })
+
+
+
+
+
 
   return (
     <Dashboard>
@@ -69,6 +75,61 @@ const UpdateProfile = () => {
             ) : (
               ""
             )}
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Full Name</label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="Type your name"
+              value={formik.values.name}
+              onChange={formik.handleChange("name")}
+              onBlur={formik.handleBlur("name")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.name && formik.errors.name}
+            </p>
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter Your Password"
+              value={formik.values.password}
+              onChange={formik.handleChange("password")}
+              onBlur={formik.handleBlur("password")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.password && formik.errors.password}
+            </p>
+          </div>
+        </div>
+        <div className="field">
+          <label className="label">Confirm Password</label>
+          <div className="control">
+            <input
+              type="text"
+              className="input"
+              placeholder="Enter your password"
+              value={formik.values.confPassword}
+              onChange={formik.handleChange("confPassword")}
+              onBlur={formik.handleBlur("confPassword")}
+            />
+            <p className="help has-text-danger">
+              {formik.touched.confPassword && formik.errors.confPassword}
+            </p>
+          </div>
+        </div>
+        <div className="field mt-6">
+          <div className="control">
+            <button type="submit" className="button is-success px-6">
+              Save
+            </button>
           </div>
         </div>
       </form>

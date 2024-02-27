@@ -21,6 +21,8 @@ export const AuthContextProvider = ({ children }) => {
   const [allVideos, setAllVideos] = useState([]);
   const [registerError, setRegisterError] = useState("");
   const [users, setUsers] = useState([]);
+  const [profileName, setProfileName] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -130,6 +132,41 @@ export const AuthContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  const editUserProfile = async(data)=> {
+    try {
+      const formData = new FormData();
+      formData.append("name", data.name)
+      formData.append("password", data.password)
+      formData.append("confPassword", data.confPassword)
+      formData.append("id", data.id)
+      formData.append("file", data.file)
+      const res = await axiosInterceptor.put(`${baseUrl}/api/users/profile/${data.id}`, formData, {
+        headers:{
+          authorization: `Bearer ${token}`
+        }
+      })
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  
+  const profile = async () => {
+    try {
+      const res = await axiosInterceptor.get(`${baseUrl}/api/users/profile`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      setProfilePhoto(res.data.url);
+      setProfileName(res.data.name)
+     
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // ---------------------------------------------News-----------------------------------------------------
 
@@ -478,6 +515,7 @@ export const AuthContextProvider = ({ children }) => {
         deleteUser,
         logout,
         userId,
+        editUserProfile,
       }}
     >
       {children}

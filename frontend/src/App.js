@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        {/* <Route path="/" element={<Dashboard />} /> */}
 
         <Route path="/administrator" element={<Login />} />
         <Route path="/dashboard" element={<Main/>} />

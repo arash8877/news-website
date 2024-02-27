@@ -138,7 +138,7 @@ const EditUser = () => {
         <div className="field mt-6">
           <div className="control">
             <button type="submit" className="button is-success px-6">
-              Add User
+              Save
             </button>
           </div>
         </div>
