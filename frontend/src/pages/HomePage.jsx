@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import TopMenu from "../components/home/topMenu/TopMenu";
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
-  )
-}
+    <div className="wrapper">
+      <TopMenu />
+    </div>
+  );
+};
 
-export default HomePage
+export default HomePage;
