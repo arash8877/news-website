@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import Comment from "../Comment/Comment";
+import Comment from "../comment/Comment";
 import "./Content.css";
-// import { HomeContext } from "../../../context/context";
 import { useParams } from "react-router-dom";
+import HomeContext from "../../../context/homeContext";
 
 
 const Content = ({ data }) => {
