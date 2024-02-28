@@ -1,0 +1,11 @@
+.side-left{
+    border-radius: 25px;
+}
+
+.social-media{
+    border-radius: 25px;
+}
+
+.social-media svg{
+    margin-left: 10px;
+}
