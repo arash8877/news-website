@@ -16,14 +16,14 @@ import AddUser from "./admin/dashboard/components/user/AddUser";
 import EditUser from "./admin/dashboard/components/user/EditUser";
 import UpdateProfile from "./admin/dashboard/components/user/UpdateProfile";
 import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
 // import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
 // import NotFound from "./components/NotFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
 // import Details from "./pages/Details";
 // import { useContext } from "react";
 // import { AuthContext } from "./admin/context/context";
@@ -35,8 +35,10 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
 
-        <Route path="/administrator" element={<Login />} />
         <Route path="/dashboard" element={<Main />} />
         <Route path="/view-news" element={<ViewNews />} />
         <Route path="/add-news" element={<AddNews />} />

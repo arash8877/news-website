@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import img from "../../../assets/images/1.jpeg";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./WhatNews.css";
 
@@ -11,7 +10,7 @@ const WhatNews = () => {
     LoadCatPost()
   }, [cat]);
 
-
+  
   return (
     <div id="whats-news" className="py-5">
       <div className="container">
@@ -87,4 +86,4 @@ const WhatNews = () => {
   );
 };
 
-export default WhatsNews;
+export default WhatNews;
