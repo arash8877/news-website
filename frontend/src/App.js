@@ -1,6 +1,4 @@
-import Login from "./admin/auth/Login";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./admin/dashboard/Dashboard";
 import ViewNews from "./admin/dashboard/components/news/ViewNews";
 import AddNews from "./admin/dashboard/components/news/AddNews";
 import { ToastContainer } from "react-toastify";
@@ -18,6 +16,7 @@ import UpdateProfile from "./admin/dashboard/components/user/UpdateProfile";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Detail from "./pages/Detail";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
@@ -38,6 +37,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/detail/:id" element={<Detail />} />
 
         <Route path="/dashboard" element={<Main />} />
         <Route path="/view-news" element={<ViewNews />} />
