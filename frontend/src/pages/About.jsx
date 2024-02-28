@@ -1,8 +1,12 @@
 import React from "react";
 import TopMenu from "../components/home/topMenu/TopMenu";
 import Navbar from "../components/home/navbar/Navbar";
-import Footer from "../components/home/footer/Footer"
+import Footer from "../components/home/footer/Footer";
+
+
 const About = () => {
+
+  
   return (
     <>
       <TopMenu />

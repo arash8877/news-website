@@ -1,8 +1,33 @@
 import React from "react";
 import TopMenu from "../components/home/topMenu/TopMenu";
 import Navbar from "../components/home/navbar/Navbar";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+
+const formSchema = Yup.object({
+  email: Yup.string().required("Email required!"),
+  subject: Yup.string().required("subject required!"),
+  message: Yup.string().required("message required!"),
+});
+
+
 
 const Contact = () => {
+
+    const formik = useFormik({
+        initialValues: {
+          email: "",
+          subject: "",
+          message: "",
+        },
+        onSubmit: (values) => {
+        //  handleEmail(values);
+        console.log(values)
+        },
+        validationSchema: formSchema,
+      });
+
+
   return (
     <>
       <TopMenu />
