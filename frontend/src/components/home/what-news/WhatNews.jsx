@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./WhatNews.css";
+import HomeContext from "../../../context/homeContext";
 
 
 const WhatNews = () => {
@@ -16,7 +17,7 @@ const WhatNews = () => {
       <div className="container">
         <div className="columns is-flex-widescreen is-block-tablet">
           <div className="column is-flex is-one-quarter-widescreen is-justify-content-center">
-            <img src={sendNews} className="send-news" alt="" />
+            <img src="" className="send-news" alt="" />
           </div>
           <div className="column is-three-quarters-widescreen is-justify-content-center">
             <div className="whats-news has-background-white p-5">
@@ -47,7 +48,7 @@ const WhatNews = () => {
 
               {loadingCatPost ? (
                 <div className="has-text-centered">
-                  <Loader />
+                  {/* <Loader /> */}
                 </div>
               ) : (
                 <div className="whats-news-post mt-6">
@@ -68,7 +69,7 @@ const WhatNews = () => {
                           </Link>
                           <div className="whats-news-post-item-date">
                             <p>
-                              {moment(post.createdAt).locale("fs").format("YYYY-MM-DD")}
+                              {/* {moment(post.createdAt).locale("fs").format("YYYY-MM-DD")} */}
                             </p>
                           </div>
                         </div>

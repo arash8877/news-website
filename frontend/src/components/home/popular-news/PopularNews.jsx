@@ -14,7 +14,7 @@ const PopularNews = () => {
       <div className="columns">
         {loadingPopular ? (
           <div className="column is-four-fifths has-background-white p-4 has-text-centered">
-            <Loader />
+            {/* <Loader /> */}
           </div>
         ) : (
           <div className="column is-four-fifths has-background-white p-4">
@@ -48,7 +48,7 @@ const PopularNews = () => {
                       </div>
                       <div className="author mt-4">
                         <span className="is-size-6 has-text-grey ml-2">
-                          {moment(news.createdAt).locale("fa").format("YYYY-MM-DD")}
+                          {/* {moment(news.createdAt).locale("fa").format("YYYY-MM-DD")} */}
                         </span>
                         <span className="is-size-6 has-text-grey mr-2">
                           {news?.user?.name}
@@ -62,7 +62,7 @@ const PopularNews = () => {
         )}
 
         <div className="column is-one-fifth has-text-centered">
-          <img src={travel} alt="" />
+          <img src="" alt="" />
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ const SideLeft = () => {
         </TwitterShareButton>
       </div>
       <div className="detail-ads has-text-centered mt-5">
-        <img src="" width="250" alt="" />
+        <img src="https://img.freepik.com/free-psd/business-promotion-corporate-instagram-story-template_120329-1473.jpg?t=st=1709137494~exp=1709141094~hmac=3ad623355b350959c914039056aae23317a237fc85692ff58308c5da6295bc5d&w=740" width="250" alt="" />
       </div>
     </div>
   )
