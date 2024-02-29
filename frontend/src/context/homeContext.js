@@ -2,13 +2,12 @@ import { createContext, useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
 import { videoReducer } from "./reducer/videoReducer";
 import { baseUrl } from "../utils/baseUrl";
-import axios from "axios"
+import axios from "axios";
 import {
   VIDEO_FAIL,
   VIDEO_REQUEST,
   VIDEO_SUCCESS,
 } from "./constants/videoConstants";
-
 
 const INITIAL_STATE = {
   loading: true,
@@ -21,6 +20,10 @@ export const HomeContext = createContext();
 export const HomeContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
 
+  useEffect(() => {
+    LoadVideo();
+  }, []);
+
   const LoadVideo = async () => {
     try {
       dispatch({ type: VIDEO_REQUEST });
@@ -32,5 +35,15 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
-  return <HomeContext.Provider value="">{children}</HomeContext.Provider>;
+  return (
+    <HomeContext.Provider
+      value={{
+        loading: state.loading,
+        error: state.error,
+        videos: state.videos,
+      }}
+    >
+      {children}
+    </HomeContext.Provider>
+  );
 };

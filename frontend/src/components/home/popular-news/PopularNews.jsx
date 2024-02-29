@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
 import "./PopularNews.css";
 import { useContext } from "react";
-import { HomeContext } from "../../../home-context/homeContext.jsx";
+import { HomeContext } from "../../../context/homeContext";
 // import Loader from "../../Loading/Loader";
 
 

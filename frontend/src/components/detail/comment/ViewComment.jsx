@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { BsArrowReturnLeft } from "react-icons/bs";
-import HomeContext from '../../../context/homeContext';
+import { HomeContext } from '../../../context/homeContext';
 
 const ViewComment = () => {
      const {newsComment} = useContext(HomeContext)

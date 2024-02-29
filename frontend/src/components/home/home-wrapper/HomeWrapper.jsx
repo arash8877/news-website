@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import "./HomeWrapper.css";
 import { Link } from "react-router-dom";
+import { HomeContext } from "../../../context/homeContext";
+import Loader from "../../loading/Loader"
 
 const HomeWrapper = () => {
-  // const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
-  //   useContext(HomeContext);
+  const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
+    useContext(HomeContext);
   return (
-    {/* <div className="home-wrapper">
+    <div className="home-wrapper">
       <div className="container">
         <div className="columns is-flex-widescreen is-block-tablet is-align-items-start">
           <div className="column is-one-quarter-widescreen is-full-desktop">
@@ -16,7 +18,7 @@ const HomeWrapper = () => {
                   <Loader />
                 </div>
               ) : (
-                <>
+                {/* <>
                   {lastNews.map((news) => {
                     return (
                       <div className="right-side-top" key={news.id}>
@@ -40,7 +42,7 @@ const HomeWrapper = () => {
                       </div>
                     );
                   })}
-                </>
+                </> */}
               )}
             </div>
           </div>
@@ -59,7 +61,7 @@ const HomeWrapper = () => {
               }
             </div>
           </div>
-    </div> */}
+    </div> 
     
   );
 };

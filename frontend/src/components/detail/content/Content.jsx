@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Comment from "../comment/Comment";
 import "./Content.css";
 import { useParams } from "react-router-dom";
-import HomeContext from "../../../context/homeContext";
+import { HomeContext } from "../../../context/homeContext";
 
 
 const Content = ({ data }) => {

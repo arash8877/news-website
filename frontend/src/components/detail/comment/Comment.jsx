@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import ViewComment from './ViewComment'
 import {useParams} from "react-router-dom"
-import HomeContext from '../../../context/homeContext'
+import { HomeContext } from '../../../context/homeContext'
 
 const Comment = () => {
      const {createComment} = useContext(HomeContext)
