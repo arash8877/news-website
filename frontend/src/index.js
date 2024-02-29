@@ -7,7 +7,7 @@ import { AuthContextProvider } from "./admin/context/context";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-// import { HomeContextProvider } from "./context/context";
+import { HomeContextProvider } from "./context/homeContext";
 axios.defaults.withCredentials = true;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,7 +15,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <HomeContextProvider>
+          <App />
+        </HomeContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
     {/* <BrowserRouter>
