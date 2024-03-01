@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
 import { toast } from "react-toastify";
 import { videoReducer } from "./reducer/videoReducer";
+import { lastNewsReducer } from "./reducer/lastNewsReducer";
 import { baseUrl } from "../utils/baseUrl";
 import axios from "axios";
 import {
@@ -9,16 +10,23 @@ import {
   VIDEO_SUCCESS,
 } from "./constants/videoConstants";
 
-const INITIAL_STATE = {
+const INITIAL_STATE_VIDEO = {
   loading: true,
   error: "",
   videos: [],
 };
 
+const INITIAL_STATE_LAST_NEWS = {
+  loading: true,
+  error: "",
+  lastNews: [],
+};
+
 export const HomeContext = createContext();
 
 export const HomeContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE_VIDEO);
+  const [stateLastNews, lastNewsDispatch] = useReducer(lastNewsReducer, INITIAL_STATE_LAST_NEWS);
 
   useEffect(() => {
     LoadVideo();
