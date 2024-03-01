@@ -9,6 +9,7 @@ import {
   VIDEO_REQUEST,
   VIDEO_SUCCESS,
 } from "./constants/videoConstants";
+import { LAST_NEWS_FAIL, LAST_NEWS_REQUEST, LAST_NEWS_SUCCESS } from "./constants/lastNewsConstants";
 
 const INITIAL_STATE_VIDEO = {
   loading: true,
@@ -32,6 +33,8 @@ export const HomeContextProvider = ({ children }) => {
     LoadVideo();
   }, []);
 
+
+  //---------------------------------LoadVideo-----------------------------------
   const LoadVideo = async () => {
     try {
       dispatch({ type: VIDEO_REQUEST });
@@ -42,6 +45,27 @@ export const HomeContextProvider = ({ children }) => {
       dispatch({ type: VIDEO_FAIL, payload: error.response.data.message });
     }
   };
+//---------------------------------LoadLastNews-----------------------------------
+  const LoadLastNews = async () => {
+    try {
+      lastNewsDispatch({ type: LAST_NEWS_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/last-news`);
+      lastNewsDispatch({ type: LAST_NEWS_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error);
+      lastNewsDispatch({
+        type: LAST_NEWS_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+//-----------------------------------------------------------------------------
+
+
+
+
+
 
   return (
     <HomeContext.Provider
