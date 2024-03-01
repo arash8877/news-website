@@ -8,20 +8,28 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 //------------------------------------------------------------------
 import {
-  VIDEO_FAIL,
   VIDEO_REQUEST,
   VIDEO_SUCCESS,
+  VIDEO_FAIL,
 } from "./constants/videoConstants";
 import {
-  LAST_NEWS_FAIL,
   LAST_NEWS_REQUEST,
   LAST_NEWS_SUCCESS,
+  LAST_NEWS_FAIL,
 } from "./constants/lastNewsConstants";
 import {
   CATEGORY_POST_REQUEST,
   CATEGORY_POST_SUCCESS,
   CATEGORY_POST_FAIL,
 } from "./constants/categoryConstants";
+import { popularNewsReducer } from "./reducer/popularReducer";
+import {
+  POPULAR_NEWS_REQUEST,
+  POPULAR_NEWS_SUCCESS,
+  POPULAR_NEWS_FAIL,
+} from "./constants/popularConstants";
+
+//-------------------------INITIAL_STATE-----------------------------
 
 const INITIAL_STATE_VIDEO = {
   loading: true,
@@ -41,6 +49,12 @@ const INITIAL_STATE_CATEGORY = {
   news: [],
 };
 
+const INITIAL_STATE_POPULAR_NEWS = {
+  loading: true,
+  error: "",
+  popularNews: [],
+};
+
 //--------------------------------------------------HomeContextProvider----------------------------------------------------
 
 export const HomeContext = createContext();
@@ -57,11 +71,15 @@ export const HomeContextProvider = ({ children }) => {
     INITIAL_STATE_CATEGORY
   );
 
+  const [statePopularNews, popularNewsDispatch] = useReducer(
+    popularNewsReducer,
+    INITIAL_STATE_POPULAR_NEWS
+  );
+
   useEffect(() => {
     LoadVideo();
     LoadLastNews();
     LoadCategory();
-    LoadCatPost();
   }, []);
 
   //---------------------------------LoadVideo-------------------------------
@@ -117,6 +135,18 @@ export const HomeContextProvider = ({ children }) => {
   };
 
   //--------------------------------------------------------------
+  const LoadPopularNews = async () => {
+    try {
+      popularNewsDispatch({ type: POPULAR_NEWS_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/popular`);
+      popularNewsDispatch({ type: POPULAR_NEWS_SUCCESS, payload: data });
+    } catch (error) {
+      popularNewsDispatch({
+        type: POPULAR_NEWS_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
   //--------------------------------------------------------------------------
 
@@ -131,9 +161,9 @@ export const HomeContextProvider = ({ children }) => {
         lastNews: stateLastNews.lastNews,
         loadingCategory: stateCategory.loading,
         errorCategory: stateCategory.error,
-        newsCategory: stateCategory.news, 
-        category
-
+        newsCategory: stateCategory.news,
+        category,
+        LoadCatPost,
       }}
     >
       {children}

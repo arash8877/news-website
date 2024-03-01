@@ -7,11 +7,14 @@ import { HomeContext } from "../../../context/homeContext";
 const WhatNews = () => {
   const { category, loadingCategory, newsCategory, LoadCatPost } =
     useContext(HomeContext);
+
   const cat = useLocation().search;
+
   useEffect(() => {
     LoadCatPost();
   }, [cat]);
 
+  
   return (
     <div id="whats-news" className="py-5">
       <div className="container">
