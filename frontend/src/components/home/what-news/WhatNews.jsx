@@ -1,17 +1,17 @@
 import React, { useEffect, useContext } from "react";
+import Loader from "../../loading/Loader";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import "./WhatNews.css";
 import { HomeContext } from "../../../context/homeContext";
 
-
 const WhatNews = () => {
-  const { category, loadingCatPost, news,LoadCatPost } = useContext(HomeContext);
-  const cat = useLocation().search
+  const { category, loadingCategory, newsCategory, LoadCatPost } =
+    useContext(HomeContext);
+  const cat = useLocation().search;
   useEffect(() => {
-    LoadCatPost()
+    LoadCatPost();
   }, [cat]);
 
-  
   return (
     <div id="whats-news" className="py-5">
       <div className="container">
@@ -46,37 +46,32 @@ const WhatNews = () => {
                 </div>
               </div>
 
-              {loadingCatPost ? (
+              {loadingCategory ? (
                 <div className="has-text-centered">
-                  {/* <Loader /> */}
+                  <Loader />
                 </div>
               ) : (
                 <div className="whats-news-post mt-6">
-                  {
-                    news && news?.map((post) => {
+                  {newsCategory &&
+                    newsCategory?.map((post) => {
                       return (
                         <div className="whats-news-post-item" key={post.id}>
-                        <div className="whats-news-post-item-img">
-                          <Link state={post} to={`/detail/${post.id}`}>
-                            <img src={post.url} alt="" />
-                          </Link>
-                        </div>
-                        <div className="whats-news-post-item-description">
-                        <Link state={post} to={`/detail/${post.id}`}>
-                            <p>
-                             {post.desc}
-                            </p>
-                          </Link>
-                          <div className="whats-news-post-item-date">
-                            <p>
-                              {/* {moment(post.createdAt).locale("fs").format("YYYY-MM-DD")} */}
-                            </p>
+                          <div className="whats-news-post-item-img">
+                            <Link state={post} to={`/detail/${post.id}`}>
+                              <img src={post.url} alt="" />
+                            </Link>
+                          </div>
+                          <div className="whats-news-post-item-description">
+                            <Link state={post} to={`/detail/${post.id}`}>
+                              <p>{post.desc}</p>
+                            </Link>
+                            <div className="whats-news-post-item-date">
+                              <p>{post.createdAt}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      )
-                    })
-                  }
+                      );
+                    })}
                 </div>
               )}
             </div>

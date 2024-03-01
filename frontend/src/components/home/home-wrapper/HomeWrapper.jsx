@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./HomeWrapper.css";
 import { Link } from "react-router-dom";
 import { HomeContext } from "../../../context/homeContext";
-import Loader from "../../loading/Loader"
+import Loader from "../../loading/Loader";
 
 const HomeWrapper = () => {
   const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
@@ -18,7 +18,7 @@ const HomeWrapper = () => {
                   <Loader />
                 </div>
               ) : (
-                {/* <>
+                <>
                   {lastNews.map((news) => {
                     return (
                       <div className="right-side-top" key={news.id}>
@@ -32,37 +32,30 @@ const HomeWrapper = () => {
                               <span>{news.category.name}</span>
                             </div>
                             <div className="post-title">{news.title}</div>
-                            <div className="post-date">
-                              {moment(news.createdAt)
-                                .locale("fa")
-                                .format("YYYY-MM-DD")}
-                            </div>
+                            <div className="post-date">{news.createdAt}</div>
                           </div>
                         </Link>
                       </div>
                     );
                   })}
-                </> */}
+                </>
               )}
             </div>
           </div>
         </div>
       </div>
       <div className="column is-three-quarters-widescreen is-full-tablet">
-            <div className="post-left-side">
-              {
-                loading ? (
-                  <div className="has-text-centered">
-                    <Loader />
-                  </div>
-                ) : (
-                  <video src={videos.url} controls width="100%" height="100%"></video>
-                )
-              }
+        <div className="post-left-side">
+          {loading ? (
+            <div className="has-text-centered">
+              <Loader />
             </div>
-          </div>
-    </div> 
-    
+          ) : (
+            <video src={videos.url} controls width="100%" height="100%"></video>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

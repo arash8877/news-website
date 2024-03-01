@@ -1,15 +1,27 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import { videoReducer } from "./reducer/videoReducer";
 import { lastNewsReducer } from "./reducer/lastNewsReducer";
+import { categoryReducer } from "./reducer/categoryReducer";
 import { baseUrl } from "../utils/baseUrl";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+//------------------------------------------------------------------
 import {
   VIDEO_FAIL,
   VIDEO_REQUEST,
   VIDEO_SUCCESS,
 } from "./constants/videoConstants";
-import { LAST_NEWS_FAIL, LAST_NEWS_REQUEST, LAST_NEWS_SUCCESS } from "./constants/lastNewsConstants";
+import {
+  LAST_NEWS_FAIL,
+  LAST_NEWS_REQUEST,
+  LAST_NEWS_SUCCESS,
+} from "./constants/lastNewsConstants";
+import {
+  CATEGORY_POST_REQUEST,
+  CATEGORY_POST_SUCCESS,
+  CATEGORY_POST_FAIL,
+} from "./constants/categoryConstants";
 
 const INITIAL_STATE_VIDEO = {
   loading: true,
@@ -23,18 +35,36 @@ const INITIAL_STATE_LAST_NEWS = {
   lastNews: [],
 };
 
+const INITIAL_STATE_CATEGORY = {
+  loading: true,
+  error: "",
+  news: [],
+};
+
+//--------------------------------------------------HomeContextProvider----------------------------------------------------
+
 export const HomeContext = createContext();
 
 export const HomeContextProvider = ({ children }) => {
+  const [category, setCategory] = useState([]);
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE_VIDEO);
-  const [stateLastNews, lastNewsDispatch] = useReducer(lastNewsReducer, INITIAL_STATE_LAST_NEWS);
+  const [stateLastNews, lastNewsDispatch] = useReducer(
+    lastNewsReducer,
+    INITIAL_STATE_LAST_NEWS
+  );
+  const [stateCategory, categoryDispatch] = useReducer(
+    categoryReducer,
+    INITIAL_STATE_CATEGORY
+  );
 
   useEffect(() => {
     LoadVideo();
+    LoadLastNews();
+    LoadCategory();
+    LoadCatPost();
   }, []);
 
-
-  //---------------------------------LoadVideo-----------------------------------
+  //---------------------------------LoadVideo-------------------------------
   const LoadVideo = async () => {
     try {
       dispatch({ type: VIDEO_REQUEST });
@@ -45,7 +75,7 @@ export const HomeContextProvider = ({ children }) => {
       dispatch({ type: VIDEO_FAIL, payload: error.response.data.message });
     }
   };
-//---------------------------------LoadLastNews-----------------------------------
+  //---------------------------------LoadLastNews-----------------------------
   const LoadLastNews = async () => {
     try {
       lastNewsDispatch({ type: LAST_NEWS_REQUEST });
@@ -60,12 +90,35 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
-//-----------------------------------------------------------------------------
+  //---------------------------------LoadCategory-----------------------------
+  const LoadCategory = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}/api/category/home`);
+      setCategory(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const cat = useLocation().search;
 
+  const LoadCatPost = async () => {
+    try {
+      categoryDispatch({ type: CATEGORY_POST_REQUEST });
+      const { data } = await axios.get(`${baseUrl}/api/news/cat-news${cat}`);
+      categoryDispatch({ type: CATEGORY_POST_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error);
+      categoryDispatch({
+        type: CATEGORY_POST_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
+  //--------------------------------------------------------------
 
-
+  //--------------------------------------------------------------------------
 
   return (
     <HomeContext.Provider
@@ -73,6 +126,14 @@ export const HomeContextProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         videos: state.videos,
+        loadingLastNews: stateLastNews.loading,
+        errorLastNews: stateLastNews.error,
+        lastNews: stateLastNews.lastNews,
+        loadingCategory: stateCategory.loading,
+        errorCategory: stateCategory.error,
+        newsCategory: stateCategory.news, 
+        category
+
       }}
     >
       {children}
