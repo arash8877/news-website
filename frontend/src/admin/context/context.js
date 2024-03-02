@@ -23,6 +23,7 @@ export const AuthContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [profileName, setProfileName] = useState("");
   const [profilePhoto, setProfilePhoto] = useState("");
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -485,6 +486,37 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   // ---------------------------------------------Comments -----------------------------------------------------
+  const getAllComment = async()=> {
+    try {
+      const res = await axiosInterceptor.get(`${baseUrl}/api/comment`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      setComments(res.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const deleteComment = async(id)=> {
+    try {
+      const res = await axiosInterceptor.delete(`${baseUrl}/api/comment/${id}`,{
+        headers:{
+          authorization : `Bearer ${token}`
+        }
+      })
+      toast.success(res.data, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      getAllComment()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <AuthContext.Provider
@@ -521,6 +553,9 @@ export const AuthContextProvider = ({ children }) => {
         getProfileInfo,
         profilePhoto,
         profileName,
+        getAllComment,
+        comments,
+        deleteComment
         
       }}
     >

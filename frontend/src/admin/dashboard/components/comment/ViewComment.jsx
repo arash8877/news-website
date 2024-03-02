@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import Dashboard from "../../Dashboard";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/context"; 
 
 const ViewComment = () => {
