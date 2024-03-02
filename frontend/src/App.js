@@ -17,10 +17,10 @@ import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Detail from "./pages/Detail";
+import ViewComment from "./admin/dashboard/components/comment/ViewComment";
 // import Main from "./admin/dashboard/components/main/Main";
 // import EditNews from "./admin/dashboard/components/news/EditNews";
 // import EditUser from "./admin/dashboard/components/users/EditUser";
-// import ViewCommentAdmin from "./admin/dashboard/components/comment/ViewCommentAdmin";
 // import NotFound from "./components/NotFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
 // import Details from "./pages/Details";
@@ -55,6 +55,8 @@ function App() {
         <Route path="/add-user" element={<AddUser />} />
         <Route path="/edit-user/:id" element={<EditUser />} />
         <Route path="/update-profile/:id" element={<UpdateProfile />} />
+
+        <Route path="/comment" element={<ViewComment/>}/>
       </Routes>
       <ToastContainer />
     </>

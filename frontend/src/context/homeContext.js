@@ -61,6 +61,10 @@ export const HomeContext = createContext();
 
 export const HomeContextProvider = ({ children }) => {
   const [category, setCategory] = useState([]);
+  const [newsComment, setNewsComment] = useState([]);
+
+
+  //------------------------------------------------------------------------
   const [state, dispatch] = useReducer(videoReducer, INITIAL_STATE_VIDEO);
   const [stateLastNews, lastNewsDispatch] = useReducer(
     lastNewsReducer,
@@ -75,7 +79,7 @@ export const HomeContextProvider = ({ children }) => {
     popularNewsReducer,
     INITIAL_STATE_POPULAR_NEWS
   );
-
+//-------------------------------------------------------------------------
   useEffect(() => {
     LoadVideo();
     LoadLastNews();
@@ -200,6 +204,7 @@ const getSingleComment = async(id) => {
         LoadCatPost,
         createComment,
         getSingleComment,
+        newsComment,
       }}
     >
       {children}
