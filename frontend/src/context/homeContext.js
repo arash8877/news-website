@@ -148,7 +148,7 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
-  //----------------------------------createComment----------------------------------------
+  //----------------------------------Comment----------------------------------------
   const createComment = async(data) => {
     try {
       const res = await axios.post(`${baseUrl}/api/comment`, data)
@@ -163,6 +163,15 @@ export const HomeContextProvider = ({ children }) => {
       console.log(error);
     }
 }
+
+const getSingleComment = async(id) => {
+  try {
+   const res = await axios.get(`${baseUrl}/api/comment/${id}`)
+   setNewsComment(res.data)
+  } catch (error) {
+    console.log(error);
+  }
+ }
 
    //--------------------------------------------------------------------------
 
@@ -190,6 +199,7 @@ export const HomeContextProvider = ({ children }) => {
         category,
         LoadCatPost,
         createComment,
+        getSingleComment,
       }}
     >
       {children}

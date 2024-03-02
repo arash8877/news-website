@@ -6,7 +6,7 @@ import { HomeContext } from "../../../context/homeContext";
 
 
 const Content = ({ data }) => {
-  const {getSingleComment,LoadView} = useContext(HomeContext)
+  const {getSingleComment, LoadView} = useContext(HomeContext)
   const {id} = useParams()
 
   useEffect(()=> {
