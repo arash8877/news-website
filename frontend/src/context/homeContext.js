@@ -134,7 +134,7 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
-  //--------------------------------------------------------------
+  //---------------------------LoadPopularNews-----------------------------------
   const LoadPopularNews = async () => {
     try {
       popularNewsDispatch({ type: POPULAR_NEWS_REQUEST });
@@ -148,7 +148,29 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
-  //--------------------------------------------------------------------------
+  //----------------------------------createComment----------------------------------------
+  const createComment = async(data) => {
+    try {
+      const res = await axios.post(`${baseUrl}/api/comment`, data)
+      toast.success(res.data, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+   //--------------------------------------------------------------------------
+
+
+    //--------------------------------------------------------------------------
+
+
+     //--------------------------------------------------------------------------
 
   return (
     <HomeContext.Provider
@@ -162,8 +184,12 @@ export const HomeContextProvider = ({ children }) => {
         loadingCategory: stateCategory.loading,
         errorCategory: stateCategory.error,
         newsCategory: stateCategory.news,
+        loadingPopular: statePopularNews.loading,
+        errorPopular: statePopularNews.error,
+        popularNews: statePopularNews.popularNews,
         category,
         LoadCatPost,
+        createComment,
       }}
     >
       {children}

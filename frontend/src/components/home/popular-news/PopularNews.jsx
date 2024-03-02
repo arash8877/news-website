@@ -1,10 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
 import "./PopularNews.css";
-import { useContext } from "react";
+import Loader from "../../loading/Loader";
 import { HomeContext } from "../../../context/homeContext";
-// import Loader from "../../Loading/Loader";
 
 
 const PopularNews = () => {
@@ -14,7 +13,7 @@ const PopularNews = () => {
       <div className="columns">
         {loadingPopular ? (
           <div className="column is-four-fifths has-background-white p-4 has-text-centered">
-            {/* <Loader /> */}
+            <Loader />
           </div>
         ) : (
           <div className="column is-four-fifths has-background-white p-4">
@@ -48,7 +47,7 @@ const PopularNews = () => {
                       </div>
                       <div className="author mt-4">
                         <span className="is-size-6 has-text-grey ml-2">
-                          {/* {moment(news.createdAt).locale("fa").format("YYYY-MM-DD")} */}
+                          {news.createdAt}
                         </span>
                         <span className="is-size-6 has-text-grey mr-2">
                           {news?.user?.name}
