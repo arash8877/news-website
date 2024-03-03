@@ -6,7 +6,7 @@ import {
   BsFillPersonPlusFill,
   BsChatDots,
 } from "react-icons/bs";
-import { AuthContext } from "../../../context/context";
+import { AuthContext } from "../../../context/context"; 
 
 const Information = () => {
   const avatarUrl =
@@ -45,17 +45,17 @@ const Information = () => {
         <div className="info-item">
           <BsFillCapslockFill />
           <h4>News</h4>
-          {/* <span>{news.length}</span> */}
+          <span>{news.length}</span>
         </div>
         <div className="info-item">
           <BsFillPersonPlusFill />
           <h4>Users</h4>
-          {/* <span>{users.length}</span> */}
+          <span>{users.length}</span>
         </div>
         <div className="info-item">
           <BsChatDots />
           <h4>Comments</h4>
-          {/* <span>{comments.length}</span> */}
+          <span>{comments.length}</span>
         </div>
       </div>
     </div>

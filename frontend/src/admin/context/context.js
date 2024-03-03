@@ -540,6 +540,28 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
+  const deactivateComment = async(id) => {
+    const data = {
+      isActive: false
+    }
+    try {
+      const res = await axiosInterceptor.put(`${baseUrl}/api/comment/deactivate/${id}`,data,{
+        headers: {
+          authorization: `Bearer ${token}`
+        }
+      })
+      getAllComment()
+      toast.success(res.data, {
+        position: "top-center",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   //------------------------------------return---------------------------------------
 
@@ -582,6 +604,7 @@ export const AuthContextProvider = ({ children }) => {
         comments,
         deleteComment,
         activeComment,
+        deactivateComment,
       }}
     >
       {children}

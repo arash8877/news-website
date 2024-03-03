@@ -3,7 +3,7 @@ import Dashboard from "../../Dashboard";
 import { AuthContext } from "../../../context/context"; 
 
 const ViewComment = () => {
-  const { getAllComment, comments, deleteComment, activeComment ,unActiveComment} =
+  const { getAllComment, comments, deleteComment, activeComment ,deactivateComment} =
     useContext(AuthContext);
 
 
@@ -36,7 +36,7 @@ const ViewComment = () => {
                 <td>{comment.email}</td>
                 <td>
                   {comment.isActive ? (
-                    <button className="button is-success" onClick={()=> unActiveComment(comment.id)}>Active</button>
+                    <button className="button is-success" onClick={()=> deactivateComment(comment.id)}>Active</button>
                   ) : (
                     <button
                       className="button is-warning"
