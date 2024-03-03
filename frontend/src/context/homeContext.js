@@ -152,6 +152,16 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
+    //---------------------------LoadView-------------------------------------------
+    const LoadView = async(id)=> {
+      try {
+        const res = await axios.get(`${baseUrl}/api/news/detail/${id}`)
+        LoadPopularNews()
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
   //----------------------------------Comment----------------------------------------
   const createComment = async(data) => {
     try {
@@ -207,6 +217,7 @@ const getSingleComment = async(id) => {
         createComment,
         getSingleComment,
         newsComment,
+        LoadView,
       }}
     >
       {children}
