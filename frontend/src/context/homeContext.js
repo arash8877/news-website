@@ -5,7 +5,7 @@ import { lastNewsReducer } from "./reducer/lastNewsReducer";
 import { categoryReducer } from "./reducer/categoryReducer";
 import { baseUrl } from "../utils/baseUrl";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 //------------------------------------------------------------------
 import {
   VIDEO_REQUEST,
@@ -40,7 +40,7 @@ const INITIAL_STATE_VIDEO = {
 const INITIAL_STATE_LAST_NEWS = {
   loading: true,
   error: "",
-  lastNews: [],
+  lastNews: []
 };
 
 const INITIAL_STATE_CATEGORY = {
@@ -99,9 +99,11 @@ export const HomeContextProvider = ({ children }) => {
   };
   //---------------------------------LoadLastNews-----------------------------
   const LoadLastNews = async () => {
+    console.log(INITIAL_STATE_LAST_NEWS.lastNews)
     try {
       lastNewsDispatch({ type: LAST_NEWS_REQUEST });
       const { data } = await axios.get(`${baseUrl}/api/news/last-news`);
+      console.log('###########',data)
       lastNewsDispatch({ type: LAST_NEWS_SUCCESS, payload: data });
     } catch (error) {
       console.log(error);
@@ -111,6 +113,7 @@ export const HomeContextProvider = ({ children }) => {
       });
     }
   };
+
 
   //---------------------------------LoadCategory-----------------------------
   const LoadCategory = async () => {
@@ -189,7 +192,23 @@ const getSingleComment = async(id) => {
 
  
 
-   //--------------------------------------------------------------------------
+   //------------------------------------Email--------------------------------------
+   const navigate = useNavigate();
+
+   const handleEmail = async(data) => {
+    try {
+      const res = await axios.post(`${baseUrl}/api/send-email`,data)
+      toast.success(res.data, {
+        position: "top-right",
+        autoClose: 3000,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
     //--------------------------------------------------------------------------
@@ -218,6 +237,7 @@ const getSingleComment = async(id) => {
         getSingleComment,
         newsComment,
         LoadView,
+        handleEmail,
       }}
     >
       {children}

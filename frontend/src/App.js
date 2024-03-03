@@ -18,14 +18,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Detail from "./pages/Detail";
 import ViewComment from "./admin/dashboard/components/comment/ViewComment";
-// import Main from "./admin/dashboard/components/main/Main";
-// import EditNews from "./admin/dashboard/components/news/EditNews";
-// import EditUser from "./admin/dashboard/components/users/EditUser";
+import Login from "./admin/auth/Login";
 // import NotFound from "./components/NotFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
-// import Details from "./pages/Details";
-// import { useContext } from "react";
-// import { AuthContext } from "./admin/context/context";
 
 function App() {
   // const { userId } = useContext(AuthContext);
@@ -34,10 +29,10 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/administrator" element={<Login />} />
 
         <Route path="/dashboard" element={<Main />} />
         <Route path="/view-news" element={<ViewNews />} />
@@ -56,7 +51,7 @@ function App() {
         <Route path="/edit-user/:id" element={<EditUser />} />
         <Route path="/update-profile/:id" element={<UpdateProfile />} />
 
-        <Route path="/comment" element={<ViewComment/>}/>
+        <Route path="/comment" element={<ViewComment />} />
       </Routes>
       <ToastContainer />
     </>

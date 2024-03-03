@@ -7,6 +7,7 @@ import Loader from "../../loading/Loader";
 const HomeWrapper = () => {
   const { videos, loading, error, loadingLastNews, errorLastNews, lastNews } =
     useContext(HomeContext);
+  console.log("***loadingLastNews", loadingLastNews);
   return (
     <div className="home-wrapper">
       <div className="container">
@@ -19,7 +20,8 @@ const HomeWrapper = () => {
                 </div>
               ) : (
                 <>
-                  {lastNews.map((news) => {
+                  <h4>testing</h4>
+                  {/* {lastNews.map((news) => {
                     return (
                       <div className="right-side-top" key={news.id}>
                         <Link state={news} to={`/detail/${news.id}`}>
@@ -37,7 +39,7 @@ const HomeWrapper = () => {
                         </Link>
                       </div>
                     );
-                  })}
+                  })} */}
                 </>
               )}
             </div>

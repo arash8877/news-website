@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import TopMenu from "../components/home/topMenu/TopMenu";
 import Navbar from "../components/home/navbar/Navbar";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { HomeContext } from "../context/homeContext";
 
 const formSchema = Yup.object({
   email: Yup.string().required("Email required!"),
@@ -13,6 +14,7 @@ const formSchema = Yup.object({
 
 
 const Contact = () => {
+  const {handleEmail} = useContext(HomeContext);
 
     const formik = useFormik({
         initialValues: {
@@ -21,7 +23,7 @@ const Contact = () => {
           message: "",
         },
         onSubmit: (values) => {
-        //  handleEmail(values);
+         handleEmail(values);
         console.log(values)
         },
         validationSchema: formSchema,
@@ -31,6 +33,7 @@ const Contact = () => {
   return (
     <>
       <TopMenu />
+      <Navbar />
       <div className="contact pt-6">
         <div className="container">
           <div className="columns">
@@ -92,7 +95,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <Navbar />
     </>
   );
 };
