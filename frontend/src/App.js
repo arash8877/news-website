@@ -19,11 +19,13 @@ import Contact from "./pages/Contact";
 import Detail from "./pages/Detail";
 import ViewComment from "./admin/dashboard/components/comment/ViewComment";
 import Login from "./admin/auth/Login";
+import { AuthContext } from "./admin/context/context";
+import { useContext } from "react";
 // import NotFound from "./components/NotFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
 
 function App() {
-  // const { userId } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
 
   return (
     <>
@@ -34,24 +36,28 @@ function App() {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/administrator" element={<Login />} />
 
-        <Route path="/dashboard" element={<Main />} />
-        <Route path="/view-news" element={<ViewNews />} />
-        <Route path="/add-news" element={<AddNews />} />
-        <Route path="/edit-news/:id" element={<EditNews />} />
+        {userId && (
+          <>
+            <Route path="/dashboard" element={<Main />} />
+            <Route path="/view-news" element={<ViewNews />} />
+            <Route path="/add-news" element={<AddNews />} />
+            <Route path="/edit-news/:id" element={<EditNews />} />
 
-        <Route path="/view-category" element={<ViewCategories />} />
-        <Route path="/add-category" element={<AddCategory />} />
-        <Route path="/edit-category/:id" element={<EditCategory />} />
+            <Route path="/view-category" element={<ViewCategories />} />
+            <Route path="/add-category" element={<AddCategory />} />
+            <Route path="/edit-category/:id" element={<EditCategory />} />
 
-        <Route path="/view-video" element={<ViewVideo />} />
-        <Route path="/add-video" element={<AddVideo />} />
+            <Route path="/view-video" element={<ViewVideo />} />
+            <Route path="/add-video" element={<AddVideo />} />
 
-        <Route path="/view-users" element={<ViewUsers />} />
-        <Route path="/add-user" element={<AddUser />} />
-        <Route path="/edit-user/:id" element={<EditUser />} />
-        <Route path="/update-profile/:id" element={<UpdateProfile />} />
+            <Route path="/view-users" element={<ViewUsers />} />
+            <Route path="/add-user" element={<AddUser />} />
+            <Route path="/edit-user/:id" element={<EditUser />} />
+            <Route path="/update-profile/:id" element={<UpdateProfile />} />
 
-        <Route path="/comment" element={<ViewComment />} />
+            <Route path="/comment" element={<ViewComment />} />
+          </>
+        )}
       </Routes>
       <ToastContainer />
     </>

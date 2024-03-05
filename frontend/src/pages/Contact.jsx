@@ -3,7 +3,7 @@ import TopMenu from "../components/home/topMenu/TopMenu";
 import Navbar from "../components/home/navbar/Navbar";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { HomeContext } from "../context/homeContext";
+import { HomeContext } from "../context/homeContext"; 
 
 const formSchema = Yup.object({
   email: Yup.string().required("Email required!"),
