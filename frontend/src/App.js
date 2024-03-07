@@ -21,7 +21,7 @@ import ViewComment from "./admin/dashboard/components/comment/ViewComment";
 import Login from "./admin/auth/Login";
 import { AuthContext } from "./admin/context/context";
 import { useContext } from "react";
-// import NotFound from "./components/NotFound/NotFound";
+import NotFound from "./components/notFound/NotFound";
 // import CheckAdmin from "./admin/auth/CheckAdmin";
 
 function App() {
@@ -58,6 +58,7 @@ function App() {
             <Route path="/comment" element={<ViewComment />} />
           </>
         )}
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
       <ToastContainer />
     </>
