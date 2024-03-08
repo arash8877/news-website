@@ -22,7 +22,7 @@ import Login from "./admin/auth/Login";
 import { AuthContext } from "./admin/context/context";
 import { useContext } from "react";
 import NotFound from "./components/notFound/NotFound";
-// import CheckAdmin from "./admin/auth/CheckAdmin";
+import CheckAdmin from "./admin/auth/CheckAdmin";
 
 function App() {
   const { userId } = useContext(AuthContext);
@@ -43,22 +43,24 @@ function App() {
             <Route path="/add-news" element={<AddNews />} />
             <Route path="/edit-news/:id" element={<EditNews />} />
 
-            <Route path="/view-category" element={<ViewCategories />} />
-            <Route path="/add-category" element={<AddCategory />} />
-            <Route path="/edit-category/:id" element={<EditCategory />} />
+            <Route element={<CheckAdmin />}>
+              <Route path="/view-category" element={<ViewCategories />} />
+              <Route path="/add-category" element={<AddCategory />} />
+              <Route path="/edit-category/:id" element={<EditCategory />} />
 
-            <Route path="/view-video" element={<ViewVideo />} />
-            <Route path="/add-video" element={<AddVideo />} />
+              <Route path="/view-video" element={<ViewVideo />} />
+              <Route path="/add-video" element={<AddVideo />} />
 
-            <Route path="/view-users" element={<ViewUsers />} />
-            <Route path="/add-user" element={<AddUser />} />
-            <Route path="/edit-user/:id" element={<EditUser />} />
+              <Route path="/view-users" element={<ViewUsers />} />
+              <Route path="/add-user" element={<AddUser />} />
+              <Route path="/edit-user/:id" element={<EditUser />} />
+            </Route>
+
             <Route path="/update-profile/:id" element={<UpdateProfile />} />
-
             <Route path="/comment" element={<ViewComment />} />
           </>
         )}
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </>
