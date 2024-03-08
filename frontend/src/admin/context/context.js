@@ -610,6 +610,7 @@ export const AuthContextProvider = ({ children }) => {
         deleteComment,
         activeComment,
         deactivateComment,
+        admin,
       }}
     >
       {children}

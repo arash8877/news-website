@@ -91,14 +91,14 @@ const Sidebar = () => {
 
 
 
-        {/* {admin ? (
+        {admin ? (
           <>
             <li>
-              <span onClick={() => setShowCategory(!showCategory)}>
+              <span onClick={() => setShowCategories(!showCategories)}>
                 Categories
               </span>
 
-              {showCategory && (
+              {showCategories && (
                 <ul>
                   <li>
                     <Link to="/add-category">Add category</Link>
@@ -147,7 +147,7 @@ const Sidebar = () => {
         </li>
         <li>
           <span onClick={logout}>Logout</span>
-        </li> */}
+        </li> 
       </ul>
     </div>
   );
