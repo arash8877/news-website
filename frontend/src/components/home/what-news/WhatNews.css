@@ -14,7 +14,7 @@
 .whats-news-post .whats-news-post-item{
     width: calc(50% - 10px);
     padding-left: 30px;
-    margin-top: 10px;
+    margin-top: 40px;
     display: flex;
 }
 
